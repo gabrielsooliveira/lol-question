@@ -1,0 +1,47 @@
+/* === Animações base === */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { transform: translateY(20px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes zoom-in {
+  from { transform: scale(0.95); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+@keyframes pop-in {
+  0%   { transform: scale(0.9); opacity: 0; }
+  80%  { transform: scale(1.02); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+/* === Aplicações padrão para elementos Bootstrap === */
+.card, .modal, img {
+  animation: fade-in 0.6s ease-out forwards;
+}
+
+/* === Classes extras para customizar animações === */
+.anim-fade     { animation: fade-in 0.6s ease-out forwards; }
+.anim-slide-up { animation: slide-up 0.6s ease-out forwards; }
+.anim-zoom     { animation: zoom-in 0.4s ease-out forwards; }
+.anim-pop      { animation: pop-in 0.5s ease-out forwards; }
+
+/* Delay personalizado */
+.anim-delay-1 { animation-delay: 0.2s; }
+.anim-delay-2 { animation-delay: 0.4s; }
+.anim-delay-3 { animation-delay: 0.6s; }
+
+/* Suavização ao entrar em tela com transição */
+.animated {
+  opacity: 0;
+  transition: opacity 0.4s ease-in;
+}
+
+.animated.in-view {
+  opacity: 1;
+}

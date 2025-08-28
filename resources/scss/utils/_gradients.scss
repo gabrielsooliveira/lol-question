@@ -1,0 +1,23 @@
+@use 'sass:map';
+
+@mixin gradient-text($from, $to) {
+  background-image: linear-gradient(to bottom, $from, $to);
+  color: black;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+// Classe padrão
+.gradient {
+  @include gradient-text($secondary, $primary);
+}
+
+// Gerar classes tipo .gradient-primary-secondary
+@each $from-name, $from-color in $theme-colors {
+  @each $to-name, $to-color in $theme-colors {
+    .gradient-#{$from-name}-#{$to-name} {
+      @include gradient-text($from-color, $to-color);
+    }
+  }
+}

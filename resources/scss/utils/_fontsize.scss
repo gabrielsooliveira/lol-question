@@ -1,0 +1,11 @@
+@use 'sass:map';
+
+$custom-fonts: (
+  7: 0.780rem,
+  8: 0.585rem
+);
+
+:root {
+  --font-size-7: 0.780rem;
+  --font-size-8: 0.585rem;
+}
