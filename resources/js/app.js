@@ -18,7 +18,7 @@ import { far } from '@fortawesome/free-regular-svg-icons';
 library.add(fas, fab, far);
 
 createInertiaApp({
-    title: title => `LolQuestion - ${title}`,
+    title: title => `HextechPlay - ${title}`,
     resolve: name => {
         const pages = import.meta.glob('./Pages/**/*.vue');
         const resolvePageComponent = (name, pages) => {
@@ -42,6 +42,6 @@ createInertiaApp({
         .mount(el)
     },
     progress: {
-        color: '#129990',
+        color: '#0B0F14',
     }
 });

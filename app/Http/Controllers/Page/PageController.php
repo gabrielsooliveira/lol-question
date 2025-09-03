@@ -11,4 +11,9 @@ class PageController extends Controller
     {
         return inertia('Home');
     }
+
+    public function hub()
+    {
+        return inertia('Hub');
+    }
 }
