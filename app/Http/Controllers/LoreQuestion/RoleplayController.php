@@ -1,24 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Game;
+namespace App\Http\Controllers\LoreQuestion;
 
 use App\Http\Controllers\Controller;
 use App\Models\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
-class GameController extends Controller
+class RoleplayController extends Controller
 {
-    public function index()
-    {
-        return inertia('LoreQuestion/Index');
-    }
-
     public function roleplay()
     {
         Session::forget('answered_questions');
         Session::forget('game_state');
-        return inertia('LoreQuestion/Mods/Roleplay');
+        return inertia('LoreQuestion/Game');
     }
 
     public function startGame()

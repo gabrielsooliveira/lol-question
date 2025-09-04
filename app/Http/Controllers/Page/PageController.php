@@ -16,4 +16,9 @@ class PageController extends Controller
     {
         return inertia('Hub');
     }
+
+    public function loreQuestionRoleplay()
+    {
+        return inertia('LoreQuestion/Index');
+    }
 }
