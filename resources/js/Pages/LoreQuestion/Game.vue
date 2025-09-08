@@ -1,21 +1,21 @@
 <script setup>
-import { ref, onMounted, watch } from 'vue';
 import axios from 'axios';
-import { Link } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
+import { ref, onMounted, watch } from 'vue';
 
-const loading = ref(true)
-const question = ref(null)
-const selectedAnswer = ref(null)
-const feedback = ref(null)
-const isSubmitting = ref(false)
-const gameFinished = ref(false)
-const gameResults = ref(null)
-const timer = ref(15) // Tempo em segundos para a resposta
-const timerInterval = ref(null)
+const loading = ref(true);
+const question = ref(null);
+const selectedAnswer = ref(null);
+const feedback = ref(null);
+const isSubmitting = ref(false);
+const gameFinished = ref(false);
+const gameResults = ref(null);
+const timer = ref(10);
+const timerInterval = ref(null);
 
 function startTimer() {
     clearInterval(timerInterval.value)
-    timer.value = 15
+    timer.value = 10
 
     timerInterval.value = setInterval(() => {
         if (timer.value > 0) {
@@ -113,6 +113,7 @@ watch(question, (newValue, oldValue) => {
 </script>
 
 <template>
+    <Head title="LoreQuestion - Play"></Head>
   <div class="d-flex justify-content-center align-items-center py-5 vh-100">
     <div class="container">
       <div class="row justify-content-center ">

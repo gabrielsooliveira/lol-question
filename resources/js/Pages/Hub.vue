@@ -13,7 +13,7 @@ const games = [
 </script>
 
 <template>
-    <Head title="Hub" />
+    <Head title="Hub"></Head>
 
     <div class="py-5 text-light vh-100 d-flex justify-content-center align-items-center">
         <div class="container">

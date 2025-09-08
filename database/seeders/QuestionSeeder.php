@@ -18,8 +18,8 @@ class QuestionSeeder extends Seeder
             ],
             [
                 'text' => 'Qual é o nome verdadeiro de LeBlanc?',
-                'correct_answer' => 'Inconhecido',
-                'options' => json_encode(['Inconhecido', 'Evaine', 'Sylas', 'Camille']),
+                'correct_answer' => 'Não conhecido',
+                'options' => json_encode(['Não conhecido', 'Evaine', 'Sylas', 'Camille']),
                 'difficulty' => 'medium',
             ],
             [
@@ -29,7 +29,7 @@ class QuestionSeeder extends Seeder
                 'difficulty' => 'medium',
             ],
             [
-                'text' => 'Qual criatura acompanha Kindred na forma do Lobo?',
+                'text' => 'Qual criatura acompanha a ovelha nos Kindred?',
                 'correct_answer' => 'O Lobo',
                 'options' => json_encode(['O Lobo', 'O Corvo', 'O Gato', 'O Dragão']),
                 'difficulty' => 'easy',
