@@ -21,7 +21,13 @@ import { Head, Link } from '@inertiajs/vue3'
                             Teste seus conhecimentos sobre as histórias de runeterra.
                             </p>
                         </div>
-                        <Link :href="route('lorequestion.roleplay')" class="btn btn-danger text-white mt-3">Jogar</Link>
+                        <div class="d-flex gap-2 mt-3">
+                            <!-- Botão principal maior -->
+                            <Link :href="route('lorequestion.roleplay')" class="btn btn-danger text-white flex-grow-1 fw-bold rounded-3 shadow">Jogar</Link>
+
+                            <!-- Botão de configuração menor -->
+                            <button class="btn btn-dark d-flex align-items-center justify-content-center rounded-3 px-3"><font-awesome-icon icon="fa-solid fa-gear" /></button>
+                        </div>
                     </div>
                 </div>
             </div>

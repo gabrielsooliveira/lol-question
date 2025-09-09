@@ -11,4 +11,9 @@ class Question extends Model
         'correct_answer',
         'options'
     ];
+
+    public function region()
+    {
+        return $this->belongsTo(Region::class);
+    }
 }

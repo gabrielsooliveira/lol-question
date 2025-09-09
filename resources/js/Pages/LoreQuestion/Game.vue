@@ -178,6 +178,7 @@ watch(question, (newValue, oldValue) => {
           <!-- Pergunta -->
           <div v-else class="card shadow-lg p-4 animate-fade">
             <div class="card-body">
+                <span class="badge bg-dark text-light">{{ question.region }}</span>
               <div class="d-flex justify-content-between align-items-center mb-3">
                 <p class="card-text fw-semibold fs-5">{{ question.text }}</p>
                 <span class="badge bg-primary text-light fs-6 px-3 py-2 shadow-sm">{{ timer }}s</span>

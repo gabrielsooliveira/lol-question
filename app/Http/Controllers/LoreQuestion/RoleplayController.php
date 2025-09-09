@@ -20,8 +20,8 @@ class RoleplayController extends Controller
     {
         $answeredQuestions = Session::get('answered_questions', []);
 
-        $question = Question::whereNotIn('id', $answeredQuestions)->inRandomOrder()->first();
-
+        $question = Question::with('region')->whereNotIn('id', $answeredQuestions)->inRandomOrder()->first();
+        dd($question);
         if (!$question) {
             return response()->json(['finished' => true]);
         }
@@ -34,7 +34,8 @@ class RoleplayController extends Controller
         return response()->json([
             'id' => $question->id,
             'text' => $question->text,
-            'options' => $options
+            'options' => $options,
+            'region' => $question->region ? $question->region->name : null,
         ]);
     }
 
