@@ -21,7 +21,7 @@ class RoleplayController extends Controller
         $answeredQuestions = Session::get('answered_questions', []);
 
         $question = Question::with('region')->whereNotIn('id', $answeredQuestions)->inRandomOrder()->first();
-        dd($question);
+
         if (!$question) {
             return response()->json(['finished' => true]);
         }
