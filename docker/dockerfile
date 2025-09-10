@@ -1,0 +1,43 @@
+# Stage 1: Build Node (Vite assets)
+FROM node:20-alpine AS node_builder
+
+WORKDIR /var/www
+
+# Copia package.json e package-lock.json e instala dependências
+COPY package*.json ./
+RUN npm install
+
+# Copia o restante e builda assets
+COPY resources/ resources/
+RUN npm run build
+
+# Stage 2: PHP / Laravel
+FROM php:8.2-fpm
+
+# Instala dependências do Laravel
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    unzip \
+    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+
+# Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+WORKDIR /var/www
+
+# Copia código PHP
+COPY . .
+
+# Copia assets buildados do Node
+COPY --from=node_builder /var/www/public/build ./public/build
+
+# Instala dependências PHP
+RUN composer install --no-dev --optimize-autoloader
+
+EXPOSE 9000
+CMD ["php-fpm"]
