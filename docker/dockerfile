@@ -1,4 +1,41 @@
-# Stage 1: Build Node (Vite assets)
+# Stage 1: PHP / Laravel
+FROM php:8.2-fpm
+
+WORKDIR /var/www
+
+# Instala dependências do Laravel
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    unzip \
+    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+
+# Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Copia apenas composer.json para instalar dependências
+COPY composer.json composer.lock ./
+
+# Instala dependências PHP, incluindo Ziggy
+RUN composer install --no-dev --optimize-autoloader
+
+# Copia o restante do código
+COPY . .
+
+# Gera ziggy.js
+RUN php artisan ziggy:generate
+
+# Copia assets buildados do Node (se já tiver buildado)
+COPY --from=node_builder /var/www/public/build ./public/build
+
+EXPOSE 9000
+CMD ["php-fpm"]
+
+# Stage 2: Build Node (Vite assets)
 FROM node:20-alpine AS node_builder
 
 WORKDIR /var/www
@@ -16,34 +53,3 @@ COPY vite.config.js .
 
 # Build dos assets
 RUN npm run build
-
-# Stage 2: PHP / Laravel
-FROM php:8.2-fpm
-
-# Instala dependências do Laravel
-RUN apt-get update && apt-get install -y \
-    git \
-    curl \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    zip \
-    unzip \
-    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
-
-# Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
-WORKDIR /var/www
-
-# Copia código PHP
-COPY . .
-
-# Copia assets buildados do Node
-COPY --from=node_builder /var/www/public/build ./public/build
-
-# Instala dependências PHP
-RUN composer install --no-dev --optimize-autoloader
-
-EXPOSE 9000
-CMD ["php-fpm"]
