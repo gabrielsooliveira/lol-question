@@ -1,55 +1,53 @@
-# Stage 1: PHP / Laravel
-FROM php:8.2-fpm
+# Stage 1: PHP base (instala Composer e Ziggy)
+FROM php:8.2-fpm AS php_base
 
 WORKDIR /var/www
 
-# Instala dependências do Laravel
 RUN apt-get update && apt-get install -y \
-    git \
-    curl \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    zip \
-    unzip \
+    git curl libpng-dev libonig-dev libxml2-dev zip unzip \
     && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
-# Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copia apenas composer.json para instalar dependências
 COPY composer.json composer.lock ./
-
-# Instala dependências PHP, incluindo Ziggy
 RUN composer install --no-dev --optimize-autoloader
 
-# Copia o restante do código
 COPY . .
-
-# Gera ziggy.js
 RUN php artisan ziggy:generate
 
-# Copia assets buildados do Node (se já tiver buildado)
-COPY --from=node_builder /var/www/public/build ./public/build
-
-EXPOSE 9000
-CMD ["php-fpm"]
-
-# Stage 2: Build Node (Vite assets)
+# Stage 2: Node build (Vite assets)
 FROM node:20-alpine AS node_builder
 
 WORKDIR /var/www
 
-# Copia apenas package.json e package-lock.json para instalar dependências
 COPY package*.json ./
 RUN npm install
 
-# Copia arquivos necessários para o build do Vite
 COPY resources/js/ resources/js/
 COPY resources/scss/ resources/scss/
-COPY vite.config.js .
-# Se você usar TypeScript, copie tsconfig.json também
-# COPY tsconfig.json .
+COPY vite.config.js ./
 
-# Build dos assets
+# Copia ziggy.js gerado pelo stage PHP
+COPY --from=php_base /var/www/public/js/ziggy.js ./public/js/ziggy.js
+
 RUN npm run build
+
+# Stage 3: Final PHP container
+FROM php:8.2-fpm
+
+WORKDIR /var/www
+
+RUN apt-get update && apt-get install -y \
+    git curl libpng-dev libonig-dev libxml2-dev zip unzip \
+    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Copia código PHP
+COPY --from=php_base /var/www /var/www
+
+# Copia assets buildados do Node
+COPY --from=node_builder /var/www/public/build ./public/build
+
+EXPOSE 9000
+CMD ["php-fpm"]
