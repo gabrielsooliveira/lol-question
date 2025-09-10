@@ -25,10 +25,12 @@ export default defineConfig({
         },
     },
     server: {
-        host: 'localhost',
-        port: 5174,
+        host: '0.0.0.0', // expõe para o host
+        port: 5173,
+        strictPort: true,
         hmr: {
-            host: 'localhost',
+            host: 'localhost', // navegador acessa
+            port: 5173,
         },
     },
     css: {
