@@ -3,12 +3,18 @@ FROM node:20-alpine AS node_builder
 
 WORKDIR /var/www
 
-# Copia package.json e package-lock.json e instala dependências
+# Copia apenas package.json e package-lock.json para instalar dependências
 COPY package*.json ./
 RUN npm install
 
-# Copia o restante e builda assets
-COPY resources/ resources/
+# Copia arquivos necessários para o build do Vite
+COPY resources/js/ resources/js/
+COPY resources/css/ resources/css/
+COPY vite.config.js .
+# Se você usar TypeScript, copie tsconfig.json também
+# COPY tsconfig.json .
+
+# Build dos assets
 RUN npm run build
 
 # Stage 2: PHP / Laravel
