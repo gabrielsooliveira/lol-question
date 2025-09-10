@@ -1,52 +1,77 @@
-# Stage 1: PHP base (instala Composer e Ziggy)
+# ----------------------------
+# Stage 1: PHP / Laravel (Base)
+# ----------------------------
 FROM php:8.2-fpm AS php_base
 
 WORKDIR /var/www
 
+# Instala dependências do Laravel
 RUN apt-get update && apt-get install -y \
-    git curl libpng-dev libonig-dev libxml2-dev zip unzip \
+    git \
+    curl \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    unzip \
     && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
+# Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-COPY composer.json composer.lock ./
+# Copia todo o código Laravel
+COPY . .
+
+# Instala dependências PHP
 RUN composer install --no-dev --optimize-autoloader
 
-COPY . .
+# Gera Ziggy
 RUN php artisan ziggy:generate
 
-# Stage 2: Node build (Vite assets)
+# ----------------------------
+# Stage 2: Node / Vite Build
+# ----------------------------
 FROM node:20-alpine AS node_builder
 
 WORKDIR /var/www
 
+# Copia apenas package.json e package-lock.json para instalar dependências
 COPY package*.json ./
 RUN npm install
 
-COPY resources/js/ resources/js/
-COPY resources/scss/ resources/scss/
-COPY vite.config.js ./
+# Copia arquivos necessários para o build, incluindo Ziggy e resources
+COPY --from=php_base /var/www/resources ./resources
+COPY --from=php_base /var/www/vendor ./vendor
+COPY vite.config.js .
 
-# Copia ziggy.js gerado pelo stage PHP
-COPY --from=php_base /var/www/public/js/ziggy.js ./public/js/ziggy.js
-
+# Build dos assets
 RUN npm run build
 
-# Stage 3: Final PHP container
-FROM php:8.2-fpm
+# ----------------------------
+# Stage 3: PHP Final
+# ----------------------------
+FROM php:8.2-fpm AS php_final
 
 WORKDIR /var/www
 
+# Instala dependências do Laravel
 RUN apt-get update && apt-get install -y \
-    git curl libpng-dev libonig-dev libxml2-dev zip unzip \
+    git \
+    curl \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    unzip \
     && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
+# Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copia código PHP
-COPY --from=php_base /var/www /var/www
+# Copia código PHP + vendor
+COPY --from=php_base /var/www ./
 
-# Copia assets buildados do Node
+# Copia assets buildados pelo Node
 COPY --from=node_builder /var/www/public/build ./public/build
 
 EXPOSE 9000
