@@ -25,7 +25,10 @@ COPY . .
 # Instala dependências PHP
 RUN composer install --no-dev --optimize-autoloader
 
-# Gera arquivo do Ziggy (resources/js/ziggy.js)
+# Copia o .env.production ou .env correto antes de gerar Ziggy
+COPY .env.production .env
+
+# Gera Ziggy
 RUN php artisan ziggy:generate resources/js/ziggy.js
 
 # ----------------------------
@@ -46,9 +49,6 @@ COPY vite.config.js ./
 # Build dos assets
 RUN npm run build
 
-# ----------------------------
-# Stage 3: Final (Nginx + PHP-FPM)
-# ----------------------------
 # ----------------------------
 # Stage 3: Final (Nginx + PHP-FPM)
 # ----------------------------
