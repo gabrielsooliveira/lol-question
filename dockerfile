@@ -26,7 +26,7 @@ COPY . .
 RUN composer install --no-dev --optimize-autoloader
 
 # Copia o .env.production ou .env correto antes de gerar Ziggy
-COPY ../.env.production .env
+COPY .env.production .env
 
 # Gera Ziggy
 RUN php artisan ziggy:generate resources/js/ziggy.js
