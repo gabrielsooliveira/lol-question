@@ -49,22 +49,15 @@ RUN npm run build
 # ----------------------------
 # Stage 3: Final (Nginx + PHP-FPM)
 # ----------------------------
-FROM nginx:alpine AS final
+FROM php:8.2-fpm AS final
 
 WORKDIR /var/www
 
-# Instala PHP-FPM no Alpine
-RUN apk add --no-cache \
-    php82 \
-    php82-fpm \
-    php82-mysqli \
-    php82-pdo_mysql \
-    php82-mbstring \
-    php82-gd \
-    php82-exif \
-    php82-bcmath \
-    php82-xml \
-    supervisor
+# Instala Nginx + Supervisor
+RUN apt-get update && apt-get install -y \
+    nginx \
+    supervisor \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Copia código Laravel e vendor
 COPY --from=php_base /var/www ./
