@@ -5,7 +5,7 @@ FROM php:8.2-fpm AS php_base
 
 WORKDIR /var/www
 
-# Dependências PHP
+# Dependências PHP necessárias
 RUN apt-get update && apt-get install -y \
     git \
     curl \
@@ -25,6 +25,9 @@ COPY . .
 # Instala dependências PHP
 RUN composer install --no-dev --optimize-autoloader
 
+# Gera arquivo do Ziggy (resources/js/ziggy.js)
+RUN php artisan ziggy:generate resources/js/ziggy.js
+
 # ----------------------------
 # Stage 2: Node / Vite Build
 # ----------------------------
@@ -35,10 +38,10 @@ WORKDIR /var/www
 COPY package*.json ./
 RUN npm install
 
-# Copia resources e vendor do Laravel
+# Copia resources e vendor do Laravel, incluindo ziggy.js
 COPY --from=php_base /var/www/resources ./resources
 COPY --from=php_base /var/www/vendor ./vendor
-COPY vite.config.js .
+COPY vite.config.js ./
 
 # Build dos assets
 RUN npm run build
@@ -51,7 +54,17 @@ FROM nginx:alpine AS final
 WORKDIR /var/www
 
 # Instala PHP-FPM no Alpine
-RUN apk add --no-cache php82 php82-fpm php82-mysqli php82-pdo_mysql php82-mbstring php82-gd php82-exif php82-bcmath php82-xml
+RUN apk add --no-cache \
+    php82 \
+    php82-fpm \
+    php82-mysqli \
+    php82-pdo_mysql \
+    php82-mbstring \
+    php82-gd \
+    php82-exif \
+    php82-bcmath \
+    php82-xml \
+    supervisor
 
 # Copia código Laravel e vendor
 COPY --from=php_base /var/www ./
