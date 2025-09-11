@@ -5,7 +5,7 @@ FROM php:8.2-fpm AS php_base
 
 WORKDIR /var/www
 
-# Instala dependências do Laravel
+# Dependências PHP
 RUN apt-get update && apt-get install -y \
     git \
     curl \
@@ -19,14 +19,11 @@ RUN apt-get update && apt-get install -y \
 # Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copia todo o código Laravel
+# Copia código Laravel
 COPY . .
 
 # Instala dependências PHP
 RUN composer install --no-dev --optimize-autoloader
-
-# Gera Ziggy
-RUN php artisan ziggy:generate
 
 # ----------------------------
 # Stage 2: Node / Vite Build
@@ -35,11 +32,10 @@ FROM node:20-alpine AS node_builder
 
 WORKDIR /var/www
 
-# Copia apenas package.json e package-lock.json para instalar dependências
 COPY package*.json ./
 RUN npm install
 
-# Copia arquivos necessários para o build, incluindo Ziggy e resources
+# Copia resources e vendor do Laravel
 COPY --from=php_base /var/www/resources ./resources
 COPY --from=php_base /var/www/vendor ./vendor
 COPY vite.config.js .
@@ -48,31 +44,23 @@ COPY vite.config.js .
 RUN npm run build
 
 # ----------------------------
-# Stage 3: PHP Final
+# Stage 3: Final (Nginx + PHP-FPM)
 # ----------------------------
-FROM php:8.2-fpm AS php_final
+FROM nginx:alpine AS final
 
 WORKDIR /var/www
 
-# Instala dependências do Laravel
-RUN apt-get update && apt-get install -y \
-    git \
-    curl \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    zip \
-    unzip \
-    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+# Instala PHP-FPM no Alpine
+RUN apk add --no-cache php82 php82-fpm php82-mysqli php82-pdo_mysql php82-mbstring php82-gd php82-exif php82-bcmath php82-xml
 
-# Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
-# Copia código PHP + vendor
+# Copia código Laravel e vendor
 COPY --from=php_base /var/www ./
 
-# Copia assets buildados pelo Node
+# Copia assets buildados
 COPY --from=node_builder /var/www/public/build ./public/build
 
-EXPOSE 9000
-CMD ["php-fpm"]
+# Copia config Nginx customizada
+COPY docker/nginx/default.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 8000
+CMD ["nginx", "-g", "daemon off;"]
