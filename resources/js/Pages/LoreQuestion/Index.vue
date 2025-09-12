@@ -26,7 +26,7 @@ import { Head, Link } from '@inertiajs/vue3'
                             <Link :href="route('lorequestion.roleplay')" class="btn btn-danger text-white flex-grow-1 fw-bold rounded-3 shadow">Jogar</Link>
 
                             <!-- Botão de configuração menor -->
-                            <button class="btn btn-dark d-flex align-items-center justify-content-center rounded-3 px-3"><font-awesome-icon icon="fa-solid fa-gear" /></button>
+                            <button class="btn btn-dark d-flex align-items-center justify-content-center rounded-3 px-3" disabled><font-awesome-icon icon="fa-solid fa-gear" /></button>
                         </div>
                     </div>
                 </div>
