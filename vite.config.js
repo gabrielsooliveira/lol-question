@@ -30,7 +30,7 @@ export default defineConfig({
         port: 5173,
         strictPort: true,
         hmr: {
-            host: 'localhost',
+            host: 'hextech-play-7b8mx.sevalla.app',
             protocol: 'wss',
             port: 5173,
         },
