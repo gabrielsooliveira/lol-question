@@ -1,17 +1,38 @@
 <script setup>
-import { Head, Link } from '@inertiajs/vue3'
+import { Head, Link, useForm } from '@inertiajs/vue3'
+import { ref } from 'vue';
+import ModalDialog from '@/js/Components/Modals/ModalDialog.vue';
+
+const isModalVisible = ref(false);
+
+const form = useForm({
+    difficulty: 'easy',
+});
+
+const openModal = () => {
+    isModalVisible.value = true;
+};
+
+const closeModal = () => {
+    isModalVisible.value = false;
+};
+
+const saveSettings = () => {
+    form.get(route('lorequestion.roleplay'), {
+        onSuccess: () => {
+            closeModal();
+        },
+    });
+};
 </script>
 
 <template>
     <Head title="LoreQuestion"></Head>
     <div class="min-vh-100 d-flex align-items-center justify-content-center">
         <div class="container text-center">
-        <!-- Título -->
         <h1 class="fw-bold mb-5 text-light">Escolha o modo de jogo</h1>
 
-        <!-- Cards de modos -->
         <div class="row g-4 justify-content-center">
-            <!-- Roleplay -->
             <div class="col-md-4">
                 <div class="card h-100 shadow-lg border-0">
                     <div class="card-body d-flex flex-column justify-content-between bg-gradient text-dark">
@@ -21,18 +42,11 @@ import { Head, Link } from '@inertiajs/vue3'
                             Teste seus conhecimentos sobre as histórias de runeterra.
                             </p>
                         </div>
-                        <div class="d-flex gap-2 mt-3">
-                            <!-- Botão principal maior -->
-                            <Link :href="route('lorequestion.roleplay')" class="btn btn-danger text-white flex-grow-1 fw-bold rounded-3 shadow">Jogar</Link>
-
-                            <!-- Botão de configuração menor -->
-                            <button class="btn btn-dark d-flex align-items-center justify-content-center rounded-3 px-3" disabled><font-awesome-icon icon="fa-solid fa-gear" /></button>
-                        </div>
+                        <button @click="openModal" class="btn btn-danger text-white mt-3">Jogar</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Competitivo (desativado por enquanto) -->
             <div class="col-md-4">
                 <div class="card h-100 shadow-lg border-0">
                     <div class="card-body d-flex flex-column justify-content-between bg-gradient text-dark">
@@ -49,4 +63,20 @@ import { Head, Link } from '@inertiajs/vue3'
         </div>
         </div>
     </div>
+
+    <ModalDialog :isVisible="isModalVisible" @close="closeModal" title="Configurações do Jogo" size="sm">
+        <form @submit.prevent="saveSettings">
+            <div class="mb-3">
+                <label for="difficulty" class="form-label">Nível de Dificuldade</label>
+                <select class="form-select" id="difficulty" v-model="form.difficulty">
+                    <option value="easy">Fácil</option>
+                    <option value="medium">Médio</option>
+                    <option value="hard">Difícil</option>
+                </select>
+            </div>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-dark text-white flex-grow-1 fw-bold rounded-3 shadow">Iniciar</button>
+            </div>
+        </form>
+    </ModalDialog>
 </template>

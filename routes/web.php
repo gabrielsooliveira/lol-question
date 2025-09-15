@@ -9,5 +9,5 @@ Route::get('/hub', [PageController::class, 'hub'])->name('hub');
 Route::get('/lorequestion', [PageController::class, 'loreQuestion'])->name('lorequestion.index');
 
 Route::get('/lorequestion/roleplay', [RoleplayController::class, 'roleplay'])->name('lorequestion.roleplay');
-Route::post('/lorequestion/submit', [RoleplayController::class, 'submitAnswer'])->name('submitAnswer');
+Route::post('/lorequestion/finish', [RoleplayController::class, 'finishGame'])->name('finishGame');
 Route::get('/lorequestion/start', [RoleplayController::class, 'startGame'])->name('startGame');

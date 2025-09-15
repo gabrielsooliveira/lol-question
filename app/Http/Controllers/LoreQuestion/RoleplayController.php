@@ -4,81 +4,78 @@ namespace App\Http\Controllers\LoreQuestion;
 
 use App\Http\Controllers\Controller;
 use App\Models\Question;
+use App\Services\GameSessionService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Log;
 
 class RoleplayController extends Controller
 {
-    public function roleplay()
+    public function roleplay(Request $request)
     {
-        Session::forget('answered_questions');
-        Session::forget('game_state');
+        $validated = $request->validate([
+            'difficulty' => 'required|string|in:easy,medium,hard',
+        ]);
+
+        GameSessionService::setGameSettings($validated);
+
         return inertia('LoreQuestion/Game');
     }
 
     public function startGame()
     {
-        $answeredQuestions = Session::get('answered_questions', []);
+        $settings = GameSessionService::getGameSettings();
 
-        $question = Question::with('region')->whereNotIn('id', $answeredQuestions)->inRandomOrder()->first();
-
-        if (!$question) {
-            return response()->json(['finished' => true]);
-        }
-
-        $answeredQuestions[] = $question->id;
-        Session::put('answered_questions', $answeredQuestions);
-
-        $options = collect(json_decode($question->options, true))->shuffle();
+        $questions = Question::with('region')
+            ->where('difficulty', $settings['difficulty'])
+            ->inRandomOrder()
+            ->limit(10)
+            ->get();
 
         return response()->json([
-            'id' => $question->id,
-            'text' => $question->text,
-            'options' => $options,
-            'region' => $question->region ? $question->region->name : null,
+            'questions' => $questions->map(fn($q) => [
+                'id' => $q->id,
+                'text' => $q->text,
+                'options' => collect(json_decode($q->options, true))->shuffle(),
+                'region' => optional($q->region)->name,
+            ]),
         ]);
     }
 
-    public function submitAnswer(Request $request)
+    public function finishGame(Request $request)
     {
-        $request->validate([
-            'question_id' => 'required|integer|exists:questions,id',
-            'answer' => 'required|string',
+        $validated = $request->validate([
+            'respostas' => 'required|array',
+            'respostas.*.question_id' => 'required|integer',
+            'respostas.*.answer' => 'required|string',
         ]);
 
-        $question = Question::findOrFail($request->question_id);
+        $correct = 0;
+        $wrong = [];
+        $totalQuestions = count($validated['respostas']);
 
-        // Verifica se a resposta enviada é "timeout"
-        $isCorrect = $question->correct_answer === $request->answer;
-        $isTimeout = $request->answer === 'timeout';
+        // Fetch all questions answered by the user in a single query
+        $questionIds = collect($validated['respostas'])->pluck('question_id');
+        $questions = Question::whereIn('id', $questionIds)->get()->keyBy('id');
 
-        $gameState = Session::get('game_state', [
-            'total_questions' => 0,
-            'correct_answers' => 0,
-            'wrong_answers' => [],
-        ]);
+        foreach ($validated['respostas'] as $resp) {
+            $question = $questions->get($resp['question_id']);
+            if (!$question) continue;
 
-        $gameState['total_questions']++;
-
-        if ($isCorrect) {
-            $gameState['correct_answers']++;
-        } else {
-            // Se a resposta for um "timeout", salva uma mensagem específica
-            $userAnswer = $isTimeout ? 'Tempo esgotado' : $request->answer;
-
-            $gameState['wrong_answers'][] = [
-                'question_text' => $question->text,
-                'user_answer' => $userAnswer,
-                'correct_answer' => $question->correct_answer,
-            ];
+            if ($question->correct_answer === $resp['answer']) {
+                $correct++;
+            } else {
+                $wrong[] = [
+                    'question_text' => $question->text,
+                    'user_answer' => $resp['answer'] === 'timeout' ? 'Tempo esgotado' : $resp['answer'],
+                    'correct_answer' => $question->correct_answer,
+                ];
+            }
         }
 
-        Session::put('game_state', $gameState);
-
         return response()->json([
-            'is_correct' => $isCorrect,
-            'finished' => $gameState['total_questions'] >= 5,
-            'results' => ($gameState['total_questions'] >= 5) ? $gameState : null,
+            'total_questions' => $totalQuestions,
+            'correct_answers' => $correct,
+            'wrong_answers' => $wrong,
         ]);
     }
 }
