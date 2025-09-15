@@ -144,7 +144,7 @@ onMounted(() => {
                             </div>
 
                             <div class="text-center mt-4">
-                                <Link class="btn btn-primary btn-lg ms-2" :href="route('lorequestion.roleplay')">Jogar Novamente</Link>
+                                <Link class="btn btn-primary btn-lg me-2" :href="route('lorequestion.roleplay')">Jogar Novamente</Link>
                                 <Link class="btn btn-dark btn-lg" :href="route('lorequestion.index')">Voltar para o menu</Link>
                             </div>
                         </div>
@@ -157,7 +157,6 @@ onMounted(() => {
 
                     <div v-else class="card shadow-lg p-4 animate-fade">
                         <div class="card-body">
-                            <span class="badge bg-dark text-light">{{ currentQuestion.region }}</span>
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <p class="card-text fw-semibold fs-5">{{ currentQuestion.text }}</p>
                                 <span class="badge bg-primary text-light fs-6 px-3 py-2 shadow-sm">{{ timer }}s</span>

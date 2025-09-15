@@ -64,7 +64,7 @@ const saveSettings = () => {
         </div>
     </div>
 
-    <ModalDialog :isVisible="isModalVisible" @close="closeModal" title="Configurações do Jogo" size="sm">
+    <ModalDialog :isVisible="isModalVisible" @close="closeModal" title="Configurações do Jogo" size="md">
         <form @submit.prevent="saveSettings">
             <div class="mb-3">
                 <label for="difficulty" class="form-label">Nível de Dificuldade</label>

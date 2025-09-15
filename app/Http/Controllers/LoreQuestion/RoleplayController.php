@@ -35,8 +35,7 @@ class RoleplayController extends Controller
             'questions' => $questions->map(fn($q) => [
                 'id' => $q->id,
                 'text' => $q->text,
-                'options' => collect(json_decode($q->options, true))->shuffle(),
-                'region' => optional($q->region)->name,
+                'options' => collect(json_decode($q->options, true))->shuffle()
             ]),
         ]);
     }
