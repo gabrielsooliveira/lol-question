@@ -1,5 +1,5 @@
 <script setup>
-import { Head } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
 </script>
 
 <template>
@@ -10,7 +10,7 @@ import { Head } from '@inertiajs/vue3';
             <div class="container position-relative">
                 <h1 class="display-3 fw-bold mb-3">Bem-vindo ao HextechPlay</h1>
                 <p class="lead mb-4">Inspirado no universo de League of Legends – jogue, divirta-se e desafie seus amigos!</p>
-                <a href="#sobre" class="btn btn-primary btn-lg">Saiba Mais</a>
+                <Link :href="route('hub')" class="btn btn-primary btn-lg">Comece a jogar</Link>
             </div>
         </section>
     </div>

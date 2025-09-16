@@ -32,10 +32,3 @@ onMounted(() => {
         </div>
     </div>
 </template>
-
-<style scoped>
-/* Transição suave da navbar */
-.transition-navbar {
-  transition: background-color 0.4s ease, box-shadow 0.4s ease;
-}
-</style>

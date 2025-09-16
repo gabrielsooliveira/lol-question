@@ -418,8 +418,8 @@ class QuestionSeeder extends Seeder
             ],
             [
                 'text' => 'Qual é o nome do esquadrão de elite de aviadores que Corki criou, responsável por reconhecimento e resgate?',
-                'correct_answer' => 'Escuadrão de Reconhecimento e Resgate de Bandópolis',
-                'options' => json_encode(['Vingadores de Piltover', 'Águias de Aço', 'Escuadrão de Reconhecimento e Resgate de Bandópolis', 'Guardiões Celestiais']),
+                'correct_answer' => 'Esquadrão de Reconhecimento e Resgate de Bandópolis',
+                'options' => json_encode(['Vingadores de Piltover', 'Águias de Aço', 'Esquadrão de Reconhecimento e Resgate de Bandópolis', 'Guardiões Celestiais']),
                 'difficulty' => 'medium',
                 'region_id' => 2,
             ],

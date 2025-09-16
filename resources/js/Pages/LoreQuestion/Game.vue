@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Head, Link } from '@inertiajs/vue3';
 import { ref, onMounted } from 'vue';
 
+const selectedCarousel = ref('correct');
 const loading = ref(true);
 const questions = ref([]);
 const currentQuestionIndex = ref(0);
@@ -99,55 +100,108 @@ onMounted(() => {
     <div class="d-flex justify-content-center align-items-center py-5 min-vh-100">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="mt-5">
-                    <div v-if="loading" class="text-center text-secondary animate-fade">
-                        <div class="spinner-border text-light mb-3" role="status"></div>
+                <div class="mt-3">
+                    <div v-if="loading" class="text-center text-secondary text-light animate-fade">
+                        <div class="spinner-border mb-3" role="status"></div>
                         <p>Carregando perguntas...</p>
                     </div>
 
-                    <div v-else-if="gameFinished" class="card shadow-lg p-4 animate-fade mt-5">
-                        <h2 class="card-title text-center mb-4">Fim do Jogo!</h2>
+                    <div v-else-if="gameFinished" class="card shadow-lg p-4 animate-fade">
+                        <h2 class="card-title text-center fw-bold mb-4">Fim do Jogo!</h2>
                         <div class="card-body row">
-                            <div class="col-lg-4">
-                                <p class="fs-5 text-center mb-4">Resultados:</p>
-                                <ul class="list-group list-group-flush mb-4">
-                                    <li class="list-group-item d-flex justify-content-between">
-                                        <span>Total de perguntas:</span>
-                                        <strong>{{ gameResults.total_questions }}</strong>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between text-success">
-                                        <span>Acertos:</span>
-                                        <strong>{{ gameResults.correct_answers }}</strong>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between text-danger">
-                                        <span>Erros:</span>
-                                        <strong>{{ gameResults.wrong_answers.length }}</strong>
-                                    </li>
-                                </ul>
-                            </div>
+                                <!-- Coluna esquerda -->
+                                <div class="col-lg-3">
+                                    <h5 class="mb-3">Resultados:</h5>
+                                    <ul class="list-group list-group-flush mb-4">
+                                        <li class="list-group-item d-flex justify-content-between">
+                                            <span>Total de perguntas:</span>
+                                            <strong>{{ gameResults.total_questions }}</strong>
+                                        </li>
 
-                            <div v-if="gameResults.wrong_answers.length > 0" class="col-lg-8">
-                                <h5 class="mb-3">Perguntas que você errou:</h5>
-                                <ul class="list-group">
-                                    <li
-                                        v-for="(error, index) in gameResults.wrong_answers"
-                                        :key="index"
-                                        class="list-group-item list-group-item-danger"
-                                    >
-                                        <p class="mb-1"><strong>Pergunta:</strong> {{ error.question_text }}</p>
-                                        <p class="mb-1"><strong>Sua resposta:</strong>
-                                            <span class="text-decoration-line-through">{{ error.user_answer }}</span>
-                                        </p>
-                                        <p class="mb-0"><strong>Resposta correta:</strong> {{ error.correct_answer }}</p>
-                                    </li>
-                                </ul>
-                            </div>
+                                        <li
+                                            class="list-group-item d-flex justify-content-between text-success fw-bold"
+                                            role="button" tabindex="0"
+                                            @click="selectedCarousel = 'correct'"
+                                        >
+                                            <span>Acertos:</span>
+                                            <strong>{{ gameResults.correct_answers.length }}</strong>
+                                        </li>
 
-                            <div class="text-center mt-4">
-                                <Link class="btn btn-primary btn-lg me-2" :href="route('lorequestion.roleplay')">Jogar Novamente</Link>
-                                <Link class="btn btn-dark btn-lg" :href="route('lorequestion.index')">Voltar para o menu</Link>
+                                        <li
+                                            class="list-group-item d-flex justify-content-between text-danger fw-bold"
+                                            role="button" tabindex="0"
+                                            v-if="gameResults.wrong_answers.length > 0"
+                                            @click="selectedCarousel = 'wrong'"
+                                        >
+                                            <span>Erros:</span>
+                                            <strong>{{ gameResults.wrong_answers.length }}</strong>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <!-- Coluna direita: carrossel -->
+                                <div class="col-lg-9">
+                                    <div v-if="selectedCarousel === 'correct' && gameResults.correct_answers.length > 0">
+                                        <h5 class="mb-3">Perguntas que você acertou:</h5>
+                                        <div id="carouselCorrect" class="carousel slide px-5" data-bs-ride="carousel">
+                                            <div class="carousel-inner">
+                                                <div
+                                                    v-for="(answer, index) in gameResults.correct_answers"
+                                                    :key="'correct-' + index"
+                                                    :class="['carousel-item', { active: index === 0 }]"
+                                                >
+                                                    <div class="px-5 text-center">
+                                                        <h6 class="mb-2">Pergunta:</h6>
+                                                        <p>{{ answer.question_text }}</p>
+                                                        <p class="text-success"><strong>Sua resposta:</strong> {{ answer.user_answer }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button class="carousel-control-prev text-dark" type="button" data-bs-target="#carouselCorrect" data-bs-slide="prev">
+                                                <font-awesome-icon icon="fa-solid fa-caret-left" size="xl" />
+                                            </button>
+                                            <button class="carousel-control-next text-dark" type="button" data-bs-target="#carouselCorrect" data-bs-slide="next">
+                                                <font-awesome-icon icon="fa-solid fa-caret-right" size="xl" />
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Carrossel de erros -->
+                                    <div v-if="selectedCarousel === 'wrong' && gameResults.wrong_answers.length > 0">
+                                        <h5 class="mb-3">Perguntas que você errou:</h5>
+                                        <div id="carouselWrong" class="carousel slide px-5" data-bs-ride="carousel">
+                                            <div class="carousel-inner">
+                                                <div
+                                                    v-for="(error, index) in gameResults.wrong_answers"
+                                                    :key="'wrong-' + index"
+                                                    :class="['carousel-item', { active: index === 0 }]"
+                                                >
+                                                    <div class="px-5 text-center">
+                                                        <p><strong>Pergunta:</strong> {{ error.question_text }}</p>
+                                                        <p><strong>Sua resposta:</strong> <span class="text-decoration-line-through">{{ error.user_answer }}</span></p>
+                                                        <p><strong>Resposta correta:</strong> <span class="text-success">{{ error.correct_answer }}</span></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button class="carousel-control-prev text-dark" type="button" data-bs-target="#carouselWrong" data-bs-slide="prev">
+                                                <font-awesome-icon icon="fa-solid fa-caret-left" size="xl" />
+                                            </button>
+                                            <button class="carousel-control-next text-dark" type="button" data-bs-target="#carouselWrong" data-bs-slide="next">
+                                                <font-awesome-icon icon="fa-solid fa-caret-right" size="xl" />
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4 d-flex flex-column flex-md-row justify-content-center align-items-center gap-2">
+                                    <Link class="btn btn-primary btn-lg" :href="route('lorequestion.roleplay')">
+                                        Jogar Novamente
+                                    </Link>
+                                    <Link class="btn btn-dark btn-lg" :href="route('lorequestion.index')">
+                                        Voltar para o menu
+                                    </Link>
+                                </div>
                             </div>
-                        </div>
                     </div>
 
                     <div v-else-if="!currentQuestion" class="card shadow-lg p-4 animate-fade text-center">
@@ -190,18 +244,3 @@ onMounted(() => {
         </div>
     </div>
 </template>
-
-<style scoped>
-/* Animações e hover leve */
-.option-hover:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    cursor: pointer;
-    transform: scale(1.02);
-    transition: all 0.2s ease-in-out;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-</style>

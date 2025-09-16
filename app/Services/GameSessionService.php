@@ -16,6 +16,7 @@ class GameSessionService
     {
         Session::put('game_settings', [
             'difficulty' => $settings['difficulty'],
+            'questionQuant' => $settings['questionQuant'] ?? 5,
         ]);
     }
 
@@ -28,6 +29,7 @@ class GameSessionService
     {
         return Session::get('game_settings', [
             'difficulty' => 'easy',
+            'questionQuant' => 5,
         ]);
     }
 }

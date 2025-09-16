@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Question;
 use App\Services\GameSessionService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class RoleplayController extends Controller
 {
@@ -14,6 +13,7 @@ class RoleplayController extends Controller
     {
         $validated = $request->validate([
             'difficulty' => 'required|string|in:easy,medium,hard',
+            'questionQuant' => 'required|integer|min:1|max:10',
         ]);
 
         GameSessionService::setGameSettings($validated);
@@ -28,7 +28,7 @@ class RoleplayController extends Controller
         $questions = Question::with('region')
             ->where('difficulty', $settings['difficulty'])
             ->inRandomOrder()
-            ->limit(10)
+            ->limit($settings['questionQuant'])
             ->get();
 
         return response()->json([
@@ -48,7 +48,7 @@ class RoleplayController extends Controller
             'respostas.*.answer' => 'required|string',
         ]);
 
-        $correct = 0;
+        $correct = [];
         $wrong = [];
         $totalQuestions = count($validated['respostas']);
 
@@ -61,7 +61,11 @@ class RoleplayController extends Controller
             if (!$question) continue;
 
             if ($question->correct_answer === $resp['answer']) {
-                $correct++;
+                $correct[] = [
+                    'question_text' => $question->text,
+                    'user_answer' => $resp['answer'] === 'timeout' ? 'Tempo esgotado' : $resp['answer'],
+                    'correct_answer' => $question->correct_answer,
+                ];
             } else {
                 $wrong[] = [
                     'question_text' => $question->text,
