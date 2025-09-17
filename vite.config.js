@@ -2,9 +2,10 @@ import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
 import path from 'path';
+import purgeCss from 'vite-plugin-purgecss';
 
 export default defineConfig({
-    // base: '/build/',
+    base: '/build/', // necessário em produção (Laravel serve /public/build)
     plugins: [
         laravel({
             input: ['resources/scss/app.scss', 'resources/js/app.js'],
@@ -18,6 +19,9 @@ export default defineConfig({
                 },
             },
         }),
+        purgeCss({
+            content: ['./resources/**/*.vue', './resources/**/*.blade.php'],
+        }),
     ],
     resolve: {
         alias: {
@@ -26,14 +30,24 @@ export default defineConfig({
         },
     },
     server: {
-        host: 'lol-question.test',
+        host: '0.0.0.0',
         port: 5173,
-        // strictPort: true,
-        // hmr: {
-        //     host: 'hextechplay.com',
-        //     protocol: 'wss',
-        //     port: 5173,
-        // },
+        strictPort: true,
+        hmr: {
+            host: 'hextechplay.com',
+            protocol: 'wss',
+            port: 5173,
+        },
+    },
+    build: {
+        rollupOptions: {
+            output: {
+                manualChunks: {
+                    vendor: ['vue', 'axios'], // separa bibliotecas grandes
+                },
+            },
+        },
+        cssCodeSplit: true, // divide css por página quando possível
     },
     css: {
         preprocessorOptions: {

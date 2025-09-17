@@ -12,7 +12,8 @@
         "concurrently": "^9.0.1",
         "laravel-vite-plugin": "^2.0.0",
         "sass": "^1.79.2",
-        "vite": "^7.0.4"
+        "vite": "^7.0.4",
+        "vite-plugin-purgecss": "^0.2.13"
     },
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^6.6.0",
