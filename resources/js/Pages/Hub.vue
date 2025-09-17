@@ -1,12 +1,13 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3'
+import LolQuestionBackground from '@/assets/images/lolquestion.jpg';
 
 const games = [
   {
     id: 1,
     title: 'LoreQuestion',
     description: 'Saiba se vocês conhece sobre as histórias do league of legends.',
-    image: 'https://i.pinimg.com/736x/b6/19/06/b619062a4a25aa7dec395815c0849ae4.jpg',
+    image: LolQuestionBackground,
     route: 'lorequestion.index'
   },
 ]

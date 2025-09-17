@@ -3,9 +3,10 @@ import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
 import path from 'path';
 import purgeCss from 'vite-plugin-purgecss';
+import viteImagemin from 'vite-plugin-imagemin';
 
 export default defineConfig({
-    base: '/build/', // necessário em produção (Laravel serve /public/build)
+    base: '/build/',
     plugins: [
         laravel({
             input: ['resources/scss/app.scss', 'resources/js/app.js'],
@@ -17,6 +18,36 @@ export default defineConfig({
                     base: null,
                     includeAbsolute: false,
                 },
+            },
+        }),
+        viteImagemin({
+            gifsicle: {
+                optimizationLevel: 7,
+                interlaced: false,
+            },
+            optipng: {
+                optimizationLevel: 7,
+            },
+            mozjpeg: {
+                quality: 75,
+            },
+            pngquant: {
+                quality: [0.65, 0.9],
+                speed: 4,
+            },
+            svgo: {
+                plugins: [
+                {
+                    name: 'removeViewBox',
+                },
+                {
+                    name: 'removeEmptyAttrs',
+                    active: false,
+                },
+                ],
+            },
+            webp: {
+                quality: 75,
             },
         }),
         purgeCss({
