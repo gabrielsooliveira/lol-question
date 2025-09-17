@@ -4,7 +4,7 @@ import vue from '@vitejs/plugin-vue';
 import path from 'path';
 
 export default defineConfig({
-    base: '/build/',
+    // base: '/build/',
     plugins: [
         laravel({
             input: ['resources/scss/app.scss', 'resources/js/app.js'],
@@ -26,14 +26,14 @@ export default defineConfig({
         },
     },
     server: {
-        host: '0.0.0.0',
+        host: 'lol-question.test',
         port: 5173,
-        strictPort: true,
-        hmr: {
-            host: 'hextechplay.com',
-            protocol: 'wss',
-            port: 5173,
-        },
+        // strictPort: true,
+        // hmr: {
+        //     host: 'hextechplay.com',
+        //     protocol: 'wss',
+        //     port: 5173,
+        // },
     },
     css: {
         preprocessorOptions: {

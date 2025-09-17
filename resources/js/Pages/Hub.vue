@@ -13,7 +13,10 @@ const games = [
 </script>
 
 <template>
-    <Head title="Hub"></Head>
+    <Head>
+        <title>Hub</title>
+        <meta head-key="description" name="description" content="Hub de jogos da HextechPlay para você se divertir" />
+    </Head>
 
     <div class="py-5 text-light vh-100 d-flex justify-content-center align-items-center">
         <div class="container">

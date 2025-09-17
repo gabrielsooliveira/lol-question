@@ -28,7 +28,11 @@ const saveSettings = () => {
 </script>
 
 <template>
-    <Head title="LoreQuestion"></Head>
+    <Head>
+        <title>LoreQuestion</title>
+        <meta head-key="description" name="description" content="LoreQuestion é um jogo da plataforma HextechPlay sobre perguntas envolvendo o universo de runeterra" />
+    </Head>
+
     <div class="min-vh-100 d-flex align-items-center justify-content-center">
         <div class="container text-center">
             <h1 class="fw-bold mb-5 text-light">Escolha o modo de jogo</h1>

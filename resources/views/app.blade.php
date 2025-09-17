@@ -9,7 +9,7 @@
     @inertiaHead
     @routes
   </head>
-  <body>
+  <body class="overflow-y-auto min-vh-100">
     @inertia
   </body>
 </html>

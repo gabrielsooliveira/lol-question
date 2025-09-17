@@ -3,7 +3,11 @@ import { Head, Link } from '@inertiajs/vue3';
 </script>
 
 <template>
-    <Head title="Home"></Head>
+    <Head>
+        <title>Home</title>
+        <meta head-key="description" name="description" content="HextechPlay - plataforma de mini-games inspirado no universo de League of Legends – jogue, divirta-se e desafie seus amigos!" />
+    </Head>
+
     <div>
         <section class="hero d-flex align-items-center justify-content-center text-center text-light">
             <div class="overlay"></div>

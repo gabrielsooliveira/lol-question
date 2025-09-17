@@ -96,7 +96,11 @@ onMounted(() => {
 </script>
 
 <template>
-    <Head title="LoreQuestion - Play"></Head>
+    <Head>
+        <title>LoreQuestion - Roleplay</title>
+        <meta head-key="description" name="description" content="Modo casual do LoreQuestion, jogo da plataforma HextechPlay sobre perguntas envolvendo o universo de runeterra" />
+    </Head>
+
     <div class="d-flex justify-content-center align-items-center py-5 min-vh-100">
         <div class="container">
             <div class="row justify-content-center">
@@ -150,7 +154,7 @@ onMounted(() => {
                                                     :key="'correct-' + index"
                                                     :class="['carousel-item', { active: index === 0 }]"
                                                 >
-                                                    <div class="px-5 text-center">
+                                                    <div class="px-auto text-center">
                                                         <h6 class="mb-2">Pergunta:</h6>
                                                         <p>{{ answer.question_text }}</p>
                                                         <p class="text-success"><strong>Sua resposta:</strong> {{ answer.user_answer }}</p>
@@ -176,7 +180,7 @@ onMounted(() => {
                                                     :key="'wrong-' + index"
                                                     :class="['carousel-item', { active: index === 0 }]"
                                                 >
-                                                    <div class="px-5 text-center">
+                                                    <div class="px-auto text-center">
                                                         <p><strong>Pergunta:</strong> {{ error.question_text }}</p>
                                                         <p><strong>Sua resposta:</strong> <span class="text-decoration-line-through">{{ error.user_answer }}</span></p>
                                                         <p><strong>Resposta correta:</strong> <span class="text-success">{{ error.correct_answer }}</span></p>
@@ -194,10 +198,10 @@ onMounted(() => {
                                 </div>
 
                                 <div class="mt-4 d-flex flex-column flex-md-row justify-content-center align-items-center gap-2">
-                                    <Link class="btn btn-primary btn-lg" :href="route('lorequestion.roleplay')">
+                                    <Link class="btn btn-primary btn-lg w-100" :href="route('lorequestion.roleplay')">
                                         Jogar Novamente
                                     </Link>
-                                    <Link class="btn btn-dark btn-lg" :href="route('lorequestion.index')">
+                                    <Link class="btn btn-dark btn-lg w-100" :href="route('lorequestion.index')">
                                         Voltar para o menu
                                     </Link>
                                 </div>
@@ -211,8 +215,8 @@ onMounted(() => {
 
                     <div v-else class="card shadow-lg p-4 animate-fade">
                         <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <p class="card-text fw-semibold fs-5">{{ currentQuestion.text }}</p>
+                            <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-3">
+                                <p class="card-text fw-semibold fs-5 mb-2 mb-md-0">{{ currentQuestion.text }}</p>
                                 <span class="badge bg-primary text-light fs-6 px-3 py-2 shadow-sm">{{ timer }}s</span>
                             </div>
 
