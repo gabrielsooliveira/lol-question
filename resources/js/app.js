@@ -7,7 +7,6 @@ import { createInertiaApp } from '@inertiajs/vue3';
 import LayoutSite from './Layouts/LayoutSite.vue';
 
 import { ZiggyVue } from 'ziggy';
-import { Ziggy } from './ziggy';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
@@ -37,7 +36,7 @@ createInertiaApp({
     setup({ el, App, props, plugin }) {
         createApp({ render: () => h(App, props) })
         .component('font-awesome-icon', FontAwesomeIcon)
-        .use(ZiggyVue, Ziggy)
+        .use(ZiggyVue)
         .use(plugin)
         .mount(el)
     },
