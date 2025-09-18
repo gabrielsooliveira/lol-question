@@ -4,6 +4,7 @@ namespace App\Http\Controllers\LoreQuestion;
 
 use App\Http\Controllers\Controller;
 use App\Models\Question;
+use App\Models\QuestionTranslation;
 use App\Services\GameSessionService;
 use Illuminate\Http\Request;
 
@@ -24,19 +25,17 @@ class RoleplayController extends Controller
     public function startGame()
     {
         $settings = GameSessionService::getGameSettings();
+        $locale = app()->getLocale();
 
-        $questions = Question::with('region')
+        $questions = Question::with('translations')
             ->where('difficulty', $settings['difficulty'])
             ->inRandomOrder()
             ->limit($settings['questionQuant'])
-            ->get();
+            ->get()
+            ->map(fn($question) => $question->getLocalizedData($locale));
 
         return response()->json([
-            'questions' => $questions->map(fn($q) => [
-                'id' => $q->id,
-                'text' => $q->text,
-                'options' => collect(json_decode($q->options, true))->shuffle()
-            ]),
+            'questions' => $questions
         ]);
     }
 
@@ -52,9 +51,8 @@ class RoleplayController extends Controller
         $wrong = [];
         $totalQuestions = count($validated['respostas']);
 
-        // Fetch all questions answered by the user in a single query
         $questionIds = collect($validated['respostas'])->pluck('question_id');
-        $questions = Question::whereIn('id', $questionIds)->get()->keyBy('id');
+        $questions = QuestionTranslation::whereIn('id', $questionIds)->get()->keyBy('id');
 
         foreach ($validated['respostas'] as $resp) {
             $question = $questions->get($resp['question_id']);

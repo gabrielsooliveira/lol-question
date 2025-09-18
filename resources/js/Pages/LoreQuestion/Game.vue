@@ -215,31 +215,32 @@ onMounted(() => {
 
                     <div v-else class="card shadow-lg p-4 animate-fade">
                         <div class="card-body">
-                            <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-3">
-                                <p class="card-text fw-semibold fs-5 mb-2 mb-md-0">{{ currentQuestion.text }}</p>
-                                <span class="badge bg-primary text-light fs-6 px-3 py-2 shadow-sm">{{ timer }}s</span>
-                            </div>
+                            <div class="container py-4 text-center">
+                                <p class="fw-bold fs-3 mb-4">{{ currentQuestion.text }}</p>
+                                <div class="d-inline-block mb-4 p-3 rounded-circle bg-primary text-white fs-4 shadow">{{ timer }}s</div>
 
-                            <div class="list-group mt-3">
-                                <label
-                                    v-for="(option, index) in currentQuestion.options"
-                                    :key="index"
-                                    class="list-group-item list-group-item-action d-flex align-items-center rounded-3 mb-2 option-hover"
-                                >
-                                    <input
-                                        class="form-check-input me-2"
-                                        type="radio"
-                                        :value="option"
-                                        v-model="selectedAnswer"
+                                <div class="row g-3 justify-content-center mt-3">
+                                    <div v-for="(option, index) in currentQuestion.options" :key="index" class="col-10 col-md-5">
+                                        <button
+                                        type="button"
+                                        class="btn w-100 py-3 fs-5 rounded-3 shadow"
+                                        :class="{
+                                            'btn-primary': !selectedAnswer,
+                                            'btn-success': isSubmitting && selectedAnswer === option,
+                                            'btn-secondary': selectedAnswer && !isSubmitting,
+                                        }"
                                         :disabled="isSubmitting"
-                                        @change="submitAnswer(option)"
-                                    />
-                                    <span>{{ option }}</span>
-                                </label>
-                            </div>
+                                        @click="selectAnswer(option)"
+                                        >
+                                        {{ option }}
+                                        </button>
+                                    </div>
+                                </div>
 
-                            <div v-if="isSubmitting" class="mt-4 text-center">
-                                <div class="spinner-border text-primary" role="status"></div>
+                                <!-- Spinner -->
+                                <div v-if="isSubmitting" class="mt-4">
+                                    <div class="spinner-border text-primary" role="status"></div>
+                                </div>
                             </div>
                         </div>
                     </div>

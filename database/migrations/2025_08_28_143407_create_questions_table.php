@@ -13,19 +13,29 @@ return new class extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
+            $table->enum('difficulty', ['easy', 'medium', 'hard']);
+            $table->timestamps();
+        });
+
+        Schema::create('question_translations', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('question_id')->constrained()->cascadeOnDelete();
+            $table->enum('locale', ['en', 'pt_BR']);
             $table->text('text');
             $table->string('correct_answer');
             $table->json('options');
-            $table->enum('difficulty', ['easy', 'medium', 'hard']);
             $table->timestamps();
+
+            $table->unique(['question_id', 'locale']);
         });
     }
 
     /**
      * Reverse the migrations.
      */
-    public function down(): void
+    public function down()
     {
+        Schema::dropIfExists('question_translations');
         Schema::dropIfExists('questions');
     }
 };

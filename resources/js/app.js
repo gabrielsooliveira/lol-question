@@ -3,6 +3,7 @@ import 'bootstrap';
 
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
+import { createI18n } from 'vue-i18n';
 
 import LayoutSite from './Layouts/LayoutSite.vue';
 
@@ -13,6 +14,8 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
+
+let i18n;
 
 library.add(fas, fab, far);
 
@@ -34,10 +37,21 @@ createInertiaApp({
         return page;
     },
     setup({ el, App, props, plugin }) {
+        if (!i18n) {
+            i18n = createI18n({
+                locale: props.initialPage.props.locale,
+                messages: { [props.initialPage.props.locale]: props.initialPage.props.translations }
+            });
+        } else {
+            i18n.global.locale = props.initialPage.props.locale;
+            i18n.global.setLocaleMessage(props.initialPage.props.locale, props.initialPage.props.translations);
+        }
+
         createApp({ render: () => h(App, props) })
         .component('font-awesome-icon', FontAwesomeIcon)
         .use(ZiggyVue)
         .use(plugin)
+        .use(i18n)
         .mount(el)
     },
     progress: {

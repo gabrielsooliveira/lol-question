@@ -12,9 +12,9 @@ class PageController extends Controller
         return inertia('Home');
     }
 
-    public function hub()
+    public function menu()
     {
-        return inertia('Hub');
+        return inertia('Menu');
     }
 
     public function loreQuestion()

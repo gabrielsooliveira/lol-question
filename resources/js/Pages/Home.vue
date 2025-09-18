@@ -15,7 +15,7 @@ import heroBackground from '@/assets/images/wallpaper.jpg';
         <div class="position-relative" style="z-index: 1; padding-top: 120px;">
         <h1 class="display-3 fw-bold mb-3">Bem-vindo ao HextechPlay</h1>
         <p class="lead mb-4">Inspirado no universo de League of Legends – jogue, divirta-se e desafie seus amigos!</p>
-        <Link :href="route('hub')" class="btn btn-primary btn-lg">Comece a jogar</Link>
+        <Link :href="route('menu')" class="btn btn-warning bg-gradient btn-lg border-0 fw-bold">{{ $t('play') }}</Link>
         </div>
     </section>
 </template>
