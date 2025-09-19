@@ -12,11 +12,11 @@ class RegionSeeder extends Seeder
         $regions = [
             [
                 'id' => 1,
-                'name' => 'Águas de Sentina'
+                'name' => 'Bilgewater'
             ],
             [
                 'id' => 2,
-                'name' => 'Bandópolis'
+                'name' => 'Bandle City'
             ],
             [
                 'id' => 3,
@@ -28,7 +28,7 @@ class RegionSeeder extends Seeder
             ],
             [
                 'id' => 5,
-                'name' => 'Ilhas das Sombras'
+                'name' => 'Shadow Isles'
             ],
             [
                 'id' => 6,
@@ -56,7 +56,7 @@ class RegionSeeder extends Seeder
             ],
             [
                 'id' => 12,
-                'name' => 'Vazio'
+                'name' => 'Void'
             ],
             [
                 'id' => 13,

@@ -44,21 +44,31 @@ class QuestionSeeder extends Seeder
                 ],
             ],
             [
-                'difficulty' => 'hard',
-                'region_id' => 1,
-                'translations' => [
-                    'pt' => [
-                        'text' => 'Qual é o nome da arma de Tristana?',
-                        'correct_answer' => 'Boomer',
-                        'options' => ['Pistola de canhão', 'O Treco Sussurrante', 'Canhão de mão', 'Boomer'],
+                "difficulty" => "easy",
+                "region_id" => 9,
+                "translations" => [
+                    "pt" => [
+                        "text" => "Qual é a principal função de Arnie ao trabalhar com Ziggs?",
+                        "correct_answer" => "Inspecionar munições hexplosivas",
+                        "options" => [
+                            "Criar novas invenções",
+                            "Pilotar veículos",
+                            "Lutar contra inimigos",
+                            "Inspecionar munições hexplosivas"
+                        ]
                     ],
-                    'en' => [
-                        'text' => "What is Tristana's weapon called?",
-                        'correct_answer' => 'Boomer',
-                        'options' => ['Pistola de canhão', 'O Treco Sussurrante', 'Canhão de mão', 'Boomer'],
-                    ],
-                ],
-            ],
+                    "en" => [
+                        "text" => "What is Arnie's main function when working with Ziggs?",
+                        "correct_answer" => "Inspecting hexplosive munitions",
+                        "options" => [
+                            "Creating new inventions",
+                            "Piloting vehicles",
+                            "Fighting enemies",
+                            "Inspecting hexplosive munitions"
+                        ]
+                    ]
+                ]
+            ]
         ];
 
         foreach ($questions as $q) {
