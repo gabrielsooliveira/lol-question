@@ -61,7 +61,7 @@ export default defineConfig({
         },
     },
     server: {
-        host: 'localhost',
+        host: 'lol-question.test',
         port: 5173,
         // strictPort: true,
         // hmr: {

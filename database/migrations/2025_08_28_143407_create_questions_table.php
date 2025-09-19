@@ -20,7 +20,7 @@ return new class extends Migration
         Schema::create('question_translations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('question_id')->constrained()->cascadeOnDelete();
-            $table->enum('locale', ['en', 'pt_BR']);
+            $table->enum('locale', ['pt', 'en']);
             $table->text('text');
             $table->string('correct_answer');
             $table->json('options');

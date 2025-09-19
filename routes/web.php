@@ -14,7 +14,7 @@ Route::post('/lorequestion/finish', [RoleplayController::class, 'finishGame'])->
 Route::get('/lorequestion/start', [RoleplayController::class, 'startGame'])->name('startGame');
 
 Route::post('/locale/{locale}', function ($locale) {
-    $available = ['en', 'pt_BR'];
+    $available = ['en', 'pt'];
 
     if (in_array($locale, $available)) {
         Session::put('locale', $locale);

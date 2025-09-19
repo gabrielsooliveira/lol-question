@@ -15,7 +15,7 @@ class QuestionSeeder extends Seeder
                 'difficulty' => 'easy',
                 'region_id' => 1,
                 'translations' => [
-                    'pt_BR' => [
+                    'pt' => [
                         'text' => 'Qual personagem é líder da tribo dos Garras do Inverno?',
                         'correct_answer' => 'Sejuani',
                         'options' => ['Ashe', 'Lissandra', 'Sejuani', 'Olaf'],
@@ -31,7 +31,7 @@ class QuestionSeeder extends Seeder
                 'difficulty' => 'medium',
                 'region_id' => 2,
                 'translations' => [
-                    'pt_BR' => [
+                    'pt' => [
                         'text' => 'Qual é o nome da arma de Tristana?',
                         'correct_answer' => 'Boomer',
                         'options' => ['Pistola de canhão', 'O Treco Sussurrante', 'Canhão de mão', 'Boomer'],
@@ -47,7 +47,7 @@ class QuestionSeeder extends Seeder
                 'difficulty' => 'hard',
                 'region_id' => 1,
                 'translations' => [
-                    'pt_BR' => [
+                    'pt' => [
                         'text' => 'Qual é o nome da arma de Tristana?',
                         'correct_answer' => 'Boomer',
                         'options' => ['Pistola de canhão', 'O Treco Sussurrante', 'Canhão de mão', 'Boomer'],

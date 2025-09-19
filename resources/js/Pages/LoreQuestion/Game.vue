@@ -217,7 +217,7 @@ onMounted(() => {
                         <div class="card-body">
                             <div class="container py-4 text-center">
                                 <p class="fw-bold fs-3 mb-4">{{ currentQuestion.text }}</p>
-                                <div class="d-inline-block mb-4 p-3 rounded-circle bg-primary text-white fs-4 shadow">{{ timer }}s</div>
+                                <div class="d-inline-block p-3 rounded-circle bg-primary text-white fs-4 shadow">{{ timer }}s</div>
 
                                 <div class="row g-3 justify-content-center mt-3">
                                     <div v-for="(option, index) in currentQuestion.options" :key="index" class="col-10 col-md-5">
@@ -230,7 +230,7 @@ onMounted(() => {
                                             'btn-secondary': selectedAnswer && !isSubmitting,
                                         }"
                                         :disabled="isSubmitting"
-                                        @click="selectAnswer(option)"
+                                        @click="submitAnswer(option)"
                                         >
                                         {{ option }}
                                         </button>
