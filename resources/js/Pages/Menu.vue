@@ -6,7 +6,6 @@ const games = [
   {
     id: 1,
     title: 'LoreQuestion',
-    description: 'Saiba se vocês conhece sobre as histórias do league of legends.',
     image: LolQuestionBackground,
     route: 'lorequestion.index'
   },
@@ -27,7 +26,6 @@ const games = [
                 <img :src="game.image" class="card-img-top img-fluid" :alt="game.title" loading="lazy" />
                 <div class="card-body d-flex flex-column bg-gradient">
                 <h4 class="card-title fw-bold mb-2">{{ game.title }}</h4>
-                <p class="card-text small flex-grow-1">{{ game.description }}</p>
                 <Link :href="route(game.route)" class="btn btn-primary mt-auto">Jogar agora</Link>
                 </div>
             </div>

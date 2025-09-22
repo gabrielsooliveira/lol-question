@@ -52,9 +52,9 @@ const saveSettings = () => {
                             </div>
                             <button
                                 @click="openModal"
-                                class="btn btn-primary text-white mt-3"
+                                class="btn btn-primary text-white mt-3 text-capitalize"
                             >
-                                Jogar
+                                {{ $t('play') }}
                             </button>
                         </div>
                     </div>
@@ -85,7 +85,7 @@ const saveSettings = () => {
     <ModalDialog :isVisible="isModalVisible" @close="closeModal" title="Configurações do Jogo">
         <form @submit.prevent="saveSettings">
             <div class="mb-3">
-                <label class="form-label fw-semibold d-block">Nível de Dificuldade</label>
+                <label class="form-label fw-semibold d-block text-capitalize">{{ $t('diffulty-phrase') }}</label>
 
                 <div class="form-check form-check-inline">
                     <input
@@ -96,7 +96,7 @@ const saveSettings = () => {
                         value="easy"
                         v-model="form.difficulty"
                     />
-                    <label class="form-check-label" for="difficultyEasy">Fácil</label>
+                    <label class="form-check-label" for="difficultyEasy">{{ $t('diffulty.easy') }}</label>
                 </div>
 
                 <div class="form-check form-check-inline">
@@ -108,7 +108,7 @@ const saveSettings = () => {
                         value="medium"
                         v-model="form.difficulty"
                     />
-                    <label class="form-check-label" for="difficultyMedium">Médio</label>
+                    <label class="form-check-label" for="difficultyMedium">{{ $t('diffulty.medium') }}</label>
                 </div>
 
                 <div class="form-check form-check-inline">
@@ -120,12 +120,12 @@ const saveSettings = () => {
                         value="hard"
                         v-model="form.difficulty"
                     />
-                    <label class="form-check-label" for="difficultyHard">Difícil</label>
+                    <label class="form-check-label" for="difficultyHard">{{ $t('diffulty.hard') }}</label>
                 </div>
             </div>
 
             <div class="mb-3">
-                <label for="questionQuant" class="form-label fw-semibold">Quantidade de perguntas</label>
+                <label for="questionQuant" class="form-label fw-semibold">{{ $t('quantity-phrase') }}</label>
                 <input type="range" class="form-range" min="1" max="10" id="questionQuant" v-model="form.questionQuant" name="questionQuant" required />
                 <div>
                     <span>{{ form.questionQuant }} / 10</span>
@@ -133,8 +133,8 @@ const saveSettings = () => {
             </div>
 
             <div class="d-grid">
-                <button type="submit" class="btn btn-primary text-white flex-grow-1 fw-bold rounded-3 shadow">
-                    Iniciar
+                <button type="submit" class="btn btn-primary text-white flex-grow-1 fw-bold rounded-3 shadow text-capitalize">
+                    {{ $t('button-start') }}
                 </button>
             </div>
         </form>
