@@ -1,10 +1,9 @@
 <script setup>
-import { Head, Link } from '@inertiajs/vue3'
+import { Head, Link } from '@inertiajs/vue3';
 import LolQuestionBackground from '@/assets/images/lolquestion.jpg';
 
 const games = [
   {
-    id: 1,
     title: 'LoreQuestion',
     image: LolQuestionBackground,
     route: 'lorequestion.index'
@@ -20,17 +19,18 @@ const games = [
 
     <div class="py-5 text-light vh-100 d-flex justify-content-center align-items-center">
         <div class="container">
-        <div class="row g-4">
-            <div v-for="game in games" :key="game.id" class="col-md-4">
-            <div class="card h-100 shadow hover-card">
-                <img :src="game.image" class="card-img-top img-fluid" :alt="game.title" loading="lazy" />
-                <div class="card-body d-flex flex-column bg-gradient">
-                <h4 class="card-title fw-bold mb-2">{{ game.title }}</h4>
-                <Link :href="route(game.route)" class="btn btn-primary mt-auto">Jogar agora</Link>
+            <div class="row g-4">
+                <div v-for="(game, index) in games" :key="index" class="col-md-4">
+                    <div class="card text-bg-dark shadow hover-card">
+                        <Link :href="route(game.route)">
+                            <img :src="game.image" class="card-img" :alt="game.title" loading="lazy">
+                            <div class="card-img-overlay">
+                                <h4 class="card-title text-white fw-bold">{{ game.title }}</h4>
+                            </div>
+                        </Link>
+                    </div>
                 </div>
             </div>
-            </div>
-        </div>
         </div>
     </div>
 </template>

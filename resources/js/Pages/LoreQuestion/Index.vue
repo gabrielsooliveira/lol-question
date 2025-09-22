@@ -96,7 +96,7 @@ const saveSettings = () => {
                         value="easy"
                         v-model="form.difficulty"
                     />
-                    <label class="form-check-label" for="difficultyEasy">{{ $t('diffulty.easy') }}</label>
+                    <label class="form-check-label text-capitalize" for="difficultyEasy">{{ $t('diffulty.easy') }}</label>
                 </div>
 
                 <div class="form-check form-check-inline">
@@ -108,7 +108,7 @@ const saveSettings = () => {
                         value="medium"
                         v-model="form.difficulty"
                     />
-                    <label class="form-check-label" for="difficultyMedium">{{ $t('diffulty.medium') }}</label>
+                    <label class="form-check-label text-capitalize" for="difficultyMedium">{{ $t('diffulty.medium') }}</label>
                 </div>
 
                 <div class="form-check form-check-inline">
@@ -120,7 +120,7 @@ const saveSettings = () => {
                         value="hard"
                         v-model="form.difficulty"
                     />
-                    <label class="form-check-label" for="difficultyHard">{{ $t('diffulty.hard') }}</label>
+                    <label class="form-check-label text-capitalize" for="difficultyHard">{{ $t('diffulty.hard') }}</label>
                 </div>
             </div>
 

@@ -3,9 +3,9 @@
 return [
     'diffulty-phrase' => 'difficulty level',
     'diffulty' => [
-        'easy' => 'Easy',
-        'medium' => 'Medium',
-        'hard' => 'Hard'
+        'easy' => 'easy',
+        'medium' => 'medium',
+        'hard' => 'hard'
     ],
     'play' => 'play',
     'button-start' => 'start',
