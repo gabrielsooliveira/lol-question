@@ -43,7 +43,7 @@ class RoleplayController extends Controller
     {
         $validated = $request->validate([
             'respostas' => 'required|array',
-            'respostas.*.question_id' => 'required|integer',
+            'respostas.*.question_id' => 'required|string',
             'respostas.*.answer' => 'required|string',
         ]);
 
@@ -51,24 +51,42 @@ class RoleplayController extends Controller
         $wrong = [];
         $totalQuestions = count($validated['respostas']);
 
-        $questionIds = collect($validated['respostas'])->pluck('question_id');
-        $questions = QuestionTranslation::whereIn('id', $questionIds)->get()->keyBy('id');
+        // Locale atual do sistema
+        $locale = app()->getLocale();
+
+        // pega todos os UUIDs enviados
+        $uuids = collect($validated['respostas'])->pluck('question_id');
+
+        // carrega as perguntas + traduções no locale ativo
+        $questions = Question::with(['translations' => function($q) use ($locale) {
+                $q->where('locale', $locale)
+                ->select('question_id', 'locale', 'text', 'correct_answer', 'options');
+            }])
+            ->whereIn('uuid', $uuids)
+            ->get()
+            ->keyBy('uuid');
 
         foreach ($validated['respostas'] as $resp) {
             $question = $questions->get($resp['question_id']);
             if (!$question) continue;
 
-            if ($question->correct_answer === $resp['answer']) {
+            // só terá 1 tradução por conta do where no eager loading
+            $translation = $question->translations->first();
+            if (!$translation) continue;
+
+            $userAnswer = $resp['answer'] === 'timeout' ? 'Tempo esgotado' : $resp['answer'];
+
+            if ($translation->correct_answer === $resp['answer']) {
                 $correct[] = [
-                    'question_text' => $question->text,
-                    'user_answer' => $resp['answer'] === 'timeout' ? 'Tempo esgotado' : $resp['answer'],
-                    'correct_answer' => $question->correct_answer,
+                    'question_text' => $translation->text,
+                    'user_answer' => $userAnswer,
+                    'correct_answer' => $translation->correct_answer,
                 ];
             } else {
                 $wrong[] = [
-                    'question_text' => $question->text,
-                    'user_answer' => $resp['answer'] === 'timeout' ? 'Tempo esgotado' : $resp['answer'],
-                    'correct_answer' => $question->correct_answer,
+                    'question_text' => $translation->text,
+                    'user_answer' => $userAnswer,
+                    'correct_answer' => $translation->correct_answer,
                 ];
             }
         }
@@ -79,4 +97,5 @@ class RoleplayController extends Controller
             'wrong_answers' => $wrong,
         ]);
     }
+
 }

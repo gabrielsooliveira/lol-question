@@ -12,21 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('questions', function (Blueprint $table) {
-            $table->id();
+            $table->uuid()->primary();
             $table->enum('difficulty', ['easy', 'medium', 'hard']);
             $table->timestamps();
         });
 
         Schema::create('question_translations', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('question_id')->constrained()->cascadeOnDelete();
+            $table->foreignUuid('question_id')->references('uuid')->on('questions')->cascadeOnDelete();
             $table->enum('locale', ['pt', 'en']);
             $table->text('text');
             $table->string('correct_answer');
             $table->json('options');
             $table->timestamps();
 
-            $table->unique(['question_id', 'locale']);
+            $table->primary(['question_id', 'locale']);
         });
     }
 

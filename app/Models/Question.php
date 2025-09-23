@@ -3,16 +3,24 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class Question extends Model
 {
+    use HasUuids;
+
+    protected $primaryKey = 'uuid';
+    public $incrementing = false;
+    protected $keyType = 'string';
+
     protected $fillable = [
-        'difficulty'
+        'difficulty',
+        'region_id'
     ];
 
     public function translations()
     {
-        return $this->hasMany(QuestionTranslation::class);
+        return $this->hasMany(QuestionTranslation::class, 'question_id', 'uuid');
     }
 
     public function translation($locale = null)
@@ -25,9 +33,9 @@ class Question extends Model
     {
         $t = $this->translation($locale);
         return [
-            'id' => $t?->id,
+            'id' => $this->uuid,
             'text' => $t?->text ?? '',
-            'options' => collect(json_decode($t?->options, true))->shuffle() ?? [],
+            'options' => collect($t?->options, true)->shuffle() ?? [],
         ];
     }
 
