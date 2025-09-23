@@ -14,8 +14,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            RegionSeeder::class,
-            QuestionSeeder::class
+            RegionSeeder::class
         ]);
     }
 }

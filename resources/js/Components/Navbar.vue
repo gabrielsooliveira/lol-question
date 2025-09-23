@@ -35,7 +35,7 @@ onUnmounted(() => {
   >
     <div class="container-fluid">
         <Link :href="route('home')" class="navbar-brand fw-bold">HextechPlay</Link>
-        <button class="btn btn-primary d-lg-none border-0 text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPrincipal" aria-controls="navbarPrincipal" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="btn btn-primary d-md-none border-0 text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPrincipal" aria-controls="navbarPrincipal" aria-expanded="false" aria-label="Toggle navigation">
                 <font-awesome-icon :icon="['fas', 'bars']" size="lg"/>
         </button>
         <div class="collapse navbar-collapse" id="navbarPrincipal">

@@ -14,6 +14,8 @@ class SetLocale
 
         App::setLocale($locale);
 
+        setlocale(LC_TIME, $locale === 'pt' ? 'pt_BR.utf8' : 'en_US.utf8');
+
         return $next($request);
     }
 }

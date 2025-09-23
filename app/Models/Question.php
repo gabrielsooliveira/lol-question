@@ -24,10 +24,11 @@ class Question extends Model
     public function getLocalizedData($locale = null)
     {
         $t = $this->translation($locale);
+
         return [
             'id' => $t?->id,
             'text' => $t?->text ?? '',
-            'options' => collect(json_decode($t?->options, true))->shuffle() ?? [],
+            'options' => collect($t?->options ?? [])->shuffle(),
         ];
     }
 
