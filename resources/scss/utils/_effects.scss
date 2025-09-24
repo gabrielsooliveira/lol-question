@@ -9,3 +9,33 @@ $transition-speed: 0.3s;
     box-shadow: $hover-shadow;
   }
 }
+
+.hover-elevate {
+  transition: all 0.3s ease;
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.1);
+  }
+}
+
+.hover-zoom {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.15);
+  }
+}
+
+.hover-glow {
+  transition: box-shadow 0.3s ease;
+  &:hover {
+    box-shadow: 0 0 20px rgba(110, 108, 108, 0.6);
+  }
+}
+
+.hover-rotate {
+  transition: transform 0.3s ease;
+  &:hover {
+    transform: rotate(-2deg) scale(1.02);
+  }
+}

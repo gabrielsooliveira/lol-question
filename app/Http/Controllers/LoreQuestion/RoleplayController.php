@@ -12,6 +12,7 @@ class RoleplayController extends Controller
 {
     public function roleplay(Request $request)
     {
+        $translations = trans('roleplayLorequestion');
         $validated = $request->validate([
             'difficulty' => 'required|string|in:easy,medium,hard',
             'questionQuant' => 'required|integer|min:1|max:10',
@@ -19,7 +20,9 @@ class RoleplayController extends Controller
 
         GameSessionService::setGameSettings($validated);
 
-        return inertia('LoreQuestion/Game');
+        return inertia('LoreQuestion/Game', [
+            'translations' => $translations
+        ]);
     }
 
     public function startGame()
@@ -74,7 +77,7 @@ class RoleplayController extends Controller
             $translation = $question->translations->first();
             if (!$translation) continue;
 
-            $userAnswer = $resp['answer'] === 'timeout' ? 'Tempo esgotado' : $resp['answer'];
+            $userAnswer = $resp['answer'] === 'timeout' ?'timeout' : $resp['answer'];
 
             if ($translation->correct_answer === $resp['answer']) {
                 $correct[] = [

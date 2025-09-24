@@ -9,16 +9,25 @@ class PageController extends Controller
 {
     public function index()
     {
-        return inertia('Home');
+        $translations = trans('home');
+        return inertia('Home', [
+            'translations' => $translations
+        ]);
     }
 
     public function menu()
     {
-        return inertia('Menu');
+        $translations = trans('menu');
+        return inertia('Menu', [
+            'translations' => $translations
+        ]);
     }
 
     public function loreQuestion()
     {
-        return inertia('LoreQuestion/Index');
+        $translations = trans('lorequestion');
+        return inertia('LoreQuestion/Index', [
+            'translations' => $translations
+        ]);
     }
 }
