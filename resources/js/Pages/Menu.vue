@@ -13,8 +13,8 @@ const games = [
 
 <template>
     <Head>
-        <title>Menu</title>
-        <meta head-key="description" name="description" content="Menu de jogos da HextechPlay para você se divertir" />
+        <title>{{ $page.props.translations.page_title }}</title>
+        <meta head-key="description" name="description" :content="$page.props.translations.page_description" />
     </Head>
 
     <div class="py-5 text-light vh-100 d-flex justify-content-center align-items-center">

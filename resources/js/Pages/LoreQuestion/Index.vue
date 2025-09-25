@@ -29,32 +29,26 @@ const saveSettings = () => {
 
 <template>
     <Head>
-        <title>LoreQuestion</title>
-        <meta head-key="description" name="description" content="LoreQuestion é um jogo da plataforma HextechPlay sobre perguntas envolvendo o universo de runeterra" />
+        <title>{{ $page.props.translations.page_title }}</title>
+        <meta head-key="description" name="description" :content="$page.props.translations.page_description" />
     </Head>
 
     <div class="min-vh-100 d-flex align-items-center justify-content-center">
         <div class="container text-center">
-            <h1 class="fw-bold mb-5 text-light">Escolha o modo de jogo</h1>
+            <h1 class="fw-bold mb-5 text-light">{{ $page.props.translations['text-mode-game'] }}</h1>
 
             <div class="row g-4 justify-content-center">
                 <div class="col-md-4">
                     <div class="card h-100 shadow-lg border-0">
-                        <div
-                            class="card-body d-flex flex-column justify-content-between bg-gradient text-dark"
-                        >
+                        <div class="card-body d-flex flex-column justify-content-between bg-gradient text-dark">
                             <div>
                                 <h4 class="card-title fw-bold">Roleplay</h4>
                                 <p class="card-text small">
-                                    Teste seus conhecimentos sobre as histórias
-                                    de runeterra.
+                                    {{ $page.props.translations['text-lorequestion-roleplay'] }}
                                 </p>
                             </div>
-                            <button
-                                @click="openModal"
-                                class="btn btn-primary text-white mt-3 text-capitalize"
-                            >
-                                {{ $t('play') }}
+                            <button @click="openModal" class="btn btn-primary text-white mt-3 text-capitalize">
+                                {{ $page.props.translations['play'] }}
                             </button>
                         </div>
                     </div>
@@ -62,18 +56,15 @@ const saveSettings = () => {
 
                 <div class="col-md-4">
                     <div class="card h-100 shadow-lg border-0">
-                        <div
-                            class="card-body d-flex flex-column justify-content-between bg-gradient text-dark"
-                        >
+                        <div class="card-body d-flex flex-column justify-content-between bg-gradient text-dark">
                             <div>
-                                <h4 class="card-title fw-bold">Competitivo</h4>
+                                <h4 class="card-title fw-bold">{{ $page.props.translations['competitive'] }}</h4>
                                 <p class="card-text small">
-                                    Teste seus conhecimentos contra outros
-                                    jogadores. (Em breve)
+                                    {{ $page.props.translations['text-lorequestion-competitive'] }}
                                 </p>
                             </div>
                             <button class="btn btn-dark mt-3" disabled>
-                                Em breve
+                                {{ $page.props.translations['coming-soon'] }}
                             </button>
                         </div>
                     </div>
@@ -82,50 +73,29 @@ const saveSettings = () => {
         </div>
     </div>
 
-    <ModalDialog :isVisible="isModalVisible" @close="closeModal" title="Configurações do Jogo">
+    <ModalDialog :isVisible="isModalVisible" @close="closeModal" :title="$page.props.translations['config-text']">
         <form @submit.prevent="saveSettings">
             <div class="mb-3">
-                <label class="form-label fw-semibold d-block text-capitalize">{{ $t('diffulty-phrase') }}</label>
+                <label class="form-label fw-semibold d-block text-capitalize">{{ $page.props.translations['diffulty-phrase'] }}</label>
 
                 <div class="form-check form-check-inline">
-                    <input
-                        class="form-check-input"
-                        type="radio"
-                        name="difficulty"
-                        id="difficultyEasy"
-                        value="easy"
-                        v-model="form.difficulty"
-                    />
-                    <label class="form-check-label text-capitalize" for="difficultyEasy">{{ $t('diffulty.easy') }}</label>
+                    <input class="form-check-input" type="radio" name="difficulty" id="difficultyEasy" value="easy" v-model="form.difficulty" />
+                    <label class="form-check-label text-capitalize" for="difficultyEasy">{{ $page.props.translations['diffulty'].easy }}</label>
                 </div>
 
                 <div class="form-check form-check-inline">
-                    <input
-                        class="form-check-input"
-                        type="radio"
-                        name="difficulty"
-                        id="difficultyMedium"
-                        value="medium"
-                        v-model="form.difficulty"
-                    />
-                    <label class="form-check-label text-capitalize" for="difficultyMedium">{{ $t('diffulty.medium') }}</label>
+                    <input class="form-check-input" type="radio" name="difficulty" id="difficultyMedium" value="medium" v-model="form.difficulty" />
+                    <label class="form-check-label text-capitalize" for="difficultyMedium">{{ $page.props.translations['diffulty'].medium }}</label>
                 </div>
 
                 <div class="form-check form-check-inline">
-                    <input
-                        class="form-check-input"
-                        type="radio"
-                        name="difficulty"
-                        id="difficultyHard"
-                        value="hard"
-                        v-model="form.difficulty"
-                    />
-                    <label class="form-check-label text-capitalize" for="difficultyHard">{{ $t('diffulty.hard') }}</label>
+                    <input class="form-check-input" type="radio" name="difficulty" id="difficultyHard" value="hard" v-model="form.difficulty" />
+                    <label class="form-check-label text-capitalize" for="difficultyHard">{{ $page.props.translations['diffulty'].hard }}</label>
                 </div>
             </div>
 
             <div class="mb-3">
-                <label for="questionQuant" class="form-label fw-semibold">{{ $t('quantity-phrase') }}</label>
+                <label for="questionQuant" class="form-label fw-semibold">{{ $page.props.translations['quantity-phrase'] }}</label>
                 <input type="range" class="form-range" min="1" max="10" id="questionQuant" v-model="form.questionQuant" name="questionQuant" required />
                 <div>
                     <span>{{ form.questionQuant }} / 10</span>
@@ -134,9 +104,10 @@ const saveSettings = () => {
 
             <div class="d-grid">
                 <button type="submit" class="btn btn-primary text-white flex-grow-1 fw-bold rounded-3 shadow text-capitalize">
-                    {{ $t('button-start') }}
+                    {{ $page.props.translations['button-start'] }}
                 </button>
             </div>
         </form>
     </ModalDialog>
 </template>
+
