@@ -8,6 +8,11 @@ const games = [
     image: LolQuestionBackground,
     route: 'lorequestion.index'
   },
+  {
+    title: 'HangMan',
+    image: LolQuestionBackground,
+    route: 'hangman.index'
+  },
 ]
 </script>
 
