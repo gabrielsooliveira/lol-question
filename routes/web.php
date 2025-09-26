@@ -27,3 +27,7 @@ Route::post('/locale/{locale}', function ($locale) {
 
     return back();
 })->name('locale.change');
+
+Route::get('/privacy-policy', function () {
+    return inertia('PrivacyPolicy');
+})->name('privacy.policy');
