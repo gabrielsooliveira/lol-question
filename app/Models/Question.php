@@ -34,7 +34,7 @@ class Question extends Model
         $t = $this->translation($locale);
 
         return [
-            'id' => $this->uuid,
+            'uuid' => $this->uuid,
             'text' => $t?->text ?? '',
             'options' => collect($t?->options, true)->shuffle() ?? [],
         ];

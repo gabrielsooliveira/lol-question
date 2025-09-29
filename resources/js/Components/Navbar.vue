@@ -23,14 +23,18 @@ onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll);
   window.removeEventListener('resize', handleResize);
 });
+
+// Computed para definir a classe
+const navbarClass = () => {
+  // bg-primary se for mobile ou se rolou
+  return (!isMdUp.value || isScrolled.value) ? 'bg-primary shadow-sm' : 'bg-transparent';
+};
 </script>
 
 <template>
     <nav
         class="navbar navbar-expand-lg fixed-top navbar-dark transition-navbar px-2"
-        :class="[
-        (isMdUp) ? 'bg-transparent' : 'bg-primary shadow-sm'
-        ]"
+        :class="navbarClass()"
         aria-label="Navbar principal"
     >
         <div class="container-fluid">

@@ -56,7 +56,7 @@ function submitAnswer(answerValue) {
     isSubmitting.value = true;
 
     userAnswers.value.push({
-        question_id: currentQuestion.value.id,
+        question_id: currentQuestion.value.uuid,
         answer: answerValue
     });
 
@@ -79,7 +79,7 @@ async function finishGame() {
     isSubmitting.value = true;
     try {
         const response = await axios.post(route('finishGame'), {
-            respostas: userAnswers.value
+            answers: userAnswers.value
         });
         gameResults.value = response.data;
         gameFinished.value = true;

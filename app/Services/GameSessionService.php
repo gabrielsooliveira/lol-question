@@ -2,34 +2,23 @@
 
 namespace App\Services;
 
+use App\DTOs\GameSettingsDTO;
 use Illuminate\Support\Facades\Session;
 
 class GameSessionService
 {
-    /**
-     * Store the game settings in the session.
-     *
-     * @param array $settings
-     * @return void
-     */
-    public static function setGameSettings(array $settings)
+    public static function setGameSettings(GameSettingsDTO $settings): void
     {
-        Session::put('game_settings', [
-            'difficulty' => $settings['difficulty'],
-            'questionQuant' => $settings['questionQuant'] ?? 5,
-        ]);
+        Session::put('game_settings', $settings->toArray());
     }
 
-    /**
-     * Retrieve the current game settings.
-     *
-     * @return array
-     */
-    public static function getGameSettings()
+    public static function getGameSettings(): GameSettingsDTO
     {
-        return Session::get('game_settings', [
+        $data = Session::get('game_settings', [
             'difficulty' => 'easy',
             'questionQuant' => 5,
         ]);
+
+        return GameSettingsDTO::fromArray($data);
     }
 }

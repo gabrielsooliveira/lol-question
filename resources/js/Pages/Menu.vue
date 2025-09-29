@@ -1,6 +1,7 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
-import LolQuestionBackground from '@/assets/images/lolquestion.jpg';
+import LolQuestionBackground from '@/assets/images/lorequestion.png';
+import HangmanBackground from '@/assets/images/hangman.png';
 
 const games = [
   {
@@ -10,7 +11,7 @@ const games = [
   },
   {
     title: 'HangMan',
-    image: LolQuestionBackground,
+    image: HangmanBackground,
     route: 'hangman.index'
   },
 ]
