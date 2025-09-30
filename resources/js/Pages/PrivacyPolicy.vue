@@ -1,11 +1,13 @@
 <script setup>
 import { Head } from "@inertiajs/vue3";
+
+const props = defineProps(["translations"]);
 </script>
 
 <template>
     <Head>
-        <title>{{ $page.props.translations.page_title }}</title>
-        <meta head-key="description" name="description" :content="$page.props.translations.page_description" />
+        <title>{{ props.translations.page_title }}</title>
+        <meta head-key="description" name="description" :content="props.translations.page_description" />
     </Head>
 
     <div class="d-flex justify-content-center align-items-center py-5 min-vh-100 text-white">
