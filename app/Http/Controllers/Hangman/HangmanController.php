@@ -8,16 +8,20 @@ use Illuminate\Http\Request;
 class HangmanController extends Controller
 {
     private $words = [
-        'LARAVEL',
-        'INERTIA',
-        'VUEJS',
-        'BOOTSTRAP',
-        'HANGMAN',
-        'JAVASCRIPT',
-        'FRAMEWORK',
-        'DESENVOLVIMENTO',
-        'PROGRAMACAO',
-        'TECNOLOGIA'
+        "AATROX", "AHRI", "AKALI", "AKSHAN", "ALISTAR", "AMUMU", "ANIVIA", "ANNIE", "APHELIOS", "ASHE",
+        "AURELION SOL", "AURORA", "AZIR", "BARD", "BEL'VETH", "BLITZCRANK", "BRAND", "BRAUM", "BRIAR", "CAITLYN",
+        "CAMILLE", "CASSIOPEIA", "CHO'GATH", "CORKI", "DARIUS", "DIANA", "DR. MUNDO", "DRAVEN", "EKKO", "ELISE",
+        "EVELYNN", "EZREAL", "FIDDLESTICKS", "FIORA", "GALIO", "GANGPLANK", "GAREN", "GNAR", "GRAGAS", "GRAVES",
+        "GWEN", "HECARIM", "HEIMERDINGER", "ILLAOI", "IRELIA", "IVERN", "JANNA", "JARVAN IV", "JHIN", "JINX",
+        "KAI'SA", "KARMA", "KARTHUS", "KASSADIN", "KATARINA", "KAYLE", "KENNEN", "KHA'ZIX", "KINDRED", "KLED",
+        "K'SANTE", "KOG'MAW", "LEBLANC", "LEE SIN", "LEONA", "LILLIA", "LISSANDRA", "LUCIAN", "LULU", "LUX",
+        "MALPHITE", "MISS FORTUNE", "MILIO", "MORDEKAISER", "MORGANA", "NAMI", "NASUS", "NAUTILUS", "NEEKO",
+        "NILAH", "OLAF", "ORIANA", "PANTHEON", "POPPY", "PYKE", "QIYANA", "RAKAN", "RAMMUS", "REK'SAI", "RENATA GLASC",
+        "RENEKTON", "RIVEN", "RUMBLE", "RYZE", "SAMIRA", "SEJUANI", "SENNA", "SETT", "SHACO", "SHEN", "SIVIR",
+        "SKARNER", "SONA", "SORAKA", "SWAIN", "SYLAS", "TAHM KENCH", "TALIYAH", "TEEMO", "THRESH", "TRISTANA",
+        "TRUNDLE", "TRYNDAMERE", "TWISTED FATE", "TWITCH", "UDYR", "URGOT", "VARUS", "VAYNE", "VEIGAR", "VEL'KOZ",
+        "VI", "VIEGO", "VIKTOR", "VLADIMIR", "VOLIBEAR", "WARWICK", "WUKONG", "XAYAH", "YASUO", "YONE",
+        "YUUMI", "ZAC", "ZED", "ZERI", "ZILEAN", "ZOE", "ZYRA"
     ];
 
     private $maxAttempts = 6;
@@ -25,11 +29,16 @@ class HangmanController extends Controller
     public function index(Request $request)
     {
         $session = $request->session();
+        $today = now()->toDateString();
 
-        // Inicializa novo jogo se não existir ou se foi solicitado reset
-        if (!$session->has('hangman') || $request->get('reset')) {
-            $word = $this->words[array_rand($this->words)];
-            $session->put('hangman', [
+        // Mantém estado do dia, ou cria se ainda não jogou hoje
+        if ($session->has('hangman') && $session->get('hangman.date') === $today) {
+            $state = $session->get('hangman');
+        } else {
+            $word = $this->getDailyWord($today);
+
+            $state = [
+                'date' => $today,
                 'word' => $word,
                 'guessed' => [],
                 'wrongLetters' => [],
@@ -37,12 +46,13 @@ class HangmanController extends Controller
                 'maxAttempts' => $this->maxAttempts,
                 'lost' => false,
                 'won' => false,
-            ]);
+                'finished' => false,
+            ];
+
+            $session->put('hangman', $state);
         }
 
-        $state = $session->get('hangman');
-
-        return inertia('Hangman/Index', [
+        return inertia('Hangman/Game', [
             'displayWord' => $this->getDisplayWord($state),
             'guessed' => $state['guessed'],
             'wrongLetters' => $state['wrongLetters'],
@@ -50,8 +60,8 @@ class HangmanController extends Controller
             'maxAttempts' => $state['maxAttempts'],
             'lost' => $state['lost'],
             'won' => $state['won'],
-            'word' => $state['lost'] ? $state['word'] : null, // Só mostra a palavra se perdeu
-            'missingLetters' => $this->getMissingLetters($state),
+            'finished' => $state['finished'],
+            'word' => $state['lost'] ? $state['word'] : null, // só manda a palavra se perdeu
         ]);
     }
 
@@ -60,9 +70,9 @@ class HangmanController extends Controller
         $session = $request->session();
         $state = $session->get('hangman');
 
-        if ($state['lost'] || $state['won']) {
+        if ($state['finished']) {
             return response()->json([
-                'error' => 'Jogo já finalizado',
+                'error' => 'Você já jogou hoje! Volte amanhã para a próxima palavra.',
                 'displayWord' => $this->getDisplayWord($state),
                 'guessed' => $state['guessed'],
                 'wrongLetters' => $state['wrongLetters'],
@@ -70,8 +80,8 @@ class HangmanController extends Controller
                 'lost' => $state['lost'],
                 'won' => $state['won'],
                 'maxAttempts' => $state['maxAttempts'],
+                'finished' => $state['finished'],
                 'word' => $state['lost'] ? $state['word'] : null,
-                'missingLetters' => $this->getMissingLetters($state),
             ]);
         }
 
@@ -94,19 +104,20 @@ class HangmanController extends Controller
             $state['guessed'][] = $letter;
 
             if (strpos($state['word'], $letter) !== false) {
-                // Letra correta - verifica se ganhou
                 if ($this->hasWon($state)) {
                     $state['won'] = true;
                 }
             } else {
-                // Letra incorreta
                 $state['wrongLetters'][] = $letter;
                 $state['wrong']++;
-
                 if ($state['wrong'] >= $state['maxAttempts']) {
                     $state['lost'] = true;
                 }
             }
+        }
+
+        if ($state['lost'] || $state['won']) {
+            $state['finished'] = true;
         }
 
         $session->put('hangman', $state);
@@ -118,16 +129,16 @@ class HangmanController extends Controller
             'wrong' => $state['wrong'],
             'lost' => $state['lost'],
             'won' => $state['won'],
+            'finished' => $state['finished'],
             'maxAttempts' => $state['maxAttempts'],
             'word' => $state['lost'] ? $state['word'] : null,
-            'missingLetters' => $this->getMissingLetters($state),
         ]);
     }
 
-    public function reset(Request $request)
+    private function getDailyWord(string $date): string
     {
-        $request->session()->forget('hangman');
-        return redirect()->route('hangman.index');
+        $index = crc32($date) % count($this->words);
+        return $this->words[$index];
     }
 
     private function getDisplayWord(array $state): string
@@ -154,34 +165,11 @@ class HangmanController extends Controller
     private function hasWon(array $state): bool
     {
         $word = $state['word'];
-        $guessed = $state['guessed'];
-
-        for ($i = 0; $i < strlen($word); $i++) {
-            if (!in_array($word[$i], $guessed)) {
+        foreach (str_split($word) as $char) {
+            if (!in_array($char, $state['guessed'])) {
                 return false;
             }
         }
-
         return true;
-    }
-
-    private function getMissingLetters(array $state): array
-    {
-        if ($state['won'] || $state['lost']) {
-            return [];
-        }
-
-        $word = $state['word'];
-        $guessed = $state['guessed'];
-        $missing = [];
-
-        for ($i = 0; $i < strlen($word); $i++) {
-            $char = $word[$i];
-            if (!in_array($char, $guessed) && !in_array($char, $missing)) {
-                $missing[] = $char;
-            }
-        }
-
-        return $missing;
     }
 }

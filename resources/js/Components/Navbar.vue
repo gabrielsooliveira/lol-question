@@ -1,6 +1,6 @@
 <script setup>
 import { Link } from '@inertiajs/vue3';
-import { onMounted, onUnmounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref, computed } from 'vue';
 import LocaleSwitcher from '@/js/Components/LocaleSwitcher.vue';
 
 const isScrolled = ref(false);
@@ -24,23 +24,18 @@ onUnmounted(() => {
   window.removeEventListener('resize', handleResize);
 });
 
-// Computed para definir a classe
-const navbarClass = () => {
-  // bg-primary se for mobile ou se rolou
-  return (!isMdUp.value || isScrolled.value) ? 'bg-primary shadow-sm' : 'bg-transparent';
-};
+const navbarClass = computed(() => {
+  const baseClasses = 'navbar navbar-expand-lg fixed-top navbar-dark transition-navbar px-2';
+  const bgClass = (!isMdUp.value || isScrolled.value) ? 'bg-primary shadow-glow' : 'bg-transparent';
+
+  return `${baseClasses} ${bgClass}`;
+});
 </script>
 
 <template>
-    <nav
-        class="navbar navbar-expand-lg fixed-top navbar-dark transition-navbar px-2"
-        :class="navbarClass()"
-        aria-label="Navbar principal"
-    >
+    <nav :class="navbarClass" aria-label="Navbar principal">
         <div class="container-fluid">
             <Link :href="route('home')" class="navbar-brand fw-bold">HextechPlay</Link>
-
-            <!-- Botão collapse para mobile -->
             <button
                 class="btn btn-primary d-lg-none border-0 text-light"
                 type="button"
@@ -56,10 +51,10 @@ const navbarClass = () => {
             <div class="collapse navbar-collapse" id="navbarPrincipal">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <li class="nav-item">
-                        <Link :href="route('home')" class="nav-link link-light">Home</Link>
+                        <Link :href="route('home')" class="nav-link link-light">Inicio</Link>
                     </li>
                     <li class="nav-item">
-                        <Link :href="route('menu')" class="nav-link link-light">Menu</Link>
+                        <Link :href="route('menu')" class="nav-link link-light">Jogos</Link>
                     </li>
                 </ul>
                 <LocaleSwitcher></LocaleSwitcher>

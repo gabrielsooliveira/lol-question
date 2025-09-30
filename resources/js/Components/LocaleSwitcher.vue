@@ -22,7 +22,7 @@ function changeLocale(newLocale) {
     <div class="d-flex align-items-center">
         <div class="dropdown ms-auto">
             <button
-                class="btn text-white dropdown-toggle border-0 bg-transparent d-block d-md-inline-block"
+                class="btn dropdown-toggle border-0 bg-transparent d-block d-md-inline-block"
                 type="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
@@ -31,10 +31,10 @@ function changeLocale(newLocale) {
             </button>
             <ul class="dropdown-menu dropdown-menu-end">
                 <li>
-                <a class="dropdown-item" href="#" @click.prevent="changeLocale('en')">EN</a>
+                    <a class="dropdown-item link-warning fw-bold" href="#" @click.prevent="changeLocale('en')">EN</a>
                 </li>
                 <li>
-                <a class="dropdown-item" href="#" @click.prevent="changeLocale('pt')">PT</a>
+                    <a class="dropdown-item link-warning fw-bold" href="#" @click.prevent="changeLocale('pt')">PT</a>
                 </li>
             </ul>
         </div>

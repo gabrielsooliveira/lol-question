@@ -151,10 +151,10 @@ onMounted(() => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <button class="carousel-control-prev text-dark" type="button" data-bs-target="#carouselCorrect" data-bs-slide="prev">
+                                        <button class="carousel-control-prev text-white" type="button" data-bs-target="#carouselCorrect" data-bs-slide="prev">
                                             <font-awesome-icon icon="fa-solid fa-caret-left" size="xl" />
                                         </button>
-                                        <button class="carousel-control-next text-dark" type="button" data-bs-target="#carouselCorrect" data-bs-slide="next">
+                                        <button class="carousel-control-next text-white" type="button" data-bs-target="#carouselCorrect" data-bs-slide="next">
                                             <font-awesome-icon icon="fa-solid fa-caret-right" size="xl" />
                                         </button>
                                     </div>
@@ -170,10 +170,10 @@ onMounted(() => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <button class="carousel-control-prev text-dark" type="button" data-bs-target="#carouselWrong" data-bs-slide="prev">
+                                        <button class="carousel-control-prev text-white" type="button" data-bs-target="#carouselWrong" data-bs-slide="prev">
                                             <font-awesome-icon icon="fa-solid fa-caret-left" size="xl" />
                                         </button>
-                                        <button class="carousel-control-next text-dark" type="button" data-bs-target="#carouselWrong" data-bs-slide="next">
+                                        <button class="carousel-control-next text-white" type="button" data-bs-target="#carouselWrong" data-bs-slide="next">
                                             <font-awesome-icon icon="fa-solid fa-caret-right" size="xl" />
                                         </button>
                                     </div>
@@ -181,7 +181,7 @@ onMounted(() => {
                             </div>
 
                             <div class="mt-4 d-flex flex-column flex-md-row justify-content-center align-items-center gap-2">
-                                <Link class="btn btn-primary btn-lg w-100" :href="route('lorequestion.roleplay')">
+                                <Link class="btn btn-warning btn-lg w-100" :href="route('lorequestion.roleplay')">
                                     {{ props.translations.play_again }}
                                 </Link>
                                 <Link class="btn btn-dark btn-lg w-100" :href="route('lorequestion.index')">
@@ -200,7 +200,7 @@ onMounted(() => {
                         <div class="card-body">
                             <div class="container py-4 text-center">
                                 <p class="fw-bold fs-3 mb-4">{{ currentQuestion.text }}</p>
-                                <div class="d-inline-block py-2 rounded-1 bg-primary text-white fs-4 shadow col-3 col-lg-1">
+                                <div class="d-inline-block py-2 rounded-1 bg-warning text-white fs-4 shadow col-3 col-lg-1">
                                     {{ timer }}{{ props.translations.seconds }}
                                 </div>
 
@@ -212,7 +212,7 @@ onMounted(() => {
                                     >
                                         <button
                                         type="button"
-                                        class="btn w-100 py-3 fs-5 rounded-3 shadow text-wrap"
+                                        class="btn btn-dark w-100 py-3 fs-5 rounded-3 shadow text-wrap"
                                         :class="{
                                             'btn-primary': !selectedAnswer,
                                             'btn-success': isSubmitting && selectedAnswer === option,

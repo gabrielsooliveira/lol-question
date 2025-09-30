@@ -57,7 +57,14 @@ const sizeClass = computed(() => {
             <div class="modal-content rounded-4 shadow">
                 <div class="conteiner d-flex justify-content-between align-items-center px-3 pt-3">
                     <h4 class="modal-title fw-bold">{{ title }}</h4>
-                    <button type="button" class="btn-close" @click="closeModal"></button>
+                    <button
+                        type="button"
+                        class="btn btn-outline-light btn-sm position-absolute top-0 end-0 m-3 border-0"
+                        @click="closeModal"
+                        aria-label="Fechar modal"
+                        >
+                        <font-awesome-icon :icon="['fas', 'times']" class="text-warning" />
+                        </button>
                 </div>
                 <div class="modal-body">
                     <slot></slot>

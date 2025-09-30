@@ -40,7 +40,7 @@ const saveSettings = () => {
 
             <div class="row g-4 justify-content-center">
                 <div class="col-md-4">
-                    <div class="card h-100 shadow-lg border-0">
+                    <div class="card text-bg-light h-100 shadow-lg border-0">
                         <div class="card-body d-flex flex-column justify-content-between bg-gradient text-dark">
                             <div>
                                 <h4 class="card-title fw-bold">Roleplay</h4>
@@ -48,7 +48,7 @@ const saveSettings = () => {
                                     {{ props.translations.text_lorequestion_roleplay }}
                                 </p>
                             </div>
-                            <button @click="openModal" class="btn btn-primary text-white mt-3 text-capitalize">
+                            <button @click="openModal" class="btn btn-warning text-white mt-3 text-capitalize">
                                 {{ props.translations.play }}
                             </button>
                         </div>
@@ -56,7 +56,7 @@ const saveSettings = () => {
                 </div>
 
                 <div class="col-md-4">
-                    <div class="card h-100 shadow-lg border-0">
+                    <div class="card text-bg-light h-100 shadow-lg border-0">
                         <div class="card-body d-flex flex-column justify-content-between bg-gradient text-dark">
                             <div>
                                 <h4 class="card-title fw-bold">{{ props.translations.competitive }}</h4>
@@ -64,7 +64,7 @@ const saveSettings = () => {
                                     {{ props.translations.text_lorequestion_competitive }}
                                 </p>
                             </div>
-                            <button class="btn btn-dark mt-3" disabled>
+                            <button class="btn btn-warning mt-3" disabled>
                                 {{ props.translations.coming_soon }}
                             </button>
                         </div>
@@ -75,7 +75,7 @@ const saveSettings = () => {
     </div>
 
     <ModalDialog :isVisible="isModalVisible" @close="closeModal" :title=" props.translations.config_text">
-        <form @submit.prevent="saveSettings">
+        <form @submit.prevent="saveSettings" class="container">
             <div class="mb-3">
                 <label class="form-label fw-semibold d-block text-capitalize">{{ props.translations.difficulty_phrase }}</label>
 
@@ -104,7 +104,7 @@ const saveSettings = () => {
             </div>
 
             <div class="d-grid">
-                <button type="submit" class="btn btn-primary text-white flex-grow-1 fw-bold rounded-3 shadow text-capitalize">
+                <button type="submit" class="btn btn-warning text-white flex-grow-1 fw-bold rounded-3 shadow text-capitalize">
                     {{ props.translations.button_start }}
                 </button>
             </div>

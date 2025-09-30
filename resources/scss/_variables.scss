@@ -1,21 +1,151 @@
-$primary: #0B0F14;
-$light: #FFFBDE;
-$dark: #1E3A47;
-$secondary: #13232E;
-$info: #4DB7E5;
-$success: #2E5A67;
-$danger: #ff6582;
-$warning: #D2BA7F;
+// ========================================
+// League of Legends Inspired Color Palette
+// ========================================
 
+// Primary Colors
+$primary: #1F2937;        // Cinza escuro moderno
+$secondary: #3B82F6;      // Azul vibrante
+$accent: #FBBF24;         // Amarelo/laranja chamativo
+$background: #111827;     // Escuro para contraste e imersão
+$danger: #EF4444;         // Vermelho para alertas e erros
+
+// Extended Palette
+$light: #F9FAFB;          // Branco suave
+$dark: #0F172A;           // Preto profundo
+$success: #10B981;        // Verde sucesso
+$warning: #F59E0B;        // Laranja aviso
+$info: #06B6D4;           // Ciano informativo
+
+// LoL Inspired Colors
+$gold: #C89B3C;           // Dourado LoL
+$blue-magic: #0596AA;     // Azul mágico
+$purple-magic: #8B5CF6;   // Roxo mágico
+$red-damage: #DC2626;     // Vermelho dano
+$green-heal: #059669;     // Verde cura
+
+// Gradients
+$gradient-primary: linear-gradient(135deg, $primary 0%, $secondary 100%);
+$gradient-accent: linear-gradient(135deg, $accent 0%, $warning 100%);
+$gradient-magic: linear-gradient(135deg, $blue-magic 0%, $purple-magic 100%);
+$gradient-dark: linear-gradient(135deg, $background 0%, $dark 100%);
+
+// Typography
+$font-family-primary: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+$font-family-secondary: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+// Font Weights
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-extrabold: 800;
+
+// Font Sizes
+$font-size-xs: 0.75rem;    // 12px
+$font-size-sm: 0.875rem;   // 14px
+$font-size-base: 1rem;     // 16px
+$font-size-lg: 1.125rem;   // 18px
+$font-size-xl: 1.25rem;    // 20px
+$font-size-2xl: 1.5rem;    // 24px
+$font-size-3xl: 1.875rem;  // 30px
+$font-size-4xl: 2.25rem;   // 36px
+$font-size-5xl: 3rem;      // 48px
+
+// Spacing
+$spacer: 1rem;
+$spacers: (
+  0: 0,
+  1: $spacer * 0.25,    // 4px
+  2: $spacer * 0.5,     // 8px
+  3: $spacer * 0.75,    // 12px
+  4: $spacer,           // 16px
+  5: $spacer * 1.25,    // 20px
+  6: $spacer * 1.5,     // 24px
+  8: $spacer * 2,       // 32px
+  10: $spacer * 2.5,    // 40px
+  12: $spacer * 3,      // 48px
+  16: $spacer * 4,      // 64px
+  20: $spacer * 5,      // 80px
+  24: $spacer * 6       // 96px
+);
+
+// Border Radius
+$border-radius-sm: 0.25rem;   // 4px
+$border-radius: 0.5rem;       // 8px
+$border-radius-md: 0.75rem;   // 12px
+$border-radius-lg: 1rem;      // 16px
+$border-radius-xl: 1.5rem;    // 24px
+$border-radius-2xl: 2rem;     // 32px
+$border-radius-full: 9999px;
+
+// Shadows
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+$shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+$shadow-glow: 0 0 20px rgba(59, 130, 246, 0.3);
+$shadow-glow-accent: 0 0 20px rgba(251, 191, 36, 0.3);
+
+// Transitions
+$transition-fast: 0.15s ease-in-out;
+$transition-base: 0.3s ease-in-out;
+$transition-slow: 0.5s ease-in-out;
+
+// Z-index
+$z-dropdown: 1000;
+$z-sticky: 1020;
+$z-fixed: 1030;
+$z-modal-backdrop: 1040;
+$z-modal: 1050;
+$z-popover: 1060;
+$z-tooltip: 1070;
+
+// Bootstrap Theme Colors Override
 $theme-colors: (
   "primary": $primary,
   "secondary": $secondary,
-  "info": $info,
+  "accent": $accent,
   "success": $success,
-  "danger": $danger,
+  "info": $info,
   "warning": $warning,
+  "danger": $danger,
   "light": $light,
-  "dark": $dark
+  "dark": $dark,
+  "gold": $gold,
+  "blue-magic": $blue-magic,
+  "purple-magic": $purple-magic,
+  "red-damage": $red-damage,
+  "green-heal": $green-heal
 );
 
+// Bootstrap Variables Override
+$body-bg: $background;
+$body-color: $light;
+$link-color: $secondary;
+$link-hover-color: $accent;
 
+// Card Variables
+$card-bg: rgba($primary, 0.8);
+$card-border-color: rgba($secondary, 0.2);
+
+// Button Variables
+$btn-border-radius: $border-radius;
+$btn-border-radius-sm: $border-radius-sm;
+$btn-border-radius-lg: $border-radius-lg;
+
+// Input Variables
+$input-bg: rgba($primary, 0.6);
+$input-border-color: rgba($secondary, 0.3);
+$input-focus-border-color: $secondary;
+$input-color: $light;
+$input-placeholder-color: rgba($light, 0.6);
+
+// Navbar Variables
+$navbar-dark-color: $light;
+$navbar-dark-hover-color: $accent;
+$navbar-dark-active-color: $accent;
+$navbar-dark-brand-color: $light;
+$navbar-dark-brand-hover-color: $accent;
