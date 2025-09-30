@@ -8,34 +8,28 @@ class PageController extends Controller
 {
     public function index()
     {
-        $translations = trans('home');
-        return inertia('Home', [
-            'translations' => $translations
-        ]);
+        return inertia('Home');
     }
 
     public function menu()
     {
-        $translations = trans('menu');
-        return inertia('Menu', [
-            'translations' => $translations
-        ]);
+        return inertia('Menu');
     }
 
     public function loreQuestion()
     {
-        $translations = trans('loreQuestion');
-        return inertia('LoreQuestion/Index', [
-            'translations' => $translations
-        ]);
+        return inertia('LoreQuestion/Index');
     }
 
     public function privatePolicy()
     {
-        $translations = trans('privacyPolicy');
-        return inertia('PrivacyPolicy', [
-            'translations' => $translations
-        ]);
+        return inertia('PrivacyPolicy');
+    }
+
+    public function terms()
+    {
+
+        return inertia('Terms');
     }
 
     public function translate($locale)

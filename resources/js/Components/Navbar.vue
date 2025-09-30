@@ -51,10 +51,10 @@ const navbarClass = computed(() => {
             <div class="collapse navbar-collapse" id="navbarPrincipal">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <li class="nav-item">
-                        <Link :href="route('home')" class="nav-link link-light">Inicio</Link>
+                        <Link :href="route('home')" class="nav-link link-light">Home</Link>
                     </li>
                     <li class="nav-item">
-                        <Link :href="route('menu')" class="nav-link link-light">Jogos</Link>
+                        <Link :href="route('menu')" class="nav-link link-light">Menu</Link>
                     </li>
                 </ul>
                 <LocaleSwitcher></LocaleSwitcher>

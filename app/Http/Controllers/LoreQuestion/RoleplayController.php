@@ -25,9 +25,7 @@ class RoleplayController extends Controller
         $settings = GameSettingsDTO::fromArray($request->validated());
         $this->startRoleplayGame->execute($settings);
 
-        return inertia('LoreQuestion/Game', [
-            'translations' => trans('roleplayLoreQuestion')
-        ]);
+        return inertia('LoreQuestion/Game');
     }
 
     public function startGame(): JsonResponse

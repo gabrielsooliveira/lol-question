@@ -3,10 +3,10 @@ import { Link } from '@inertiajs/vue3';
 </script>
 
 <template>
-  <footer class="bg-glass border-glow mt-3">
+  <footer class="bg-glass border-glow mt-3 border-top">
     <div class="container py-5">
       <div class="row">
-        <div class="col-lg-8 mb-4 text-lg-start text-center">
+        <div class="col-lg-10 mb-4 text-lg-start text-center">
           <div class="d-flex align-items-center mb-3">
             <span class="fw-bold fs-4">HextechPlay</span>
           </div>
@@ -31,7 +31,7 @@ import { Link } from '@inertiajs/vue3';
         </div>
 
         <!-- Community -->
-        <div class="col-lg-2 col-md-6 mb-4">
+        <!-- <div class="col-lg-2 col-md-6 mb-4">
           <h6 class="text-warning text-uppercase fw-semibold mb-3">Comunidade</h6>
           <ul class="list-unstyled">
             <li class="mb-2"><Link href="#" class="text-light text-decoration-none">Leaderboard</Link></li>
@@ -39,10 +39,10 @@ import { Link } from '@inertiajs/vue3';
             <li class="mb-2"><Link href="#" class="text-light text-decoration-none">Torneios</Link></li>
             <li class="mb-2"><Link href="#" class="text-light text-decoration-none">Fórum</Link></li>
           </ul>
-        </div>
+        </div> -->
 
         <!-- Support -->
-        <div class="col-lg-2 col-md-6 mb-4">
+        <!-- <div class="col-lg-2 col-md-6 mb-4">
           <h6 class="text-warning text-uppercase fw-semibold mb-3">Suporte</h6>
           <ul class="list-unstyled">
             <li class="mb-2"><Link href="#" class="text-light text-decoration-none">Central de Ajuda</Link></li>
@@ -50,10 +50,10 @@ import { Link } from '@inertiajs/vue3';
             <li class="mb-2"><Link href="#" class="text-light text-decoration-none">Reportar Bug</Link></li>
             <li class="mb-2"><Link href="#" class="text-light text-decoration-none">Feedback</Link></li>
           </ul>
-        </div>
+        </div> -->
 
         <!-- Newsletter -->
-        <div class="col-lg-2 col-md-6 mb-4">
+        <!-- <div class="col-lg-2 col-md-6 mb-4">
           <h6 class="text-warning text-uppercase fw-semibold mb-3">Newsletter</h6>
           <p class="opacity-75 small mb-3">
             Receba novidades sobre novos jogos e eventos.
@@ -62,7 +62,7 @@ import { Link } from '@inertiajs/vue3';
             <input type="email" class="form-control form-control-sm me-2 bg-dark text-light border border-primary" placeholder="Seu e-mail">
             <button class="btn btn-warning btn-sm"><font-awesome-icon icon="fas fa-paper-plane" /></button>
           </form>
-        </div>
+        </div> -->
       </div>
 
       <hr class="border-secondary my-4">
@@ -73,7 +73,7 @@ import { Link } from '@inertiajs/vue3';
         </div>
         <div class="col-md-6 text-center text-md-end">
           <Link :href="route('privacy.policy')" class="text-light text-decoration-none me-3 small">Política de Privacidade</Link>
-          <Link href="#" class="text-light text-decoration-none small">Termos de Uso</Link>
+          <Link :href="route('terms')" class="text-light text-decoration-none small">Termos de Uso</Link>
         </div>
       </div>
 

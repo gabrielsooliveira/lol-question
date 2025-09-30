@@ -40,7 +40,12 @@ createInertiaApp({
         if (!i18n) {
             i18n = createI18n({
                 locale: props.initialPage.props.locale,
-                messages: { [props.initialPage.props.locale]: props.initialPage.props.translations }
+                messages: {
+                    [props.initialPage.props.locale]: {
+                        ...props.initialPage.props.translations.site,
+                        ...props.initialPage.props.translations.page,
+                    }
+                }
             });
         } else {
             i18n.global.locale = props.initialPage.props.locale;
