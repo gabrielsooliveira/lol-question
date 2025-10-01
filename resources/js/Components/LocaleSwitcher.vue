@@ -5,30 +5,18 @@ import { watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 const page = usePage();
-const { locale, setLocaleMessage } = useI18n({ useScope: 'global' }); // global scope
+const { locale } = useI18n();
 
 function changeLocale(newLocale) {
   router.post(route('locale.change', newLocale), {}, {
     preserveScroll: true,
     onSuccess: () => {
-      locale.value = newLocale;
-      page.props.locale = newLocale;
+        window.location.reload();
+        locale.value = newLocale;
+        page.props.locale = newLocale;
     },
   });
 }
-
-watch(
-  () => page.props.translations.page,
-  (newPageTranslations) => {
-    if (newPageTranslations) {
-      setLocaleMessage(locale.value, {
-        ...page.props.translations.site,
-        ...newPageTranslations,
-      });
-    }
-  },
-  { immediate: true }
-);
 </script>
 
 <template>

@@ -31,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
         Inertia::share([
             'locale' => fn () => app()->getLocale(),
             'translations' => fn () => [
+                'site' => Lang::get('site'),
                 'page' => function () {
                     $routeName = request()->route()->getName();
                     $filename = str_replace('.', '_', $routeName);

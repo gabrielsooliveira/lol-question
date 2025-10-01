@@ -1,32 +1,36 @@
 <?php
 
 return [
-    'title' => 'Terms of Use',
-    'last_updated' => 'Last updated: September 30, 2025',
-    'introduction' => 'Welcome to HextechPlay. By using our platform, you agree to the following terms and conditions.',
+    'page_title' => 'Terms of Use and Service',
+    'page_description' => 'HextechPlay - Terms of Use and Service for accessing the website and digital platforms.',
+    'title' => 'HextechPlay Terms of Use',
+    'last_updated' => 'Last updated: 2025-10-01',
 
-    'usage' => [
-        'heading' => 'Use of the Platform',
-        'content' => 'Users must use HextechPlay responsibly and in accordance with applicable laws. You may not attempt to disrupt or misuse the platform.',
-    ],
+    'section1_heading' => '1. Acceptance of Terms',
+    'section1_content' => 'By browsing and using the HextechPlay website, you automatically agree to our rules and conditions. These terms may change periodically, and by continuing to use the site, you accept the changes.',
 
-    'accounts' => [
-        'heading' => 'User Accounts',
-        'content' => 'You are responsible for maintaining the confidentiality of your account credentials. Any activity under your account is your responsibility.',
-    ],
+    'section2_heading' => '2. How to Use Our Website',
+    'section2_content' => 'Most of the site is accessible without registration, but some areas require an account. You are responsible for providing true information, keeping your login secure, and using resources respectfully and legally.',
 
-    'content' => [
-        'heading' => 'Content',
-        'content' => 'All content on HextechPlay, including text, images, and games, is owned by the platform or its licensors. Unauthorized use is prohibited.',
-    ],
+    'section3_heading' => '3. Your Privacy',
+    'section3_content' => 'By using the site, you accept our Privacy Policy, which describes how we collect, use, and protect your personal data with transparency and security.',
 
-    'termination' => [
-        'heading' => 'Termination',
-        'content' => 'We may suspend or terminate your access at any time if these terms are violated.',
-    ],
+    'section4_heading' => '4. Content Rights',
+    'section4_content' => 'All HextechPlay content (texts, images, videos, code, audio, etc.) is protected by copyright and intellectual property laws. Use is permitted only for personal and non-commercial purposes. Reproduction or distribution without authorization is prohibited.',
 
-    'acceptance' => [
-        'heading' => 'Acceptance of Terms',
-        'content' => 'By creating an account or continuing to use HextechPlay, you confirm that you have read, understood, and accepted these Terms of Use.',
-    ],
+    'section5_heading' => '5. Cookies and Technologies',
+    'section5_content' => 'We use cookies to improve your experience. You can limit or block cookies in your browser, but some features may not work properly.',
+
+    'section6_heading' => '6. External Links',
+    'section6_content' => 'Our site may include external links, but we are not responsible for third-party content or privacy practices.',
+
+    'section7_heading' => '7. Changes and Updates',
+    'section7_content' => 'We may update these Terms of Use periodically. By continuing to use our services after updates, you confirm acceptance of the new terms.',
+
+    'contact_heading' => 'Questions or Comments?',
+    'contact_content' => 'Contact us by email: gabrielcodercontato@gmail.com',
+
+    'accept_label' => 'I have read and accept the Terms of Use',
+    'accept_button' => 'Accept',
+    'decline_button' => 'Decline',
 ];

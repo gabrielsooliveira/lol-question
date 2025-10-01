@@ -45,7 +45,7 @@ const navbarClass = computed(() => {
                 aria-expanded="false"
                 aria-label="Toggle navigation"
             >
-                <font-awesome-icon :icon="['fas', 'bars']" size="lg"/>
+                <font-awesome-icon icon="fas fa-bars" size="lg"/>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarPrincipal">

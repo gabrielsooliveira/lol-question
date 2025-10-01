@@ -15,7 +15,6 @@ const timer = ref(15);
 const timerInterval = ref(null);
 const userAnswers = ref([]);
 const currentQuestion = ref(null);
-const props = defineProps(["translations"]);
 
 function startTimer() {
     clearInterval(timerInterval.value);
@@ -97,8 +96,8 @@ onMounted(() => {
 
 <template>
     <Head>
-        <title>{{ props.translations.page_title }}</title>
-        <meta head-key="description" name="description" :content="props.translations.page_description" />
+        <title>{{ $t('page_title') }}</title>
+        <meta head-key="description" name="description" :content="$t('page_description')" />
     </Head>
 
     <div class="d-flex justify-content-center align-items-center py-5 min-vh-100">
@@ -107,24 +106,24 @@ onMounted(() => {
                 <div class="mt-3">
                     <div v-if="loading" class="text-center text-secondary text-light animate-fade">
                         <div class="spinner-border mb-3" role="status"></div>
-                        <p>{{ props.translations.loading_questions }}</p>
+                        <p>{{ $t('loading_questions') }}</p>
                     </div>
 
                     <div v-else-if="gameFinished" class="card shadow-lg p-4 animate-fade">
-                        <h2 class="card-title text-center fw-bold mb-4">{{ props.translations.game_finished }}</h2>
+                        <h2 class="card-title text-center fw-bold mb-4">{{ $t('game_finished') }}</h2>
                         <div class="card-body row">
                             <div class="col-lg-3">
-                                <h5 class="mb-3">{{ props.translations.results }}</h5>
+                                <h5 class="mb-3">{{ $t('results') }}</h5>
                                 <ul class="list-group list-group-flush mb-4">
                                     <li class="list-group-item d-flex justify-content-between">
-                                        <span>{{ props.translations.total_questions }}</span>
+                                        <span>{{ $t('total_questions') }}</span>
                                         <strong>{{ gameResults.total_questions }}</strong>
                                     </li>
 
                                     <li class="list-group-item d-flex justify-content-between text-success fw-bold hover-glow"
                                         role="button" tabindex="0"
                                         @click="selectedCarousel = 'correct'">
-                                        <span>{{ props.translations.correct_answers }}</span>
+                                        <span>{{ $t('correct_answers') }}</span>
                                         <strong>{{ gameResults.correct_answers.length }}</strong>
                                     </li>
 
@@ -132,14 +131,16 @@ onMounted(() => {
                                         role="button" tabindex="0"
                                         v-if="gameResults.wrong_answers.length > 0"
                                         @click="selectedCarousel = 'wrong'">
-                                        <span>{{ props.translations.wrong_answers }}</span>
+                                        <span>{{ $t('wrong_answers') }}</span>
                                         <strong>{{ gameResults.wrong_answers.length }}</strong>
                                     </li>
                                 </ul>
                             </div>
 
                             <div class="col-lg-9">
-                                <h5 class="mb-3">{{ props.translations[selectedCarousel === 'correct' ? 'questions_you_got_right' : 'questions_you_got_wrong'] }}</h5>
+                                <h5 class="mb-3">
+                                    {{ $t(selectedCarousel === 'correct' ? 'questions_you_got_right' : 'questions_you_got_wrong') }}
+                                </h5>
 
                                 <div v-if="selectedCarousel === 'correct' && gameResults.correct_answers.length > 0">
                                     <div id="carouselCorrect" class="carousel slide px-5" data-bs-ride="carousel">
@@ -147,7 +148,7 @@ onMounted(() => {
                                             <div v-for="(answer, index) in gameResults.correct_answers" :key="'correct-' + index" :class="['carousel-item', { active: index === 0 }]">
                                                 <div class="px-auto text-center">
                                                     <p>{{ answer.question_text }}</p>
-                                                    <p class="text-success"><strong>{{ props.translations.your_answer }}:</strong> {{ answer.user_answer }}</p>
+                                                    <p class="text-success"><strong>{{ $t('your_answer') }}:</strong> {{ answer.user_answer }}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -165,8 +166,8 @@ onMounted(() => {
                                         <div class="carousel-inner">
                                             <div v-for="(error, index) in gameResults.wrong_answers" :key="'wrong-' + index" :class="['carousel-item', { active: index === 0 }]">
                                                 <div class="px-auto text-center">
-                                                    <p><strong>{{ props.translations.your_answer }}:</strong> <span class="text-decoration-line-through">{{ error.user_answer === 'timeout' ? $t('timeout') : error.user_answer }}</span></p>
-                                                    <p><strong>{{ props.translations.correct_answer }}:</strong> <span class="text-success">{{ error.correct_answer }}</span></p>
+                                                    <p><strong>{{ $t('your_answer') }}:</strong> <span class="text-decoration-line-through">{{ error.user_answer === 'timeout' ? $t('timeout') : error.user_answer }}</span></p>
+                                                    <p><strong>{{ $t('correct_answer') }}:</strong> <span class="text-success">{{ error.correct_answer }}</span></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -182,18 +183,18 @@ onMounted(() => {
 
                             <div class="mt-4 d-flex flex-column flex-md-row justify-content-center align-items-center gap-2">
                                 <Link class="btn btn-warning btn-lg w-100" :href="route('lorequestion.roleplay')">
-                                    {{ props.translations.play_again }}
+                                    {{ $t('play_again') }}
                                 </Link>
                                 <Link class="btn btn-dark btn-lg w-100" :href="route('lorequestion.index')">
-                                    {{ props.translations.back_to_menu }}
+                                    {{ $t('back_to_menu') }}
                                 </Link>
                             </div>
                         </div>
                     </div>
 
                     <div v-else-if="!currentQuestion" class="card shadow-lg p-4 animate-fade text-center">
-                        <p class="text-danger mb-3">{{ props.translations.no_questions_found }}</p>
-                        <button class="btn btn-primary" @click="fetchQuestions">{{ props.translations.try_again }}</button>
+                        <p class="text-danger mb-3">{{ $t('no_questions_found') }}</p>
+                        <button class="btn btn-primary" @click="fetchQuestions">{{ $t('try_again') }}</button>
                     </div>
 
                     <div v-else class="card shadow-lg p-4 animate-fade">
@@ -201,7 +202,7 @@ onMounted(() => {
                             <div class="container py-4 text-center">
                                 <p class="fw-bold fs-3 mb-4">{{ currentQuestion.text }}</p>
                                 <div class="d-inline-block py-2 rounded-1 bg-warning text-white fs-4 shadow col-3 col-lg-1">
-                                    {{ timer }}{{ props.translations.seconds }}
+                                    {{ timer }}{{ $t('seconds') }}
                                 </div>
 
                                 <div class="row g-3 justify-content-center mt-3">
@@ -226,7 +227,7 @@ onMounted(() => {
                                     </div>
                                 </div>
                                 <div v-if="isSubmitting" class="mt-4">
-                                    <div class="spinner-border text-primary" role="status"></div>
+                                    <div class="spinner-border text-warning" role="status"></div>
                                 </div>
                             </div>
                         </div>

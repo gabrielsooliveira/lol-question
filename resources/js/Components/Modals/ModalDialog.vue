@@ -63,8 +63,8 @@ const sizeClass = computed(() => {
                         @click="closeModal"
                         aria-label="Fechar modal"
                         >
-                        <font-awesome-icon :icon="['fas', 'times']" class="text-warning" />
-                        </button>
+                            <font-awesome-icon icon="fas fa-times" class="text-warning" />
+                    </button>
                 </div>
                 <div class="modal-body">
                     <slot></slot>

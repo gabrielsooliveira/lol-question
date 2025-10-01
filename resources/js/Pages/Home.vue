@@ -113,7 +113,7 @@ onMounted(() => {
             minHeight: '100vh',
             paddingTop: 'env(safe-area-inset-top)',
         }">
-        <div class="container position-relative" style="z-index: 10; padding-top: 120px">
+        <div class="container position-relative">
             <!-- Logo -->
             <div class="hero-logo mb-4" :class="{ 'fade-in': isVisible }">
                 <img :src="logo" class="img-fluid hover-scale" width="280" alt="HextechPlay Logo" />
@@ -130,7 +130,7 @@ onMounted(() => {
 
             <!-- CTA Buttons -->
             <div class="hero-actions slide-in-left delay-400" :class="{ 'fade-in': isVisible }">
-                <Link :href="route('menu')" class="btn btn-accent btn-lg me-3 mb-3 hover-lift">
+                <Link :href="route('menu')" class="btn btn-accent btn-lg me-3 mb-3 hover-lift fw-semibold">
                 <font-awesome-icon icon="fas fa-play" class="me-2"></font-awesome-icon>
                 {{ $t("play_button") }}
                 </Link>

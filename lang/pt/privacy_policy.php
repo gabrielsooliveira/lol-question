@@ -1,20 +1,40 @@
 <?php
 
 return [
-    "page_title" => "Política de Privacidade",
-    "page_description" => "Política de Privacidade do HextechPlay – protegendo seus dados pessoais",
-    "title" => "Política de Privacidade do HextechPlay",
-    "effective_date" => "Data de Vigência",
-    "intro" => "No HextechPlay, respeitamos sua privacidade e nos comprometemos a proteger as informações pessoais de nossos visitantes. Esta Política de Privacidade explica como tratamos as informações quando você usa nosso site.",
-    "info_we_collect_title" => "Informações que Coletamos",
-    "info_we_collect_text" => "Não coletamos diretamente informações pessoalmente identificáveis, a menos que fornecidas voluntariamente...",
-    "cookies_title" => "Cookies e Publicidade do Google",
-    "cookies_text" => "O HextechPlay usa fornecedores terceirizados, incluindo o Google, que utilizam cookies para exibir anúncios. O Google usa o cookie DART para veicular anúncios com base nas visitas a este site e outros. Os usuários podem optar por não participar através de",
-    "google_ads_link" => "Configurações de Anúncios do Google",
-    "third_party_links_title" => "Links de Terceiros",
-    "third_party_links_text" => "Nosso site pode conter links para sites externos. Não somos responsáveis por suas práticas.",
-    "consent_title" => "Consentimento",
-    "consent_text" => "Ao usar o HextechPlay, você concorda com esta Política de Privacidade.",
-    "contact_title" => "Fale Conosco",
-    "contact_text" => "Se tiver dúvidas, entre em contato conosco pelo email:"
+    'page_title' => 'Política de Privacidade',
+    'page_description' => 'HextechPlay - Política de Privacidade e proteção de dados pessoais dos usuários.',
+    'title' => 'Política de Privacidade da HextechPlay',
+    'effective_date' => 'Data de Vigência',
+    'intro' => 'Bem-vindo à HextechPlay. Nosso compromisso é com a integridade e a segurança dos dados pessoais dos nossos usuários e clientes. Esta Política de Privacidade aplica-se a todas as interações digitais realizadas em nosso site www.hextechplay.com, serviços associados, aplicativos móveis e outras plataformas digitais sob nosso controle.',
+
+    'definitions_title' => 'Definições',
+    'definitions_text' => '“Dados Pessoais” são informações que identificam ou podem identificar uma pessoa natural. “Dados Pessoais Sensíveis” revelam características íntimas, como origem racial, crenças religiosas, opiniões políticas, dados genéticos ou biométricos. “Tratamento de Dados Pessoais” abrange operações como coleta, registro, armazenamento, uso, compartilhamento ou destruição. “Leis de Proteção de Dados” incluem a LGPD (Lei nº 13.709/18).',
+
+    'info_we_collect_title' => 'Dados Coletados e Motivos da Coleta',
+    'info_we_collect_text' => 'Coletamos informações fornecidas por você (nome, e-mail, endereço, dados de pagamento) e informações coletadas automaticamente (IP, navegador, páginas visitadas, buscas, etc).',
+
+    'cookies_title' => 'Uso de Cookies e Tecnologias de Rastreamento',
+    'cookies_text' => 'A HextechPlay utiliza cookies essenciais, de desempenho, funcionais e de publicidade para melhorar sua experiência e entender como nossos serviços são utilizados.',
+    'google_ads_link' => 'Gerenciar preferências de anúncios do Google',
+
+    'purposes_title' => 'Finalidades do Processamento de Dados',
+    'purposes_text' => 'Utilizamos seus dados para oferecer e melhorar serviços, processar transações, personalizar sua experiência, enviar notificações, cumprir obrigações legais e realizar análises internas.',
+
+    'sharing_title' => 'Compartilhamento e Transferência de Dados',
+    'sharing_text' => 'Podemos compartilhar dados com prestadores de serviço, parceiros, autoridades legais ou em processos de fusão e reestruturação, garantindo sempre a proteção de seus dados.',
+
+    'third_party_links_title' => 'Links para outros sites e redes sociais',
+    'third_party_links_text' => 'Nosso site pode conter links externos para parceiros ou redes sociais. Não nos responsabilizamos pelas políticas de privacidade de terceiros. Recomendamos a leitura atenta dessas políticas.',
+
+    'rights_title' => 'Direitos dos Titulares dos Dados',
+    'rights_text' => 'Você pode acessar, corrigir ou excluir seus dados, limitar ou se opor ao tratamento, solicitar portabilidade e retirar consentimento a qualquer momento, entrando em contato conosco.',
+
+    'security_title' => 'Segurança dos Dados',
+    'security_text' => 'Adotamos medidas técnicas e organizacionais para proteger seus dados, mas nenhum sistema é 100% seguro. Caso ocorra uma violação, notificaremos você e as autoridades competentes.',
+
+    'changes_title' => 'Alterações na Política',
+    'changes_text' => 'Esta Política de Privacidade pode ser atualizada periodicamente. A versão mais recente estará sempre disponível em nosso site.',
+
+    'contact_title' => 'Contato',
+    'contact_text' => 'Se tiver dúvidas sobre nossa Política de Privacidade, envie um e-mail para:',
 ];

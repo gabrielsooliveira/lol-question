@@ -14,10 +14,10 @@ import { Link } from '@inertiajs/vue3';
             A plataforma definitiva de mini-games inspirada no universo de League of Legends. Teste suas habilidades e conhecimento sobre Runeterra.
           </p>
           <div class="d-flex justify-content-lg-start justify-content-center">
-            <a href="#" class="btn btn-outline-light btn-sm me-2"><font-awesome-icon icon="fab fa-discord" /></a>
-            <a href="#" class="btn btn-outline-light btn-sm me-2"><font-awesome-icon icon="fab fa-twitter" /></a>
-            <a href="#" class="btn btn-outline-light btn-sm me-2"><font-awesome-icon icon="fab fa-youtube" /></a>
-            <a href="#" class="btn btn-outline-light btn-sm"><font-awesome-icon icon="fab fa-twitch" /></a>
+            <a href="#" class="btn btn-outline-light btn-sm me-2 disabled"><font-awesome-icon icon="fab fa-discord" /></a>
+            <a href="#" class="btn btn-outline-light btn-sm me-2 disabled"><font-awesome-icon icon="fab fa-twitter" /></a>
+            <a href="#" class="btn btn-outline-light btn-sm me-2 disabled"><font-awesome-icon icon="fab fa-youtube" /></a>
+            <a href="https://www.facebook.com/people/HextechPlay/61581496198338/" target="_blank" class="btn btn-outline-light btn-sm"><font-awesome-icon icon="fab fa-facebook" /></a>
           </div>
         </div>
 
