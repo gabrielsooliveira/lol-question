@@ -28,8 +28,8 @@ const games = ref([
   },
   {
     id: 2,
-    title: t('hangman_title'),
-    description: t('hangman_desc'),
+    title: t('runeterraguess_title'),
+    description: t('runeterraguess_desc'),
     image: HangmanBackground,
     route: 'runeterraguess.game',
     category: 'word',

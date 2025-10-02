@@ -11,7 +11,7 @@ return [
     'footer_games' => 'Jogos',
     'footer_support' => 'Suporte',
     'game_lorequestion' => 'LoreQuestion',
-    'game_hangman' => 'RuneterraGuess',
+    'game_runeterraguess' => 'RuneterraGuess',
     'support_help_center' => 'Central de Ajuda',
     'support_contact' => 'Contato',
     'support_report_bug' => 'Reportar Bug',

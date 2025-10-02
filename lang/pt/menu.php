@@ -25,6 +25,6 @@ return [
   'puzzle' => 'Quebra-Cabeça',
   'lorequestion_title' => 'LoreQuestion',
   'lorequestion_desc' => 'Teste seus conhecimentos sobre a história de Runeterra no LoreQuestion.',
-  'hangman_title' => 'RuneterraGuess',
-  'hangman_desc' => 'Adivinhe a palavra escondida relacionada ao universo de League of Legends'
+  'runeterraguess_title' => 'RuneterraGuess',
+  'runeterraguess_desc' => 'Adivinhe a palavra escondida relacionada ao universo de League of Legends'
 ];

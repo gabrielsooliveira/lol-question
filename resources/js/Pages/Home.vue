@@ -107,7 +107,7 @@ onMounted(() => {
     </Head>
 
     <section
-        class="hero-section d-flex align-items-center justify-content-center text-center text-light position-relative"
+        class="overflow-hidden d-flex align-items-center justify-content-center text-center text-light position-relative"
         :style="{
             background: `linear-gradient(rgba(17, 24, 39, 0.8), rgba(15, 23, 42, 0.9)), url(${heroBackground}) center / cover no-repeat`,
             minHeight: '100vh',
@@ -304,14 +304,6 @@ onMounted(() => {
 </template>
 
 <style scoped>
-/* Mantive efeitos, glassmorphism e responsividade do padrão anterior */
-
-/* Hero Section */
-.hero-section {
-    position: relative;
-    overflow: hidden;
-}
-
 .hero-logo {
     transition: all 0.5s ease;
 }
