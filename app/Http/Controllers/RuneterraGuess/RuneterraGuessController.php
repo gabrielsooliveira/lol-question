@@ -21,7 +21,7 @@ class RuneterraGuessController extends Controller
         "SKARNER", "SONA", "SORAKA", "SWAIN", "SYLAS", "TAHM KENCH", "TALIYAH", "TEEMO", "THRESH", "TRISTANA",
         "TRUNDLE", "TRYNDAMERE", "TWISTED FATE", "TWITCH", "UDYR", "URGOT", "VARUS", "VAYNE", "VEIGAR", "VEL'KOZ",
         "VI", "VIEGO", "VIKTOR", "VLADIMIR", "VOLIBEAR", "WARWICK", "WUKONG", "XAYAH", "YASUO", "YONE",
-        "YUUMI", "ZAC", "ZED", "ZERI", "ZILEAN", "ZOE", "ZYRA"
+        "YUUMI", "ZAC", "ZED", "ZERI", "ZILEAN", "ZOE", "ZYRA", "DEMACIA", "NOXUS", "IONIA", "PILTOVER", "ZAUN", "SHURIMA", "FRELJORD", "TARGON", "ICATHIA"
     ];
 
     private $maxAttempts = 6;
