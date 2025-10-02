@@ -26,7 +26,7 @@ import { Link } from '@inertiajs/vue3';
           <h6 class="text-warning text-uppercase fw-semibold mb-3">Jogos</h6>
           <ul class="list-unstyled">
             <li class="mb-2"><Link :href="route('lorequestion.index')" class="text-light text-decoration-none">LoreQuestion</Link></li>
-            <li class="mb-2"><Link :href="route('hangman.index')" class="text-light text-decoration-none">RuneterraGuess</Link></li>
+            <li class="mb-2"><Link :href="route('runeterra.game')" class="text-light text-decoration-none">RuneterraGuess</Link></li>
           </ul>
         </div>
 

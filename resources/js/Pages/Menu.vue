@@ -31,7 +31,7 @@ const games = ref([
     title: t('hangman_title'),
     description: t('hangman_desc'),
     image: HangmanBackground,
-    route: 'hangman.index',
+    route: 'runeterra.game',
     category: 'word',
     players: 1800,
     rating: 4.6,

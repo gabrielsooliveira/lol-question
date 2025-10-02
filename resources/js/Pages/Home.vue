@@ -36,7 +36,7 @@ const featuredGames = ref([
         title: t('featured_games.runeterraguess.title'),
         description: t('featured_games.runeterraguess.description'),
         image: HangmanBackground,
-        route: "hangman.index",
+        route: "runeterra.game",
         players: 1800,
     },
 ]);

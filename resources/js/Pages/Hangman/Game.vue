@@ -1,10 +1,15 @@
 <template>
   <div class="min-vh-100 d-flex align-items-center justify-content-center py-4">
     <div class="container w-50">
-      <div class="card shadow-lg  text-white rounded-4 border-0">
+      <div class="card shadow-lg text-white rounded-4 border-0">
         <div class="card-body text-center p-4">
-          <h2 class="fw-bold mb-4"><font-awesome-icon icon="fa-solid fa-gamepad" class="text-warning"/> Jogo da Forca</h2>
+          <!-- Título -->
+          <h2 class="fw-bold mb-4">
+            <font-awesome-icon icon="fa-solid fa-gamepad" class="text-warning"/>
+            {{ $t('title') }}
+          </h2>
 
+          <!-- Palavra -->
           <div class="d-flex flex-wrap justify-content-center gap-2 mb-4">
             <div
               v-for="(char, index) in displayWord.split(' ')"
@@ -17,16 +22,17 @@
             </div>
           </div>
 
+          <!-- Tentativas -->
           <div class="row g-3 mb-4">
             <div class="col-6">
               <div class="bg-dark rounded p-3 h-100">
-                <small class="text-white d-block">TENTATIVAS</small>
+                <small class="text-white d-block">{{ $t('attempts') }}</small>
                 <div class="fs-4 fw-bold text-warning">{{ wrong }} / {{ maxAttempts }}</div>
               </div>
             </div>
             <div class="col-6">
               <div class="bg-dark rounded p-3 h-100">
-                <small class="text-white d-block">RESTANTES</small>
+                <small class="text-white d-block">{{ $t('attempts') }}</small>
                 <div class="fs-4 fw-bold text-warning">{{ maxAttempts - wrong }}</div>
               </div>
             </div>
@@ -35,15 +41,15 @@
           <!-- Mensagem de Status -->
           <div class="mb-4">
             <div v-if="won" class="alert alert-success fs-5 fw-bold rounded-3">
-              🎉 Parabéns! Você ganhou!
+              {{ $t('status.won') }}
             </div>
             <div v-else-if="lost" class="alert alert-danger fs-5 fw-bold rounded-3">
-              😢 Você perdeu! <br />
-              <small>A palavra era:</small>
+              {{ $t('status.lost') }} <br />
+              <small>{{ $t('status.lost_word') }}</small>
               <div class="fs-4 mt-2 text-uppercase">{{ word }}</div>
             </div>
             <div v-else class="alert alert-info rounded-3">
-              Digite uma letra ou tente a palavra completa
+              {{ $t('status.playing') }}
             </div>
           </div>
 
@@ -54,7 +60,7 @@
               v-model="userInput"
               class="form-control text-center text-uppercase text-warning fw-bold"
               :class="{ 'is-invalid': inputError }"
-              placeholder="Digite letra ou palavra"
+              :placeholder="$t('input.placeholder')"
               :disabled="lost || won"
               @keyup.enter="makeGuess"
               @input="clearError"
@@ -65,15 +71,15 @@
               @click="makeGuess"
               :disabled="lost || won || !userInput.trim()"
             >
-              <span v-if="!loading">✅ Tentar</span>
-              <span v-else>⏳</span>
+              <span v-if="!loading">{{ $t('input.button_try') }}</span>
+              <span v-else>{{ $t('input.button_loading') }}</span>
             </button>
           </div>
           <div v-if="inputError" class="text-danger small mb-3">{{ inputError }}</div>
 
           <!-- Letras Erradas -->
           <div class="mb-4 text-start">
-            <h6 class="text-danger mb-2 fw-bold">❌ Letras Erradas</h6>
+            <h6 class="text-danger mb-2 fw-bold">{{ $t('wrong_letters.title') }}</h6>
             <div class="bg-dark rounded p-3 min-height-60">
               <div v-if="wrongLetters.length > 0" class="d-flex flex-wrap gap-2">
                 <span
@@ -84,13 +90,14 @@
                   {{ letter }}
                 </span>
               </div>
-              <small v-else class="text-warning">Nenhuma ainda</small>
+              <small v-else class="text-warning">{{ $t('wrong_letters.none') }}</small>
             </div>
           </div>
 
+          <!-- Dica -->
           <div class="mt-3">
             <small class="text-warning">
-              💡 Dica: Digite uma letra ou a palavra inteira para adivinhar!
+              {{ $t('hint') }}
             </small>
           </div>
         </div>
@@ -102,6 +109,7 @@
 <script setup>
 import { ref } from 'vue';
 import { router } from '@inertiajs/vue3';
+import { useI18n } from 'vue-i18n';
 
 // Props recebidas do controller
 const props = defineProps({
@@ -119,6 +127,7 @@ const props = defineProps({
 const userInput = ref('')
 const loading = ref(false)
 const inputError = ref('')
+const { t } = useI18n();
 
 // Métodos
 const getLetterBoxClass = (char, index) => {
@@ -142,14 +151,13 @@ const makeGuess = async () => {
 
   const input = userInput.value.trim().toUpperCase()
 
-  // Validações
   if (input.length === 1 && !/^[A-Z]$/.test(input)) {
-    inputError.value = 'Digite apenas letras!'
+    inputError.value = t('input.error_invalid')
     return
   }
 
   if (input.length === 1 && props.guessed.includes(input)) {
-    inputError.value = 'Você já tentou esta letra!'
+    inputError.value = t('input.error_repeat')
     return
   }
 
@@ -161,7 +169,7 @@ const makeGuess = async () => {
       ? { letter: input }
       : { word: input }
 
-    const response = await fetch(route('hangman.guess'), {
+    const response = await fetch(route('runeterra.game.guess'), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -175,11 +183,10 @@ const makeGuess = async () => {
     if (data.error) {
       inputError.value = data.error
     } else {
-      // Atualiza a página com os novos dados
       router.reload({ only: ['displayWord', 'guessed', 'wrongLetters', 'wrong', 'lost', 'won', 'word', 'missingLetters'] })
     }
   } catch (error) {
-    inputError.value = 'Erro ao processar tentativa. Tente novamente.'
+    inputError.value = t('input.error_generic')
     console.error('Erro:', error)
   } finally {
     loading.value = false

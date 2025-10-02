@@ -8,6 +8,7 @@ return [
     'nav_menu' => 'Menu',
 
     // Loading
+    'loading_head' => 'Carregando',
     'loading_title' => 'HextechPlay',
     'loading_text' => 'Carregando a experiência...',
 

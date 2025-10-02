@@ -61,7 +61,7 @@ class HangmanController extends Controller
             'lost' => $state['lost'],
             'won' => $state['won'],
             'finished' => $state['finished'],
-            'word' => $state['lost'] ? $state['word'] : null, // só manda a palavra se perdeu
+            'word' => $state['lost'] ? $state['word'] : null,
         ]);
     }
 
