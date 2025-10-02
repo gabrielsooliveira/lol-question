@@ -1,7 +1,9 @@
 <?php
 
 return [
-    'title' => 'Hangman Game',
+    'page_title' => 'RuneterraGuess - Guess the League of Legends Word!',
+    'page_description' => 'Play RuneterraGuess, a fun word-guessing game based on the League of Legends universe. Try to guess the secret word with clues and a limited number of attempts!',
+    'title' => 'RuneterraGuess',
     'attempts' => 'ATTEMPTS',
     'remaining' => 'REMAINING',
     'status' => [

@@ -1,4 +1,98 @@
+<script setup>
+import { ref } from 'vue';
+import { Head, router } from '@inertiajs/vue3';
+import { useI18n } from 'vue-i18n';
+
+const props = defineProps({
+  displayWord: String,
+  guessed: Array,
+  wrongLetters: Array,
+  wrong: Number,
+  maxAttempts: Number,
+  lost: Boolean,
+  won: Boolean,
+  word: String
+})
+
+const userInput = ref('')
+const loading = ref(false)
+const inputError = ref('')
+const { t } = useI18n();
+
+const getLetterBoxClass = (char, index) => {
+  if (props.won) {
+    return 'bg-success text-white border-success'
+  }
+
+  if (props.lost) {
+    return 'bg-secondary text-white border-secondary'
+  }
+
+  if (char !== '_') {
+    return 'bg-primary text-white border-primary'
+  }
+
+  return 'bg-dark border-light'
+}
+
+const makeGuess = async () => {
+  if (!userInput.value.trim() || loading.value) return
+
+  const input = userInput.value.trim().toUpperCase()
+
+  if (input.length === 1 && !/^[A-Z]$/.test(input)) {
+    inputError.value = t('input.error_invalid')
+    return
+  }
+
+  if (input.length === 1 && props.guessed.includes(input)) {
+    inputError.value = t('input.error_repeat')
+    return
+  }
+
+  loading.value = true
+  inputError.value = ''
+
+  try {
+    const payload = input.length === 1
+      ? { letter: input }
+      : { word: input }
+
+    const response = await fetch(route('runeterraguess.game.guess'), {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+      },
+      body: JSON.stringify(payload)
+    })
+
+    const data = await response.json()
+
+    if (data.error) {
+      inputError.value = data.error
+    } else {
+      router.reload({ only: ['displayWord', 'guessed', 'wrongLetters', 'wrong', 'lost', 'won', 'word', 'missingLetters'] })
+    }
+  } catch (error) {
+    inputError.value = t('input.error_generic')
+    console.error('Erro:', error)
+  } finally {
+    loading.value = false
+    userInput.value = ''
+  }
+}
+
+const clearError = () => {
+  inputError.value = ''
+}
+</script>
+
 <template>
+    <Head>
+        <title>{{ t('page_title') }}</title>
+        <meta head-key="description" name="description" :content="t('page_description')" />
+    </Head>
   <div class="min-vh-100 d-flex align-items-center justify-content-center py-4">
     <div class="container w-50">
       <div class="card shadow-lg text-white rounded-4 border-0">
@@ -105,96 +199,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { ref } from 'vue';
-import { router } from '@inertiajs/vue3';
-import { useI18n } from 'vue-i18n';
-
-// Props recebidas do controller
-const props = defineProps({
-  displayWord: String,
-  guessed: Array,
-  wrongLetters: Array,
-  wrong: Number,
-  maxAttempts: Number,
-  lost: Boolean,
-  won: Boolean,
-  word: String
-})
-
-// Estados reativos
-const userInput = ref('')
-const loading = ref(false)
-const inputError = ref('')
-const { t } = useI18n();
-
-// Métodos
-const getLetterBoxClass = (char, index) => {
-  if (props.won) {
-    return 'bg-success text-white border-success'
-  }
-
-  if (props.lost) {
-    return 'bg-secondary text-white border-secondary'
-  }
-
-  if (char !== '_') {
-    return 'bg-primary text-white border-primary'
-  }
-
-  return 'bg-dark border-light'
-}
-
-const makeGuess = async () => {
-  if (!userInput.value.trim() || loading.value) return
-
-  const input = userInput.value.trim().toUpperCase()
-
-  if (input.length === 1 && !/^[A-Z]$/.test(input)) {
-    inputError.value = t('input.error_invalid')
-    return
-  }
-
-  if (input.length === 1 && props.guessed.includes(input)) {
-    inputError.value = t('input.error_repeat')
-    return
-  }
-
-  loading.value = true
-  inputError.value = ''
-
-  try {
-    const payload = input.length === 1
-      ? { letter: input }
-      : { word: input }
-
-    const response = await fetch(route('runeterra.game.guess'), {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-      },
-      body: JSON.stringify(payload)
-    })
-
-    const data = await response.json()
-
-    if (data.error) {
-      inputError.value = data.error
-    } else {
-      router.reload({ only: ['displayWord', 'guessed', 'wrongLetters', 'wrong', 'lost', 'won', 'word', 'missingLetters'] })
-    }
-  } catch (error) {
-    inputError.value = t('input.error_generic')
-    console.error('Erro:', error)
-  } finally {
-    loading.value = false
-    userInput.value = ''
-  }
-}
-
-const clearError = () => {
-  inputError.value = ''
-}
-</script>

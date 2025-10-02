@@ -1,7 +1,9 @@
 <?php
 
 return [
-    'title' => 'Jogo da Forca',
+    'page_title' => 'RuneterraGuess - Adivinhe a palavra de League of Legends!',
+    'page_description' => 'Jogue RuneterraGuess, um divertido jogo de adivinhar palavras baseado no universo de League of Legends. Tente adivinhar a palavra secreta com dicas e um número limitado de tentativas!',
+    'title' => 'RuneterraGuess',
     'attempts' => 'TENTATIVAS',
     'remaining' => 'RESTANTES',
     'status' => [

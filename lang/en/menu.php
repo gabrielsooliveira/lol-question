@@ -23,8 +23,8 @@ return [
   "word" => "Word",
   "memory" => "Memory",
   "puzzle" => "Puzzle",
-  "lorequestion_title" => "Runeterra Quiz",
-  "lorequestion_desc" => "Test your knowledge of the League of Legends universe with the Runeterra Quiz.",
-  "hangman_title" => "Hangman",
-  "hangman_desc" => "Guess the hidden words related to League of Legends champions."
+  "lorequestion_title" => "LoreQuestion",
+  "lorequestion_desc" => "Test your knowledge about Runeterra lore",
+  "runeterraguess_title" => "RuneterraGuess",
+  "runeterraguess_desc" => "Guess the hidden words related to League of Legends champions."
 ];

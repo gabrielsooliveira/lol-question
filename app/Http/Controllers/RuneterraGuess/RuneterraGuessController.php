@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Hangman;
+namespace App\Http\Controllers\RuneterraGuess;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class HangmanController extends Controller
+class RuneterraGuessController extends Controller
 {
     private $words = [
         "AATROX", "AHRI", "AKALI", "AKSHAN", "ALISTAR", "AMUMU", "ANIVIA", "ANNIE", "APHELIOS", "ASHE",
@@ -52,7 +52,7 @@ class HangmanController extends Controller
             $session->put('hangman', $state);
         }
 
-        return inertia('Hangman/Game', [
+        return inertia('RuneterraGuess/Game', [
             'displayWord' => $this->getDisplayWord($state),
             'guessed' => $state['guessed'],
             'wrongLetters' => $state['wrongLetters'],
@@ -81,7 +81,7 @@ class HangmanController extends Controller
                 'won' => $state['won'],
                 'maxAttempts' => $state['maxAttempts'],
                 'finished' => $state['finished'],
-                'word' => $state['lost'] ? $state['word'] : null,
+                'word' => $state['lost'] ? $state['word'] : null
             ]);
         }
 
@@ -131,7 +131,7 @@ class HangmanController extends Controller
             'won' => $state['won'],
             'finished' => $state['finished'],
             'maxAttempts' => $state['maxAttempts'],
-            'word' => $state['lost'] ? $state['word'] : null,
+            'word' => $state['lost'] ? $state['word'] : null
         ]);
     }
 

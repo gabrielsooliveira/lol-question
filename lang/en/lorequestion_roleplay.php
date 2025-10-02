@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'page_title' => 'LoreQuestion',
+    'page_title' => 'LoreQuestion - Game',
     'page_description' => 'LoreQuestion is a HextechPlay game about questions involving the Runeterra universe',
 
     'loading_questions' => 'Loading questions...',
