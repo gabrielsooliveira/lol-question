@@ -28,7 +28,7 @@ return [
     'section7_content' => 'We may update these Terms of Use periodically. By continuing to use our services after updates, you confirm acceptance of the new terms.',
 
     'contact_heading' => 'Questions or Comments?',
-    'contact_content' => 'Contact us by email: gabrielcodercontato@gmail.com',
+    'contact_content' => 'Contact us by email: hextechplaycontact@gmail.com',
 
     'accept_label' => 'I have read and accept the Terms of Use',
     'accept_button' => 'Accept',

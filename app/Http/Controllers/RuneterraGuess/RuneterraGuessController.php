@@ -4,64 +4,57 @@ namespace App\Http\Controllers\RuneterraGuess;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\DailyWord;
+use Carbon\Carbon;
 
 class RuneterraGuessController extends Controller
 {
-    private $words = [
-        "AATROX", "AHRI", "AKALI", "AKSHAN", "ALISTAR", "AMUMU", "ANIVIA", "ANNIE", "APHELIOS", "ASHE",
-        "AURELION SOL", "AURORA", "AZIR", "BARD", "BEL'VETH", "BLITZCRANK", "BRAND", "BRAUM", "BRIAR", "CAITLYN",
-        "CAMILLE", "CASSIOPEIA", "CHO'GATH", "CORKI", "DARIUS", "DIANA", "DR. MUNDO", "DRAVEN", "EKKO", "ELISE",
-        "EVELYNN", "EZREAL", "FIDDLESTICKS", "FIORA", "GALIO", "GANGPLANK", "GAREN", "GNAR", "GRAGAS", "GRAVES",
-        "GWEN", "HECARIM", "HEIMERDINGER", "ILLAOI", "IRELIA", "IVERN", "JANNA", "JARVAN IV", "JHIN", "JINX",
-        "KAI'SA", "KARMA", "KARTHUS", "KASSADIN", "KATARINA", "KAYLE", "KENNEN", "KHA'ZIX", "KINDRED", "KLED",
-        "K'SANTE", "KOG'MAW", "LEBLANC", "LEE SIN", "LEONA", "LILLIA", "LISSANDRA", "LUCIAN", "LULU", "LUX",
-        "MALPHITE", "MISS FORTUNE", "MILIO", "MORDEKAISER", "MORGANA", "NAMI", "NASUS", "NAUTILUS", "NEEKO",
-        "NILAH", "OLAF", "ORIANA", "PANTHEON", "POPPY", "PYKE", "QIYANA", "RAKAN", "RAMMUS", "REK'SAI", "RENATA GLASC",
-        "RENEKTON", "RIVEN", "RUMBLE", "RYZE", "SAMIRA", "SEJUANI", "SENNA", "SETT", "SHACO", "SHEN", "SIVIR",
-        "SKARNER", "SONA", "SORAKA", "SWAIN", "SYLAS", "TAHM KENCH", "TALIYAH", "TEEMO", "THRESH", "TRISTANA",
-        "TRUNDLE", "TRYNDAMERE", "TWISTED FATE", "TWITCH", "UDYR", "URGOT", "VARUS", "VAYNE", "VEIGAR", "VEL'KOZ",
-        "VI", "VIEGO", "VIKTOR", "VLADIMIR", "VOLIBEAR", "WARWICK", "WUKONG", "XAYAH", "YASUO", "YONE",
-        "YUUMI", "ZAC", "ZED", "ZERI", "ZILEAN", "ZOE", "ZYRA", "DEMACIA", "NOXUS", "IONIA", "PILTOVER", "ZAUN", "SHURIMA", "FRELJORD", "TARGON", "ICATHIA"
-    ];
-
-    private $maxAttempts = 6;
-
     public function index(Request $request)
     {
         $session = $request->session();
-        $today = now()->toDateString();
+        $today = Carbon::now('America/Sao_Paulo')->toDateString();
 
-        // Mantém estado do dia, ou cria se ainda não jogou hoje
+        // Busca a palavra do dia
+        $daily = DailyWord::with('word')->where('date', $today)->first();
+        if (!$daily) {
+            abort(404, "Palavra do dia ainda não definida.");
+        }
+
+        $word = strtoupper($daily->word->name);
+        $maxAttempts = $daily->word->max_attempts;
+
+        // Mantém estado do dia ou cria se não houver
         if ($session->has('hangman') && $session->get('hangman.date') === $today) {
             $state = $session->get('hangman');
         } else {
-            $word = $this->getDailyWord($today);
-
             $state = [
                 'date' => $today,
                 'word' => $word,
                 'guessed' => [],
                 'wrongLetters' => [],
                 'wrong' => 0,
-                'maxAttempts' => $this->maxAttempts,
+                'maxAttempts' => $maxAttempts,
                 'lost' => false,
                 'won' => false,
                 'finished' => false,
             ];
-
             $session->put('hangman', $state);
         }
+
+        // Calcula tempo restante até próxima palavra
+        $timeRemaining = $this->getTimeRemaining();
 
         return inertia('RuneterraGuess/Game', [
             'displayWord' => $this->getDisplayWord($state),
             'guessed' => $state['guessed'],
             'wrongLetters' => $state['wrongLetters'],
             'wrong' => $state['wrong'],
-            'maxAttempts' => $state['maxAttempts'],
             'lost' => $state['lost'],
             'won' => $state['won'],
             'finished' => $state['finished'],
+            'maxAttempts' => $state['maxAttempts'],
             'word' => $state['lost'] ? $state['word'] : null,
+            'timeRemaining' => $timeRemaining
         ]);
     }
 
@@ -86,11 +79,11 @@ class RuneterraGuessController extends Controller
         }
 
         $letter = strtoupper($request->input('letter', ''));
-        $word = strtoupper($request->input('word', ''));
+        $wordInput = strtoupper($request->input('word', ''));
 
-        // Tentativa de palavra completa
-        if ($word) {
-            if ($word === $state['word']) {
+        if ($wordInput) {
+            // Tentativa de adivinhar palavra inteira
+            if ($wordInput === $state['word']) {
                 $state['won'] = true;
             } else {
                 $state['wrong']++;
@@ -98,9 +91,8 @@ class RuneterraGuessController extends Controller
                     $state['lost'] = true;
                 }
             }
-        }
-        // Tentativa de letra
-        elseif ($letter && !in_array($letter, $state['guessed'])) {
+        } elseif ($letter && !in_array($letter, $state['guessed'])) {
+            // Tentativa de letra
             $state['guessed'][] = $letter;
 
             if (strpos($state['word'], $letter) !== false) {
@@ -122,6 +114,9 @@ class RuneterraGuessController extends Controller
 
         $session->put('hangman', $state);
 
+        // Tempo restante até próxima palavra
+        $timeRemaining = $this->getTimeRemaining();
+
         return response()->json([
             'displayWord' => $this->getDisplayWord($state),
             'guessed' => $state['guessed'],
@@ -131,15 +126,14 @@ class RuneterraGuessController extends Controller
             'won' => $state['won'],
             'finished' => $state['finished'],
             'maxAttempts' => $state['maxAttempts'],
-            'word' => $state['lost'] ? $state['word'] : null
+            'word' => $state['lost'] ? $state['word'] : null,
+            'timeRemaining' => $timeRemaining
         ]);
     }
 
-    private function getDailyWord(string $date): string
-    {
-        $index = crc32($date) % count($this->words);
-        return $this->words[$index];
-    }
+    // -----------------------------
+    // Funções auxiliares
+    // -----------------------------
 
     private function getDisplayWord(array $state): string
     {
@@ -149,7 +143,7 @@ class RuneterraGuessController extends Controller
         $display = '';
         for ($i = 0; $i < strlen($word); $i++) {
             $char = $word[$i];
-            if (in_array($char, $guessed) || $state['lost'] || $state['won']) {
+            if (in_array($char, $guessed) || $state['lost'] || $state['won'] || $char === ' ') {
                 $display .= $char;
             } else {
                 $display .= '_';
@@ -164,12 +158,28 @@ class RuneterraGuessController extends Controller
 
     private function hasWon(array $state): bool
     {
-        $word = $state['word'];
+        $word = str_replace(' ', '', $state['word']); // Ignora espaços
+        $guessed = $state['guessed'];
+
         foreach (str_split($word) as $char) {
-            if (!in_array($char, $state['guessed'])) {
+            if (!in_array($char, $guessed)) {
                 return false;
             }
         }
+
         return true;
+    }
+
+    private function getTimeRemaining(): array
+    {
+        $now = Carbon::now('America/Sao_Paulo');
+        $nextMidnight = $now->copy()->addDay()->startOfDay();
+        $diff = $nextMidnight->diff($now);
+
+        return [
+            'hours' => $diff->h,
+            'minutes' => $diff->i,
+            'seconds' => $diff->s
+        ];
     }
 }

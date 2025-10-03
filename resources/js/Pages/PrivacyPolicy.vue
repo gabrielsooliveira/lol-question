@@ -54,8 +54,8 @@ import { Head } from '@inertiajs/vue3';
             <h2 class="h5 fw-semibold mt-4">{{ $t('contact_title') }}</h2>
             <p>
                 {{ $t('contact_text') }}
-                <a href="mailto:gabrielcodercontato@gmail.com" class="link-warning">
-                    gabrielcodercontato@gmail.com
+                <a href="mailto:hextechplaycontact@gmail.com" class="link-warning">
+                    hextechplaycontact@gmail.com
                 </a>
             </p>
         </div>

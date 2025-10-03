@@ -46,7 +46,7 @@ function acceptTerms() {
             <p class="text-light">We may update these Terms of Use periodically. By continuing to use our services after updates, you confirm acceptance of the new terms.</p>
 
             <h4 class="text-warning">Questions or Comments?</h4>
-            <p class="text-light">Contact us by email: <a class="text-warning" href="mailto:gabrielcodercontato@gmail.com">gabrielcodercontato@gmail.com</a></p>
+            <p class="text-light">Contact us by email: <a class="text-warning" href="mailto:hextechplaycontact@gmail.com">hextechplaycontact@gmail.com</a></p>
         </div>
 
         <div class="d-flex flex-column flex-md-row gap-2 justify-content-md-between align-items-md-center">

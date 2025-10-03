@@ -20,7 +20,7 @@ return [
     'section7_heading' => '7. Mudanças e Atualizações',
     'section7_content' => 'Podemos atualizar estes Termos de Uso periodicamente. Ao continuar a usar nossos serviços após alterações, você confirma que aceita os novos termos.',
     'contact_heading' => 'Dúvidas ou Comentários?',
-    'contact_content' => 'Entre em contato através do e-mail: gabrielcodercontato@gmail.com',
+    'contact_content' => 'Entre em contato através do e-mail: hextechplaycontact@gmail.com',
     'accept_label' => 'Li e aceito os Termos de Uso',
     'accept_button' => 'Aceito',
     'decline_button' => 'Não Aceito',
