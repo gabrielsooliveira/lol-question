@@ -75,26 +75,26 @@ const saveSettings = () => {
 
     <ModalDialog :isVisible="isModalVisible" @close="closeModal" :title=" $t('config_text')">
         <form @submit.prevent="saveSettings" class="container">
-            <div class="mb-3">
+            <div class="mb-3 text-primary">
                 <label class="form-label fw-semibold d-block text-capitalize">{{ $t('diffulty_phrase') }}</label>
 
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="difficulty" id="difficultyEasy" value="easy" v-model="form.difficulty" />
+                    <input class="form-check-input text-primary" type="radio" name="difficulty" id="difficultyEasy" value="easy" v-model="form.difficulty" />
                     <label class="form-check-label text-capitalize" for="difficultyEasy">{{ $t('diffulty.easy') }}</label>
                 </div>
 
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="difficulty" id="difficultyMedium" value="medium" v-model="form.difficulty" />
+                    <input class="form-check-input text-primary" type="radio" name="difficulty" id="difficultyMedium" value="medium" v-model="form.difficulty" />
                     <label class="form-check-label text-capitalize" for="difficultyMedium">{{ $t('diffulty.medium') }}</label>
                 </div>
 
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="difficulty" id="difficultyHard" value="hard" v-model="form.difficulty" />
+                    <input class="form-check-input text-primary" type="radio" name="difficulty" id="difficultyHard" value="hard" v-model="form.difficulty" />
                     <label class="form-check-label text-capitalize" for="difficultyHard">{{ $t('diffulty.hard') }}</label>
                 </div>
             </div>
 
-            <div class="mb-3">
+            <div class="mb-3 text-primary">
                 <label for="questionQuant" class="form-label fw-semibold">{{ $t('quantity_phrase') }}</label>
                 <input type="range" class="form-range" min="1" max="10" id="questionQuant" v-model="form.questionQuant" name="questionQuant" required />
                 <div>

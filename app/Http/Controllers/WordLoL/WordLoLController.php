@@ -1,20 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\RuneterraGuess;
+namespace App\Http\Controllers\WordLoL;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\DailyWord;
 use Carbon\Carbon;
 
-class RuneterraGuessController extends Controller
+class WordLoLController extends Controller
 {
     public function index(Request $request)
     {
         $session = $request->session();
         $today = Carbon::now('America/Sao_Paulo')->toDateString();
 
-        // Busca a palavra do dia
         $daily = DailyWord::with('word')->where('date', $today)->first();
         if (!$daily) {
             abort(404, "Palavra do dia ainda não definida.");
@@ -23,9 +22,8 @@ class RuneterraGuessController extends Controller
         $word = strtoupper($daily->word->name);
         $maxAttempts = $daily->word->max_attempts;
 
-        // Mantém estado do dia ou cria se não houver
-        if ($session->has('hangman') && $session->get('hangman.date') === $today) {
-            $state = $session->get('hangman');
+        if ($session->has('wordlol') && $session->get('wordlol.date') === $today) {
+            $state = $session->get('wordlol');
         } else {
             $state = [
                 'date' => $today,
@@ -38,13 +36,12 @@ class RuneterraGuessController extends Controller
                 'won' => false,
                 'finished' => false,
             ];
-            $session->put('hangman', $state);
+            $session->put('wordlol', $state);
         }
 
-        // Calcula tempo restante até próxima palavra
         $timeRemaining = $this->getTimeRemaining();
 
-        return inertia('RuneterraGuess/Game', [
+        return inertia('WordLoL/Game', [
             'displayWord' => $this->getDisplayWord($state),
             'guessed' => $state['guessed'],
             'wrongLetters' => $state['wrongLetters'],
@@ -53,7 +50,7 @@ class RuneterraGuessController extends Controller
             'won' => $state['won'],
             'finished' => $state['finished'],
             'maxAttempts' => $state['maxAttempts'],
-            'word' => $state['lost'] ? $state['word'] : null,
+            'word' => $state['lost'] || $state['won'] ? $state['word'] : null,
             'timeRemaining' => $timeRemaining
         ]);
     }
@@ -61,7 +58,7 @@ class RuneterraGuessController extends Controller
     public function guess(Request $request)
     {
         $session = $request->session();
-        $state = $session->get('hangman');
+        $state = $session->get('wordlol');
 
         if ($state['finished']) {
             return response()->json([
@@ -74,7 +71,7 @@ class RuneterraGuessController extends Controller
                 'won' => $state['won'],
                 'maxAttempts' => $state['maxAttempts'],
                 'finished' => $state['finished'],
-                'word' => $state['lost'] ? $state['word'] : null
+                'word' => $state['lost'] || $state['won'] ? $state['word'] : null,
             ]);
         }
 
@@ -112,9 +109,8 @@ class RuneterraGuessController extends Controller
             $state['finished'] = true;
         }
 
-        $session->put('hangman', $state);
+        $session->put('wordlol', $state);
 
-        // Tempo restante até próxima palavra
         $timeRemaining = $this->getTimeRemaining();
 
         return response()->json([
@@ -126,14 +122,10 @@ class RuneterraGuessController extends Controller
             'won' => $state['won'],
             'finished' => $state['finished'],
             'maxAttempts' => $state['maxAttempts'],
-            'word' => $state['lost'] ? $state['word'] : null,
+            'word' => $state['lost'] || $state['won'] ? $state['word'] : null,
             'timeRemaining' => $timeRemaining
         ]);
     }
-
-    // -----------------------------
-    // Funções auxiliares
-    // -----------------------------
 
     private function getDisplayWord(array $state): string
     {
@@ -158,7 +150,7 @@ class RuneterraGuessController extends Controller
 
     private function hasWon(array $state): bool
     {
-        $word = str_replace(' ', '', $state['word']); // Ignora espaços
+        $word = str_replace(' ', '', $state['word']);
         $guessed = $state['guessed'];
 
         foreach (str_split($word) as $char) {

@@ -47,8 +47,8 @@ return [
             'title' => 'LoreQuestion',
             'description' => 'Test your knowledge about Runeterra lore',
         ],
-        'runeterraguess' => [
-            'title' => 'RuneterraGuess',
+        'wordlol' => [
+            'title' => 'WordLoL',
             'description' => 'Guess the names of League of Legends champions',
         ],
     ],

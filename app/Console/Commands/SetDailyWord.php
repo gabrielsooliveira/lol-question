@@ -9,7 +9,7 @@ use App\Models\DailyWord;
 class SetDailyWord extends Command
 {
     protected $signature = 'runeterra:set-daily-word';
-    protected $description = 'Define a palavra do dia de RuneterraGuess';
+    protected $description = 'Define a palavra do dia de WordLoL';
 
     public function handle(): void
     {

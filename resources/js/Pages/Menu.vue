@@ -3,7 +3,7 @@ import { Head, Link } from '@inertiajs/vue3';
 import { ref, computed, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import LolQuestionBackground from '@/assets/images/lorequestion.png';
-import HangmanBackground from '@/assets/images/hangman.png';
+import WordLoLBackground from '@/assets/images/wordlol.png';
 
 const { t } = useI18n(); // <-- hook do i18n
 
@@ -28,10 +28,10 @@ const games = ref([
   },
   {
     id: 2,
-    title: t('runeterraguess_title'),
-    description: t('runeterraguess_desc'),
-    image: HangmanBackground,
-    route: 'runeterraguess.game',
+    title: t('wordlol_title'),
+    description: t('wordlol_desc'),
+    image: WordLoLBackground,
+    route: 'wordlol.game',
     category: 'word',
     players: 1800,
     rating: 4.6,
@@ -94,13 +94,13 @@ onMounted(() => isVisible.value = true);
 
       <div class="d-flex justify-content-center flex-wrap mt-4 fade-in delay-300" :class="{ 'slide-in-left': isVisible }">
         <div class="stat-badge me-2 mb-2">
-          <i class="fas fa-gamepad text-accent me-1"></i> {{ games.length }} {{ t('games') }}
+          <font-awesome-icon icon="fas fa-gamepad" class="text-accent me-1"></font-awesome-icon> {{ games.length }} {{ t('games') }}
         </div>
         <div class="stat-badge me-2 mb-2">
-          <i class="fas fa-users text-accent me-1"></i> {{ games.reduce((sum,g)=>sum+g.players,0).toLocaleString() }} {{ t('players') }}
+          <font-awesome-icon icon="fas fa-users" class="text-accent me-1"></font-awesome-icon> {{ games.reduce((sum,g)=>sum+g.players,0).toLocaleString() }} {{ t('players') }}
         </div>
         <div class="stat-badge me-2 mb-2">
-          <i class="fas fa-star text-accent me-1"></i> {{ (games.reduce((sum,g)=>sum+g.rating,0)/games.length).toFixed(1) }} {{ t('rating') }}
+          <font-awesome-icon icon="fas fa-star" class="text-accent me-1"></font-awesome-icon> {{ (games.reduce((sum,g)=>sum+g.rating,0)/games.length).toFixed(1) }} {{ t('rating') }}
         </div>
       </div>
     </div>
@@ -110,23 +110,23 @@ onMounted(() => isVisible.value = true);
   <section class="featured-section py-5 bg-glass" v-if="featuredGames.length">
     <div class="container">
       <h2 class="section-title mb-3">
-        <i class="fas fa-star text-accent me-2"></i> {{ t('featured_games') }}
+        {{ t('featured_games') }}
       </h2>
       <p class="text-light opacity-75 mb-4">{{ t('featured_games_subtitle') }}</p>
       <div class="row">
         <div class="col-lg-4 col-md-6 mb-4" v-for="game in featuredGames" :key="game.id">
           <div class="card card-game featured h-100">
-            <div class="featured-badge"><i class="fas fa-crown"></i></div>
+            <div class="featured-badge"><font-awesome-icon icon="fas fa-crown"></font-awesome-icon></div>
             <div class="card-img-wrapper">
               <img :src="game.image" class="card-img-top" :alt="game.title">
               <div class="card-overlay">
-                <Link :href="route(game.route)" class="play-button"><i class="fas fa-play"></i></Link>
+                <Link :href="route(game.route)" class="play-button"><font-awesome-icon icon="fas fa-play"></font-awesome-icon></Link>
               </div>
             </div>
             <div class="card-body">
               <div class="d-flex justify-content-between align-items-center mb-2">
                 <span>{{ game.title }}</span>
-                <div class="rating"><i class="fas fa-star text-warning me-1"></i>{{ game.rating }}</div>
+                <div class="rating"><font-awesome-icon icon="fas fa-star" class="text-warning me-1"></font-awesome-icon>{{ game.rating }}</div>
               </div>
               <p class="card-text text-light opacity-75">{{ game.description }}</p>
               <div class="game-meta mb-3">
@@ -152,7 +152,7 @@ onMounted(() => isVisible.value = true);
         <div class="row g-3">
           <div class="col-md-4">
             <div class="position-relative">
-              <i class="fas fa-search search-icon"></i>
+              <font-awesome-icon icon="fas fa-search" class="search-icon"></font-awesome-icon>
               <input v-model="searchQuery" type="text" class="form-control ps-5 bg-glass text-light" :placeholder="t('search_games')">
             </div>
           </div>
@@ -167,7 +167,7 @@ onMounted(() => isVisible.value = true);
             </select>
           </div>
           <div class="col-md-2">
-            <button @click="clearFilters" class="btn btn-outline-secondary w-100"><i class="fas fa-times me-1"></i> {{ t('clear') }}</button>
+            <button @click="clearFilters" class="btn btn-outline-secondary w-100"><font-awesome icon="fas fa-times" class="me-1"></font-awesome> {{ t('clear') }}</button>
           </div>
         </div>
       </div>
@@ -183,18 +183,18 @@ onMounted(() => isVisible.value = true);
                 <div class="col-lg-4 col-md-6 mb-4" v-for="game in filteredGames" :key="game.id">
                     <div class="card card-game featured h-100">
                         <div class="featured-badge">
-                            <i class="fas fa-crown"></i>
+                            <font-awesome-icon class="fas fa-crown"></font-awesome-icon>
                         </div>
                     <div class="card-img-wrapper">
                         <img :src="game.image" class="card-img-top" :alt="game.title">
                         <div class="card-overlay">
-                            <Link :href="route(game.route)" class="play-button"><i class="fas fa-play"></i></Link>
+                            <Link :href="route(game.route)" class="play-button"><font-awesome-icon class="fas fa-play"></font-awesome-icon></Link>
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-2">
                             <span>{{ game.title }}</span>
-                        <div class="rating"><i class="fas fa-star text-warning me-1"></i>{{ game.rating }}</div>
+                        <div class="rating"><font-awesome-icon icon="fas fa-star" class="text-warning me-1"></font-awesome-icon>{{ game.rating }}</div>
                     </div>
                     <p class="card-text text-light opacity-75">{{ game.description }}</p>
                             <div class="game-meta mb-3">
@@ -204,17 +204,17 @@ onMounted(() => isVisible.value = true);
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
                                 <small class="text-secondary"><font-awesome-icon icon="fas fa-users me-1"></font-awesome-icon> {{ game.players.toLocaleString() }}</small>
-                                <Link :href="route(game.route)" class="btn btn-accent btn-sm hover-lift"><font-awesome-icon icon="fas fa-play me-1"></font-awesome-icon> {{ t('play') }}</Link>
+                                <Link :href="route(game.route)" class="btn btn-accent btn-sm hover-lift"><font-awesome-icon icon="fas fa-play" class="me-1"></font-awesome-icon> {{ t('play') }}</Link>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div v-else class="text-center py-5 text-light">
-                <i class="fas fa-search mb-3" style="font-size:3rem;"></i>
+                <font-awesome-icon icon="fas fa-search" class="mb-3 fs-2"></font-awesome-icon>
                 <h4>Nenhum jogo encontrado</h4>
                 <p class="opacity-75">Ajuste os filtros ou busque por outro termo.</p>
-                <button @click="clearFilters" class="btn btn-accent"><i class="fas fa-refresh me-2"></i> Limpar Filtros</button>
+                <button @click="clearFilters" class="btn btn-accent"><font-awesome-icon icon="fas fa-refresh" class="me-1"></font-awesome-icon> Limpar Filtros</button>
             </div>
         </div>
     </section>

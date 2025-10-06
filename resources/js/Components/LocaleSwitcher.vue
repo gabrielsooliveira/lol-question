@@ -31,7 +31,7 @@ function changeLocale(newLocale) {
         🌐 {{ $i18n.locale.toUpperCase() }}
       </button>
 
-      <ul class="dropdown-menu dropdown-menu-end">
+      <ul class="dropdown-menu dropdown-menu-end border bg-primary">
         <li>
           <a
             class="dropdown-item link-warning fw-bold"

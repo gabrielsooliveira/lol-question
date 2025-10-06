@@ -9,6 +9,7 @@
 
         gtag('config', 'G-XD3SJVR73S');
     </script>
+    <meta name="google-adsense-account" content="ca-pub-4640291799140211">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4640291799140211" crossorigin="anonymous"></script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">

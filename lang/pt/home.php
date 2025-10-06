@@ -36,8 +36,8 @@ return [
             'title' => 'LoreQuestion',
             'description' => 'Teste seus conhecimentos sobre a história de Runeterra',
         ],
-        'runeterraguess' => [
-            'title' => 'RuneterraGuess',
+        'wordlol' => [
+            'title' => 'WordLoL',
             'description' => 'Adivinhe a palavra escondida relacionada ao universo de League of Legends',
         ],
     ],

@@ -6,7 +6,7 @@ import heroBackground from "@/assets/images/wallpaper.jpg";
 import homeImage2 from "@/assets/images/home-image-2.png";
 import logo from "@/assets/images/icon.png";
 import LolQuestionBackground from "@/assets/images/lorequestion.png";
-import HangmanBackground from "@/assets/images/hangman.png";
+import WordLoLBackground from "@/assets/images/wordlol.png";
 import { useI18n } from 'vue-i18n';
 
 // Configurar i18n
@@ -33,10 +33,10 @@ const featuredGames = ref([
     },
     {
         id: 2,
-        title: t('featured_games.runeterraguess.title'),
-        description: t('featured_games.runeterraguess.description'),
-        image: HangmanBackground,
-        route: "runeterraguess.game",
+        title: t('featured_games.wordlol.title'),
+        description: t('featured_games.wordlol.description'),
+        image: WordLoLBackground,
+        route: "wordlol.game",
         players: 1800,
     },
 ]);
@@ -158,7 +158,6 @@ onMounted(() => {
                         </div>
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-2">
-                                <font-awesome-icon :icon="`fas fa-${game.icon}`" class="text-accent me-2"></font-awesome-icon>
                                 <h5 class="card-title mb-0">
                                     {{ game.title }}
                                 </h5>
@@ -199,8 +198,7 @@ onMounted(() => {
                             <font-awesome-icon :icon="`fas fa-${stat.icon}`" class="text-accent"></font-awesome-icon>
                         </div>
                         <div class="stat-value-large text-gradient fw-bold mb-2">
-                            {{ Math.floor(stat.value).toLocaleString()
-                            }}{{ stat.suffix || "" }}
+                            {{ Math.floor(stat.value).toLocaleString() }}{{ stat.suffix || "" }}
                         </div>
                         <div class="stat-label-large text-light">
                             {{ stat.label }}

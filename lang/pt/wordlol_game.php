@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'page_title' => 'RuneterraGuess - Adivinhe a palavra de League of Legends!',
-    'page_description' => 'Jogue RuneterraGuess, um divertido jogo de adivinhar palavras baseado no universo de League of Legends. Tente adivinhar a palavra secreta com dicas e um número limitado de tentativas!',
-    'title' => 'RuneterraGuess',
+    'page_title' => 'WordLoL - Adivinhe a palavra de League of Legends!',
+    'page_description' => 'Jogue WordLoL, um divertido jogo de adivinhar palavras baseado no universo de League of Legends. Tente adivinhar a palavra secreta com dicas e um número limitado de tentativas!',
+    'title' => 'WordLoL',
     'attempts' => 'TENTATIVAS',
     'remaining' => 'RESTANTES',
     'status' => [
@@ -11,6 +11,12 @@ return [
         'lost' => '😢 Você perdeu!',
         'lost_word' => 'A palavra era:',
         'playing' => 'Digite uma letra ou tente a palavra completa',
+    ],
+    "share_result" => "Compartilhar Resultado",
+    'share' => [
+        'won' => "Acertei {score} letras na palavra! Difícil!",
+        "lost" => "Não consegui! A palavra era: {word}",
+        "unsupported" => "Compartilhamento não suportado neste navegador."
     ],
     'input' => [
         'placeholder' => 'Digite letra ou palavra',

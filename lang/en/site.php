@@ -21,7 +21,7 @@ return [
 
     // Games
     'game_lorequestion' => 'LoreQuestion',
-    'game_runeterraguess' => 'RuneterraGuess',
+    'game_wordlol' => 'WordLoL',
 
     // Support Links
     'support_help_center' => 'Help Center',
