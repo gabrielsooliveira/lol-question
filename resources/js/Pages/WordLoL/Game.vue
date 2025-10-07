@@ -13,6 +13,7 @@ const props = defineProps({
   lost: Boolean,
   won: Boolean,
   word: String,
+  attempts: Number,
   timeRemaining: Object
 });
 
@@ -21,6 +22,7 @@ const loading = ref(false);
 const inputError = ref("");
 const { t } = useI18n();
 const isModalVisible = ref(false);
+const showGuide = ref(false);
 
 const getLetterBoxClass = (char, index) => {
   if (props.won) {
@@ -82,6 +84,7 @@ const makeGuess = async () => {
           "wrongLetters",
           "wrong",
           "lost",
+          "attempts",
           "won",
           "word",
         ],
@@ -141,11 +144,25 @@ const closeModal = () => {
 };
 
 const shareOnTwitter = () => {
-  const gameResult = props.won ? "🎉 Eu venci!" : "😢 Eu perdi...";
-  const attemptsInfo = `Tentativas: ${props.wrong}/${props.maxAttempts}`;
+  const messagesWin = [
+    "Subi no ranking do WordLoL!",
+    "Acertei a palavra antes de todo mundo!",
+    "Mais uma vitória no HextechPlay!",
+  ];
+
+  const messagesLose = [
+    "Quase acertei a palavra de hoje!",
+    "A palavra me trollou dessa vez...",
+    "Preciso treinar mais no WordLoL!",
+  ];
+
+  const message = props.won ? messagesWin[Math.floor(Math.random() * messagesWin.length)] : messagesLose[Math.floor(Math.random() * messagesLose.length)];
+
+  const attemptsInfo = `Na ${props.attempts}ª tentativa`;
+  const errorsInfo = `Erros: ${props.wrong}/${props.maxAttempts}`;
   const gameUrl = window.location.origin;
 
-  const text = `${gameResult}\n${attemptsInfo}\nJogue também em ${gameUrl} #HextechPlay #WordLoL #LeagueOfLegends`;
+  const text = props.won ? `${message}\n${attemptsInfo}\n${errorsInfo}\nTente também em ${gameUrl} #HextechPlay #WordLoL #LoL` : `${message}\nTente também em ${gameUrl} #HextechPlay #WordLoL #LoL`;
   const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
   window.open(twitterUrl, "_blank");
 };
@@ -184,7 +201,7 @@ const shareOnTwitter = () => {
                     <div class="row g-3 mb-4">
                         <div class="col-6">
                         <div class="bg-dark rounded p-3 h-100">
-                            <small class="text-white d-block">{{ $t("attempts") }}</small>
+                            <small class="text-white d-block">{{ $t("remaining") }}</small>
 
                             <div class="fs-4 fw-bold text-warning">
                             {{ wrong }} / {{ maxAttempts }}
@@ -195,15 +212,14 @@ const shareOnTwitter = () => {
                         <div class="col-6">
                         <div class="bg-dark rounded p-3 h-100">
                             <small class="text-white d-block">{{ $t("attempts") }}</small>
-
                             <div class="fs-4 fw-bold text-warning">
-                            {{ maxAttempts - wrong }}
+                            {{ attempts }}
                             </div>
                         </div>
                         </div>
                     </div>
 
-                    <div class="input-group input-group-lg mb-4">
+                    <div class="input-group input-group-lg">
                         <input
                             type="text"
                             v-model="userInput"
@@ -211,18 +227,14 @@ const shareOnTwitter = () => {
                             :class="{ 'is-invalid': inputError }"
                             :placeholder="$t('input.placeholder')"
                             :disabled="lost || won"
+                            :maxlength="props.displayWord.split(' ').length"
                             @keyup.enter="makeGuess"
                             @input="clearError"
                         />
 
-                        <button
-                            class="btn btn-warning px-4"
-                            @click="makeGuess"
-                            :disabled="lost || won || !userInput.trim()"
-                        >
-                        <span v-if="!loading">{{ $t("input.button_try") }}</span>
-
-                        <span v-else>{{ $t("input.button_loading") }}</span>
+                        <button class="btn btn-warning px-4" @click="makeGuess" :disabled="lost || won || !userInput.trim()">
+                            <span v-if="!loading">{{ $t("input.button_try") }}</span>
+                            <span v-else>{{ $t("input.button_loading") }}</span>
                         </button>
                     </div>
 
@@ -230,7 +242,7 @@ const shareOnTwitter = () => {
                         {{ inputError }}
                     </div>
 
-                    <div class="mb-4 text-start">
+                    <div class="mt-4 text-start">
                         <h6 class="text-danger mb-2 fw-bold">
                         {{ $t("wrong_letters.title") }}
                         </h6>
@@ -255,15 +267,26 @@ const shareOnTwitter = () => {
                         </div>
                     </div>
 
-                    <div class="mt-3">
-                        <small class="text-warning">
-                        {{ $t("hint") }}
-                        </small>
-                    </div>
+                    <button class="btn btn-sm btn-warning mt-5" @click="showGuide = true">
+                        <font-awesome-icon icon="fas fa-question"></font-awesome-icon>
+                    </button>
                 </div>
             </div>
         </div>
     </div>
+
+    <ModalDialog :isVisible="showGuide" @close="showGuide = false">
+        <div class="text-primary">
+            <h3>{{ $t("guide.title") }}</h3>
+            <ul>
+                <li>{{ $t('guide.item1') }}</li>
+                <li>{{ $t('guide.item2') }}</li>
+                <li>{{ $t('guide.item3') }}</li>
+                <li>{{ $t('guide.item4') }}</li>
+                <li>{{ $t('guide.item5') }}</li>
+            </ul>
+        </div>
+    </ModalDialog>
 
     <ModalDialog :isVisible="isModalVisible" @close="closeModal" >
         <template #default>

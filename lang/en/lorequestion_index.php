@@ -20,6 +20,16 @@ return [
         'hard' => 'Hard',
     ],
 
+    'guide' => [
+        'title' => 'How to Play',
+        'item1' => 'You have 15 seconds to answer each question.',
+        'item2' => 'Choose the correct option by clicking the corresponding button.',
+        'item3' => 'If you do not answer in time, the question will be marked as "timeout".',
+        'item4' => 'At the end of the game, you will see your correct and wrong answers.',
+        'item5' => 'You can review right and wrong answers using the carousels.',
+        'item6' => 'Share your result and try to improve next time!',
+    ],
+
     'quantity_phrase' => 'Number of questions',
     'button_start' => 'Start game',
 ];

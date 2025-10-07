@@ -49,7 +49,7 @@ return [
         ],
         'wordlol' => [
             'title' => 'WordLoL',
-            'description' => 'Guess the names of League of Legends champions',
+            'description' => 'Guess the hidden word related to the League of Legends universe.',
         ],
     ],
     'achievements' => [

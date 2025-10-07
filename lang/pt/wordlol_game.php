@@ -5,7 +5,7 @@ return [
     'page_description' => 'Jogue WordLoL, um divertido jogo de adivinhar palavras baseado no universo de League of Legends. Tente adivinhar a palavra secreta com dicas e um número limitado de tentativas!',
     'title' => 'WordLoL',
     'attempts' => 'TENTATIVAS',
-    'remaining' => 'RESTANTES',
+    'remaining' => 'CHANCES RESTANTES',
     'status' => [
         'won' => '🎉 Parabéns! Você ganhou!',
         'lost' => '😢 Você perdeu!',
@@ -30,5 +30,12 @@ return [
         'title' => '❌ Letras Erradas',
         'none' => 'Nenhuma ainda',
     ],
-    'hint' => '💡 Dica: Digite uma letra ou a palavra inteira para adivinhar!',
+    'guide' => [
+        'title' => 'Como Jogar WordLoL',
+        'item1' => 'Tente adivinhar a palavra antes de atingir o número máximo de erros.',
+        'item2' => 'Digite uma letra por vez ou tente adivinhar a palavra inteira.',
+        'item3' => 'Palavras já tentadas não podem ser repetidas.',
+        'item4' => 'Compartilhe seus resultados no Twitter ao finalizar.',
+        'item5' => 'Você tem um tempo limitado para cada palavra, fique atento!',
+    ],
 ];

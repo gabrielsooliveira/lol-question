@@ -26,5 +26,5 @@ return [
   "lorequestion_title" => "LoreQuestion",
   "lorequestion_desc" => "Test your knowledge about Runeterra lore",
   "wordlol_title" => "WordLoL",
-  "wordlol_desc" => "Guess the hidden words related to League of Legends champions."
+  "wordlol_desc" => "Guess the hidden word related to the League of Legends universe."
 ];

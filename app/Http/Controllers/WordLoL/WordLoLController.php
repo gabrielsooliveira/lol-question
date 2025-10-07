@@ -30,6 +30,7 @@ class WordLoLController extends Controller
                 'guessed' => [],
                 'wrongLetters' => [],
                 'wrong' => 0,
+                'attempts' => 0,
                 'maxAttempts' => $maxAttempts,
                 'lost' => false,
                 'won' => false,
@@ -48,6 +49,7 @@ class WordLoLController extends Controller
             'lost' => $state['lost'],
             'won' => $state['won'],
             'finished' => $state['finished'],
+            'attempts' => $state['attempts'],
             'maxAttempts' => $state['maxAttempts'],
             'word' => $state['lost'] || $state['won'] ? $state['word'] : null,
             'timeRemaining' => $timeRemaining
@@ -79,6 +81,8 @@ class WordLoLController extends Controller
 
         if ($wordInput) {
             // Tentativa de adivinhar palavra inteira
+            $state['attempts']++;
+
             if ($wordInput === $state['word']) {
                 $state['won'] = true;
             } else {
@@ -89,6 +93,7 @@ class WordLoLController extends Controller
             }
         } elseif ($letter && !in_array($letter, $state['guessed'])) {
             // Tentativa de letra
+            $state['attempts']++;
             $state['guessed'][] = $letter;
 
             if (strpos($state['word'], $letter) !== false) {
@@ -120,6 +125,7 @@ class WordLoLController extends Controller
             'lost' => $state['lost'],
             'won' => $state['won'],
             'finished' => $state['finished'],
+            'attempts' => $state['attempts'],
             'maxAttempts' => $state['maxAttempts'],
             'word' => $state['lost'] || $state['won'] ? $state['word'] : null,
             'timeRemaining' => $timeRemaining

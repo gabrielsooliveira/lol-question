@@ -162,7 +162,7 @@ onMounted(() => {
                                     {{ game.title }}
                                 </h5>
                             </div>
-                            <p class="card-text text-light opacity-75 mb-3">
+                            <p class="card-text text-light text-truncate opacity-75 mb-3">
                                 {{ game.description }}
                             </p>
                             <div class="d-flex justify-content-between align-items-center">

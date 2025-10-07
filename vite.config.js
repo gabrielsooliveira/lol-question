@@ -61,7 +61,7 @@ export default defineConfig({
         },
     },
     server: {
-        host: 'lol-question.test',
+        host: 'hextechplay.test',
         port: 5173,
         // strictPort: true,
         // hmr: {

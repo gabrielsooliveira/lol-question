@@ -4,6 +4,7 @@ import { ref } from "vue";
 import ModalDialog from "@/js/Components/Modals/ModalDialog.vue";
 
 const isModalVisible = ref(false);
+const showGuide = ref(false);
 
 const form = useForm({
     difficulty: "easy",
@@ -35,9 +36,9 @@ const saveSettings = () => {
 
     <div class="min-vh-100 d-flex align-items-center justify-content-center">
         <div class="container text-center">
-            <h1 class="fw-bold mb-5 text-light">{{ $t('text_mode_game') }}</h1>
+            <h1 class="fw-bold text-light">{{ $t('text_mode_game') }}</h1>
 
-            <div class="row g-4 justify-content-center">
+            <div class="row g-4 mt-3 justify-content-center">
                 <div class="col-md-4">
                     <div class="card text-bg-light h-100 shadow-lg border-0">
                         <div class="card-body d-flex flex-column justify-content-between bg-gradient text-dark">
@@ -70,8 +71,26 @@ const saveSettings = () => {
                     </div>
                 </div>
             </div>
+
+            <button class="btn btn-sm btn-warning mt-5" @click="showGuide = true">
+                <font-awesome-icon icon="fas fa-question"></font-awesome-icon>
+            </button>
         </div>
     </div>
+
+    <ModalDialog :isVisible="showGuide" @close="showGuide = false">
+        <div class="text-primary p-3">
+            <h3>{{ $t('guide.title') }}</h3>
+            <ul>
+                <li>{{ $t('guide.item1') }}</li>
+                <li>{{ $t('guide.item2') }}</li>
+                <li>{{ $t('guide.item3') }}</li>
+                <li>{{ $t('guide.item4') }}</li>
+                <li>{{ $t('guide.item5') }}</li>
+                <li>{{ $t('guide.item6') }}</li>
+            </ul>
+        </div>
+    </ModalDialog>
 
     <ModalDialog :isVisible="isModalVisible" @close="closeModal" :title=" $t('config_text')">
         <form @submit.prevent="saveSettings" class="container">

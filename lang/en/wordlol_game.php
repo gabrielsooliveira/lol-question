@@ -5,7 +5,7 @@ return [
     'page_description' => 'Play WordLoL, a fun word-guessing game based on the League of Legends universe. Try to guess the secret word with clues and a limited number of attempts!',
     'title' => 'WordLoL',
     'attempts' => 'ATTEMPTS',
-    'remaining' => 'REMAINING',
+    'remaining' => 'REMAINING CHANCES',
     'status' => [
         'won' => '🎉 Congratulations! You won!',
         'lost' => '😢 You lost!',
@@ -30,5 +30,12 @@ return [
         'title' => '❌ Wrong Letters',
         'none' => 'None yet',
     ],
-    'hint' => '💡 Tip: Type a letter or the full word to guess!',
+    'guide' => [
+        'title' => 'How to Play WordLoL',
+        'item1' => 'Try to guess the word before reaching the maximum number of mistakes.',
+        'item2' => 'Type one letter at a time or try guessing the whole word.',
+        'item3' => 'Already tried words cannot be repeated.',
+        'item4' => 'Share your results on Twitter after finishing.',
+        'item5' => 'You have limited time for each word, stay alert!',
+    ],
 ];

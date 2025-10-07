@@ -16,6 +16,16 @@ return [
         'medium' => 'Média',
         'hard' => 'Difícil',
     ],
+    'guide' => [
+        'title' => 'Como Jogar',
+        'item1' => 'Você terá 15 segundos para responder cada pergunta.',
+        'item2' => 'Escolha a opção correta clicando no botão correspondente.',
+        'item3' => 'Se não responder dentro do tempo, a pergunta será marcada como “tempo esgotado”.',
+        'item4' => 'Ao final do jogo, você verá suas respostas corretas e erradas.',
+        'item5' => 'Você pode revisar as respostas certas e erradas usando os carousels.',
+        'item6' => 'Compartilhe seu resultado e tente melhorar na próxima vez!',
+
+    ],
     'quantity_phrase' => 'Quantidade de perguntas',
     'button_start' => 'Iniciar jogo',
 ];

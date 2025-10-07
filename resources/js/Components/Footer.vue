@@ -8,10 +8,10 @@ import { Link } from '@inertiajs/vue3';
       <div class="row">
         <div class="col-lg-10 mb-4 text-lg-start text-center">
           <div class="d-flex align-items-center mb-3">
-            <span class="fw-bold fs-4">HextechPlay</span>
+            <span class="fw-bold fs-4">{{ $t('brand') }}</span>
           </div>
           <p class="opacity-75 mb-3">
-            A plataforma definitiva de mini-games inspirada no universo de League of Legends. Teste suas habilidades e conhecimento sobre Runeterra.
+            {{ $t('footer_description') }}
           </p>
           <div class="d-flex justify-content-lg-start justify-content-center">
             <a href="#" class="btn btn-outline-light btn-sm me-2 disabled"><font-awesome-icon icon="fab fa-discord" /></a>
@@ -19,15 +19,6 @@ import { Link } from '@inertiajs/vue3';
             <a href="#" class="btn btn-outline-light btn-sm me-2 disabled"><font-awesome-icon icon="fab fa-youtube" /></a>
             <a href="https://www.facebook.com/people/HextechPlay/61581496198338/" target="_blank" class="btn btn-outline-light btn-sm"><font-awesome-icon icon="fab fa-facebook" /></a>
           </div>
-        </div>
-
-        <!-- Quick Links -->
-        <div class="col-lg-2 col-md-6 mb-4">
-          <h6 class="text-warning text-uppercase fw-semibold mb-3">Jogos</h6>
-          <ul class="list-unstyled">
-            <li class="mb-2"><Link :href="route('lorequestion.index')" class="text-light text-decoration-none">LoreQuestion</Link></li>
-            <li class="mb-2"><Link :href="route('wordlol.game')" class="text-light text-decoration-none">WordLoL</Link></li>
-          </ul>
         </div>
 
         <!-- Community -->
@@ -63,17 +54,26 @@ import { Link } from '@inertiajs/vue3';
             <button class="btn btn-warning btn-sm"><font-awesome-icon icon="fas fa-paper-plane" /></button>
           </form>
         </div> -->
+
+        <!-- Quick Links -->
+        <div class="col-lg-2 col-md-6 mb-4">
+          <h6 class="text-warning text-uppercase fw-semibold mb-3">{{ $t('footer_games') }}</h6>
+          <ul class="list-unstyled">
+            <li class="mb-2"><Link :href="route('lorequestion.index')" class="text-light text-decoration-none">{{ $t('game_lorequestion') }}</Link></li>
+            <li class="mb-2"><Link :href="route('wordlol.game')" class="text-light text-decoration-none">{{ $t('game_wordlol') }}</Link></li>
+          </ul>
+        </div>
       </div>
 
       <hr class="border-secondary my-4">
 
       <div class="row align-items-center">
         <div class="col-md-6 text-center text-md-start">
-          <small class="opacity-75">© 2025 HextechPlay</small>
+          <small class="opacity-75">{{ $t('copyright') }}</small>
         </div>
         <div class="col-md-6 text-center text-md-end">
-          <Link :href="route('privacy.policy')" class="text-light text-decoration-none me-3 small">Política de Privacidade</Link>
-          <Link :href="route('terms')" class="text-light text-decoration-none small">Termos de Uso</Link>
+          <Link :href="route('privacy.policy')" class="text-light text-decoration-none me-3 small">{{ $t('privacy_policy') }}</Link>
+          <Link :href="route('terms')" class="text-light text-decoration-none small">{{ $t('terms_of_use') }}</Link>
         </div>
       </div>
 

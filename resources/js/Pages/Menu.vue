@@ -128,7 +128,7 @@ onMounted(() => isVisible.value = true);
                 <span>{{ game.title }}</span>
                 <div class="rating"><font-awesome-icon icon="fas fa-star" class="text-warning me-1"></font-awesome-icon>{{ game.rating }}</div>
               </div>
-              <p class="card-text text-light opacity-75">{{ game.description }}</p>
+              <p class="card-text text-light text-truncate opacity-75">{{ game.description }}</p>
               <div class="game-meta mb-3">
                 <span :class="`badge bg-${getDifficultyColor(game.difficulty)} me-2`">{{ game.difficulty }}</span>
                 <span class="badge bg-secondary me-2">{{ game.category }}</span>
@@ -196,7 +196,7 @@ onMounted(() => isVisible.value = true);
                             <span>{{ game.title }}</span>
                         <div class="rating"><font-awesome-icon icon="fas fa-star" class="text-warning me-1"></font-awesome-icon>{{ game.rating }}</div>
                     </div>
-                    <p class="card-text text-light opacity-75">{{ game.description }}</p>
+                    <p class="card-text text-light text-truncate opacity-75">{{ game.description }}</p>
                             <div class="game-meta mb-3">
                                 <span :class="`badge bg-${getDifficultyColor(game.difficulty)} me-2`">{{ game.difficulty }}</span>
                                 <span class="badge bg-secondary me-2">{{ game.category }}</span>

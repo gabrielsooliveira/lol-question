@@ -39,7 +39,7 @@ const navbarClass = computed(() => {
             <button
                 class="btn btn-primary d-lg-none border-0 text-light"
                 type="button"
-                data-bs-toggle="collapse"
+                data-bs-toggle="offcanvas"
                 data-bs-target="#navbarPrincipal"
                 aria-controls="navbarPrincipal"
                 aria-expanded="false"
@@ -48,16 +48,22 @@ const navbarClass = computed(() => {
                 <font-awesome-icon icon="fas fa-bars" size="lg"/>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarPrincipal">
-                <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                    <li class="nav-item">
-                        <Link :href="route('home')" class="nav-link link-light">Home</Link>
-                    </li>
-                    <li class="nav-item">
-                        <Link :href="route('menu')" class="nav-link link-light">Menu</Link>
-                    </li>
-                </ul>
-                <LocaleSwitcher></LocaleSwitcher>
+            <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1"  aria-labelledby="offcanvasNavbarLabel" id="navbarPrincipal">
+                <div class="offcanvas-header">
+                    <Link :href="route('home')" class="navbar-brand fw-bold">HextechPlay</Link>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        <li class="nav-item">
+                            <Link :href="route('home')" class="nav-link link-light">Home</Link>
+                        </li>
+                        <li class="nav-item">
+                            <Link :href="route('menu')" class="nav-link link-light">Menu</Link>
+                        </li>
+                    </ul>
+                    <LocaleSwitcher></LocaleSwitcher>
+                </div>
             </div>
         </div>
     </nav>
