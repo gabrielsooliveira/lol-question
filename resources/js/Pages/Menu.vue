@@ -116,12 +116,8 @@ onMounted(() => isVisible.value = true);
       <div class="row">
         <div class="col-lg-4 col-md-6 mb-4" v-for="game in featuredGames" :key="game.id">
           <div class="card card-game featured h-100">
-            <div class="featured-badge"><font-awesome-icon icon="fas fa-crown"></font-awesome-icon></div>
             <div class="card-img-wrapper">
               <img :src="game.image" class="card-img-top" :alt="game.title">
-              <div class="card-overlay">
-                <Link :href="route(game.route)" class="play-button"><font-awesome-icon icon="fas fa-play"></font-awesome-icon></Link>
-              </div>
             </div>
             <div class="card-body">
               <div class="d-flex justify-content-between align-items-center mb-2">
@@ -152,7 +148,6 @@ onMounted(() => isVisible.value = true);
         <div class="row g-3">
           <div class="col-md-4">
             <div class="position-relative">
-              <font-awesome-icon icon="fas fa-search" class="search-icon"></font-awesome-icon>
               <input v-model="searchQuery" type="text" class="form-control ps-5 bg-glass text-light" :placeholder="t('search_games')">
             </div>
           </div>
@@ -182,14 +177,8 @@ onMounted(() => isVisible.value = true);
             <div class="row" v-if="filteredGames.length">
                 <div class="col-lg-4 col-md-6 mb-4" v-for="game in filteredGames" :key="game.id">
                     <div class="card card-game featured h-100">
-                        <div class="featured-badge">
-                            <font-awesome-icon icon="fas fa-crown"></font-awesome-icon>
-                        </div>
                     <div class="card-img-wrapper">
                         <img :src="game.image" class="card-img-top" :alt="game.title">
-                        <div class="card-overlay">
-                            <Link :href="route(game.route)" class="play-button"><font-awesome-icon icon="fas fa-play"></font-awesome-icon></Link>
-                        </div>
                     </div>
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-2">
