@@ -167,7 +167,7 @@ onMounted(() => isVisible.value = true);
             </select>
           </div>
           <div class="col-md-2">
-            <button @click="clearFilters" class="btn btn-outline-secondary w-100"><font-awesome icon="fas fa-times" class="me-1"></font-awesome> {{ t('clear') }}</button>
+            <button @click="clearFilters" class="btn btn-outline-secondary w-100"><font-awesome-icon icon="fas fa-times" class="me-1"></font-awesome-icon> {{ t('clear') }}</button>
           </div>
         </div>
       </div>
@@ -183,12 +183,12 @@ onMounted(() => isVisible.value = true);
                 <div class="col-lg-4 col-md-6 mb-4" v-for="game in filteredGames" :key="game.id">
                     <div class="card card-game featured h-100">
                         <div class="featured-badge">
-                            <font-awesome-icon class="fas fa-crown"></font-awesome-icon>
+                            <font-awesome-icon icon="fas fa-crown"></font-awesome-icon>
                         </div>
                     <div class="card-img-wrapper">
                         <img :src="game.image" class="card-img-top" :alt="game.title">
                         <div class="card-overlay">
-                            <Link :href="route(game.route)" class="play-button"><font-awesome-icon class="fas fa-play"></font-awesome-icon></Link>
+                            <Link :href="route(game.route)" class="play-button"><font-awesome-icon icon="fas fa-play"></font-awesome-icon></Link>
                         </div>
                     </div>
                     <div class="card-body">
