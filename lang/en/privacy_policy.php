@@ -2,7 +2,11 @@
 
 return [
     'page_title' => 'Privacy Policy',
-    'page_description' => 'HextechPlay - Privacy Policy and protection of users\' personal data.',
+    'page_description' => 'HextechPlay - Privacy Policy and protection of users personal data.',
+    'page_keywords' => 'HextechPlay, LoL mini games, online games, League of Legends quiz, runeterra, fun, quick games',
+    'og_title' => 'HextechPlay – Mini Games and League of Legends Quizzes',
+    'og_description' => 'Test your knowledge and have fun with fast-paced games inspired by Runeterra!',
+
     'title' => 'HextechPlay Privacy Policy',
     'effective_date' => 'Effective Date',
     'intro' => 'Welcome to HextechPlay. Our commitment is to the integrity and security of our users\' and customers\' personal data. This Privacy Policy applies to all digital interactions carried out on our website www.hextechplay.com, associated services, mobile applications, and other digital platforms under our control.',

@@ -33,38 +33,46 @@ const navbarClass = computed(() => {
 </script>
 
 <template>
-    <nav :class="navbarClass" aria-label="Navbar principal">
-        <div class="container-fluid">
-            <Link :href="route('home')" class="navbar-brand fw-bold">HextechPlay</Link>
-            <button
-                class="btn btn-primary d-lg-none border-0 text-light"
-                type="button"
-                data-bs-toggle="offcanvas"
-                data-bs-target="#navbarPrincipal"
-                aria-controls="navbarPrincipal"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-            >
-                <font-awesome-icon icon="fas fa-bars" size="lg"/>
-            </button>
+  <nav :class="navbarClass" aria-label="Navbar principal">
+    <div class="container">
+      <!-- Marca -->
+      <Link :href="route('home')" class="navbar-brand fw-bold text-light">
+        HextechPlay
+      </Link>
 
-            <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1"  aria-labelledby="offcanvasNavbarLabel" id="navbarPrincipal">
-                <div class="offcanvas-header">
-                    <Link :href="route('home')" class="navbar-brand fw-bold">HextechPlay</Link>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                        <li class="nav-item">
-                            <Link :href="route('home')" class="nav-link link-light">Home</Link>
-                        </li>
-                        <li class="nav-item">
-                            <Link :href="route('menu')" class="nav-link link-light">Menu</Link>
-                        </li>
-                    </ul>
-                    <LocaleSwitcher></LocaleSwitcher>
-                </div>
-            </div>
+      <!-- Botão mobile -->
+      <button class="btn btn-primary d-lg-none border-0 text-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarPrincipal" aria-controls="navbarPrincipal" aria-expanded="false" aria-label="Toggle navigation">
+        <font-awesome-icon icon="fas fa-bars" size="lg" />
+      </button>
+
+      <!-- Offcanvas (Menu Mobile) -->
+      <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="navbarPrincipal" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header border-bottom">
+          <Link :href="route('home')" class="navbar-brand fw-bold text-light">HextechPlay</Link>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-    </nav>
+
+        <div class="offcanvas-body">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <Link :href="route('home')" class="nav-link text-light">
+                Home
+              </Link>
+            </li>
+            <li class="nav-item">
+              <Link :href="route('menu')" class="nav-link text-light">
+                Menu
+              </Link>
+            </li>
+            <li class="nav-item">
+              <Link :href="route('partnes')" class="nav-link text-light">
+                Parceiros
+              </Link>
+            </li>
+          </ul>
+          <LocaleSwitcher />
+        </div>
+      </div>
+    </div>
+  </nav>
 </template>

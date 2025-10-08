@@ -3,6 +3,9 @@
 return [
     'page_title' => 'LoreQuestion',
     'page_description' => 'LoreQuestion is a HextechPlay game about questions involving the Runeterra universe',
+'page_keywords' => 'HextechPlay, LoL mini games, online games, League of Legends quiz, runeterra, fun, quick games',
+    'og_title' => 'HextechPlay – Mini Games and League of Legends Quizzes',
+    'og_description' => 'Test your knowledge and have fun with fast-paced games inspired by Runeterra!',
 
     'text_mode_game' => 'Choose game mode',
     'text_lorequestion_roleplay' => 'Test your knowledge against other players in a fun casual way.',

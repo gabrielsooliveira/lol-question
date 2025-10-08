@@ -5,7 +5,7 @@ return [
     // Navbar
     'brand' => 'HextechPlay',
     'nav_home' => 'Home',
-    'nav_menu' => 'Menu',
+    'nav_menu' => 'Games',
 
     // Loading
     'loading_head' => 'Loading',

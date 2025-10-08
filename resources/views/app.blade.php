@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html>
   <head>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XD3SJVR73S"></script>
     <script>
@@ -14,12 +14,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="author" content="HextechPlay Team" />
+    <meta property="og:type" content="website" />
     @vite(['resources/scss/app.scss', 'resources/js/app.js'])
     <link rel="icon" href="{{ asset('favicon.ico') }}">
     @inertiaHead
     @routes
   </head>
-  <body class="overflow-y-auto min-vh-100">
+  <body class="overflow-y-auto overflow-x-hidden min-vh-100">
     @inertia
   </body>
 </html>

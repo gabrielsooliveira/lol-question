@@ -144,25 +144,35 @@ const closeModal = () => {
 };
 
 const shareOnTwitter = () => {
+  // Coleta as mensagens aleatórias de vitória/derrota
   const messagesWin = [
-    "Subi no ranking do WordLoL!",
-    "Acertei a palavra antes de todo mundo!",
-    "Mais uma vitória no HextechPlay!",
+    t('result.win.item1'),
+    t('result.win.item2'),
+    t('result.win.item3'),
   ];
 
   const messagesLose = [
-    "Quase acertei a palavra de hoje!",
-    "A palavra me trollou dessa vez...",
-    "Preciso treinar mais no WordLoL!",
+    t('result.lost.item1'),
+    t('result.lost.item2'),
+    t('result.lost.item3'),
   ];
 
-  const message = props.won ? messagesWin[Math.floor(Math.random() * messagesWin.length)] : messagesLose[Math.floor(Math.random() * messagesLose.length)];
+  const message = props.won
+    ? messagesWin[Math.floor(Math.random() * messagesWin.length)]
+    : messagesLose[Math.floor(Math.random() * messagesLose.length)];
 
-  const attemptsInfo = `Na ${props.attempts}ª tentativa`;
-  const errorsInfo = `Erros: ${props.wrong}/${props.maxAttempts}`;
+  // Textos com interpolação
+  const attemptsInfo = props.attempts + t('attempts_info');
+  const errorsInfo = t('error') + props.wrong + props.maxAttempts;
   const gameUrl = window.location.origin;
 
-  const text = props.won ? `${message}\n${attemptsInfo}\n${errorsInfo}\nTente também em ${gameUrl} #HextechPlay #WordLoL #LoL` : `${message}\nTente também em ${gameUrl} #HextechPlay #WordLoL #LoL`;
+  let text = '';
+  if (props.won) {
+    text = `${message}\n${attemptsInfo}\n${errorsInfo}\n${t('invite_text')} ${gameUrl} #HextechPlay #WordLoL #LoL`;
+  } else {
+    text = `${message}\n${t('invite_text')} ${gameUrl} #HextechPlay #WordLoL #LoL`;
+  }
+
   const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
   window.open(twitterUrl, "_blank");
 };
@@ -170,13 +180,15 @@ const shareOnTwitter = () => {
 
 <template>
     <Head>
-        <title>{{ t("page_title") }}</title>
-        <meta
-        head-key="description"
-        name="description"
-        :content="t('page_description')"
-        />
+        <title>{{ $t('page_title') }}</title>
+        <meta name="description" :content="$t('page_description')" />
+        <meta name="keywords" :content="$t('page_keywords')" />
+        <meta property="og:title" :content="$t('og_title')" />
+        <meta property="og:description" :content="$t('og_description')" />
+        <meta property="og:url" content="https://hextechplay.com/wordlol" />
+        <link rel="canonical" href="https://hextechplay.com/wordlol" />
     </Head>
+
     <div class="min-vh-100 d-flex align-items-center justify-content-center py-4">
         <div class="container">
             <div class="card shadow-lg text-white rounded-4 border-0">
@@ -292,20 +304,20 @@ const shareOnTwitter = () => {
         <template #default>
             <div class="text-center py-1">
                 <template v-if="props.won">
-                    <h3 class="text-success">🎉 Parabéns! Você Venceu!</h3>
-                    <p class="text-dark">A palavra era: {{ props.word }}</p>
+                    <h3 class="text-success">{{ $t('result.win.title') }}</h3>
+                    <p class="text-dark">{{ $t('result.word') }} {{ props.word }}</p>
                 </template>
 
                 <template v-else-if="props.lost">
-                    <h3 class="text-danger">😢 Que pena! Você Perdeu.</h3>
-                    <p class="text-dark">A palavra correta era: {{ props.word }}</p>
+                    <h3 class="text-danger">{{ $t('result.lost.title') }}</h3>
+                    <p class="text-dark">{{ $t('result.word') }} {{ props.word }}</p>
                 </template>
 
                 <hr class="my-4" />
 
                 <div class="text-center">
                     <p class="mb-2 text-primary fw-bold">
-                    Tempo para a próxima palavra:
+                        {{ $t('next_question') }}
                     </p>
                     <h4 class="text-warning">{{ formattedTime }}</h4>
                 </div>
@@ -313,13 +325,10 @@ const shareOnTwitter = () => {
                 <hr class="my-4" />
 
                 <div class="text-center">
-                    <p class="text-primary fw-bold mb-2">Compartilhe seu resultado:</p>
-                    <button
-                        @click="shareOnTwitter"
-                        class="btn btn-outline-primary fw-bold rounded-pill px-4"
-                    >
+                    <p class="text-primary fw-bold mb-2">{{ $t('share_result') }}</p>
+                    <button @click="shareOnTwitter" class="btn btn-outline-primary fw-bold rounded-pill px-4">
                         <font-awesome-icon icon="fa-brands fa-x-twitter" class="me-2" />
-                        Compartilhar no Twitter
+                        {{ $t('share_button.twitter') }}
                     </button>
                 </div>
             </div>

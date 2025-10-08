@@ -28,8 +28,17 @@ class PageController extends Controller
 
     public function terms()
     {
-
         return inertia('Terms');
+    }
+
+    public function contact()
+    {
+        return inertia('Contact');
+    }
+
+    public function partnes()
+    {
+        return inertia('Partnes');
     }
 
     public function translate($locale)

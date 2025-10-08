@@ -97,7 +97,12 @@ onMounted(() => {
 <template>
     <Head>
         <title>{{ $t('page_title') }}</title>
-        <meta head-key="description" name="description" :content="$t('page_description')" />
+        <meta name="description" :content="$t('page_description')" />
+        <meta name="keywords" :content="$t('page_keywords')" />
+        <meta property="og:title" :content="$t('og_title')" />
+        <meta property="og:description" :content="$t('og_description')" />
+        <meta property="og:url" content="https://hextechplay.com/lorequestion/roleplay" />
+        <link rel="canonical" href="https://hextechplay.com/lorequestion/roleplay" />
     </Head>
 
     <div class="d-flex justify-content-center align-items-center py-5 min-vh-100">

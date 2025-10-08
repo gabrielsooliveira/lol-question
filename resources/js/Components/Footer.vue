@@ -6,7 +6,7 @@ import { Link } from '@inertiajs/vue3';
   <footer class="bg-glass border-glow mt-3 border-top">
     <div class="container py-5">
       <div class="row">
-        <div class="col-lg-10 mb-4 text-lg-start text-center">
+        <div class="col-lg-8 mb-4 text-lg-start text-center">
           <div class="d-flex align-items-center mb-3">
             <span class="fw-bold fs-4">{{ $t('brand') }}</span>
           </div>
@@ -33,15 +33,15 @@ import { Link } from '@inertiajs/vue3';
         </div> -->
 
         <!-- Support -->
-        <!-- <div class="col-lg-2 col-md-6 mb-4">
+        <div class="col-lg-2 col-md-6 mb-4">
           <h6 class="text-warning text-uppercase fw-semibold mb-3">Suporte</h6>
           <ul class="list-unstyled">
-            <li class="mb-2"><Link href="#" class="text-light text-decoration-none">Central de Ajuda</Link></li>
-            <li class="mb-2"><Link href="#" class="text-light text-decoration-none">Contato</Link></li>
-            <li class="mb-2"><Link href="#" class="text-light text-decoration-none">Reportar Bug</Link></li>
-            <li class="mb-2"><Link href="#" class="text-light text-decoration-none">Feedback</Link></li>
+            <li class="mb-2"><Link :href="route('contact')" class="text-light text-decoration-none">Central de Ajuda</Link></li>
+            <li class="mb-2"><Link :href="route('contact')" class="text-light text-decoration-none">Contato</Link></li>
+            <li class="mb-2"><Link :href="route('contact')" class="text-light text-decoration-none">Reportar Bug</Link></li>
+            <li class="mb-2"><Link :href="route('contact')" class="text-light text-decoration-none">Feedback</Link></li>
           </ul>
-        </div> -->
+        </div>
 
         <!-- Newsletter -->
         <!-- <div class="col-lg-2 col-md-6 mb-4">

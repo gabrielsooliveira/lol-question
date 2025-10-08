@@ -3,6 +3,10 @@
 return [
     'page_title' => 'LoreQuestion - Game',
     'page_description' => 'LoreQuestion é um jogo da plataforma HextechPlay sobre perguntas envolvendo o universo de Runeterra',
+    'page_keywords' => 'HextechPlay, mini games LoL, jogos online, quiz League of Legends, runeterra, diversão, jogos rápidos',
+    'og_title' => 'HextechPlay – Mini Games e Quizzes de League of Legends',
+    'og_description' => 'Teste seu conhecimento e divirta-se com jogos rápidos inspirados em Runeterra!',
+
     'loading_questions' => 'Carregando perguntas...',
     'game_finished' => 'Fim do Jogo!',
     'results' => 'Resultados:',

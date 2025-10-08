@@ -78,10 +78,15 @@ onMounted(() => isVisible.value = true);
 </script>
 
 <template>
-  <Head>
-    <title>{{ t('page_title') }}</title>
-    <meta head-key="description" name="description" :content="t('page_description')" />
-  </Head>
+    <Head>
+        <title>{{ $t('page_title') }}</title>
+        <meta name="description" :content="$t('page_description')" />
+        <meta name="keywords" :content="$t('page_keywords')" />
+        <meta property="og:title" :content="$t('og_title')" />
+        <meta property="og:description" :content="$t('og_description')" />
+        <meta property="og:url" content="https://hextechplay.com/games" />
+        <link rel="canonical" href="https://hextechplay.com/games" />
+    </Head>
 
   <section class="games-hero py-5 mt-5 text-center">
     <div class="container mt-5">

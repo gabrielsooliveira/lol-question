@@ -3,6 +3,10 @@
 return [
     'page_title' => 'Termos de Uso e Serviço',
     'page_description' => 'HextechPlay - Termos de Uso e Serviço para utilização do site e plataformas digitais.',
+    'page_keywords' => 'HextechPlay, mini games LoL, jogos online, quiz League of Legends, runeterra, diversão, jogos rápidos',
+    'og_title' => 'HextechPlay – Mini Games e Quizzes de League of Legends',
+    'og_description' => 'Teste seu conhecimento e divirta-se com jogos rápidos inspirados em Runeterra!',
+
     'title' => 'Termos de Uso da HextechPlay',
     'last_updated' => 'Última atualização: 01/10/2025',
     'section1_heading' => '1. Aceitando os Termos',
@@ -12,7 +16,7 @@ return [
     'section3_heading' => '3. Sua Privacidade',
     'section3_content' => 'Ao usar o site, você aceita nossa Política de Privacidade, que descreve como coletamos, usamos e protegemos seus dados pessoais, sempre com transparência e segurança.',
     'section4_heading' => '4. Direitos de Conteúdo',
-    'section4_content' => 'Todos os conteúdos da HextechPlay (textos, imagens, vídeos, códigos, áudios, etc.) são protegidos por leis de direitos autorais e propriedade intelectual. O uso é permitido apenas para fins pessoais e não comerciais, sendo proibida a reprodução ou distribuição sem autorização.',
+    'section4_content' => 'Todos os conteúdos da HextechPlay seguem o principio do "Legal Jibber Jabber" da Riot Games, utilizando bens pertencentes à Riot Games. A Riot Games não apoia nem patrocina este projeto.',
     'section5_heading' => '5. Cookies e Tecnologias',
     'section5_content' => 'Usamos cookies para melhorar sua experiência. Você pode limitar ou recusar cookies no navegador, mas algumas funções podem não funcionar corretamente.',
     'section6_heading' => '6. Links Externos',

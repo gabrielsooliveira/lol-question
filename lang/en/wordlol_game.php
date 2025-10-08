@@ -3,6 +3,10 @@
 return [
     'page_title' => 'WordLoL - Guess the League of Legends Word!',
     'page_description' => 'Play WordLoL, a fun word-guessing game based on the League of Legends universe. Try to guess the secret word with clues and a limited number of attempts!',
+    'page_keywords' => 'HextechPlay, LoL mini games, online games, League of Legends quiz, runeterra, fun, quick games',
+    'og_title' => 'HextechPlay – Mini Games and League of Legends Quizzes',
+    'og_description' => 'Test your knowledge and have fun with fast-paced games inspired by Runeterra!',
+
     'title' => 'WordLoL',
     'attempts' => 'ATTEMPTS',
     'remaining' => 'REMAINING CHANCES',
@@ -37,5 +41,31 @@ return [
         'item3' => 'Already tried words cannot be repeated.',
         'item4' => 'Share your results on Twitter after finishing.',
         'item5' => 'You have limited time for each word, stay alert!',
+    ],
+    'result' => [
+        'win' => [
+            'title' => '🎉 Congratulations! You win!',
+            'item1' => 'You guessed today’s word!',
+            'item2' => 'Crushing victory!',
+            'item3' => 'Your Hextech IQ is 200!',
+        ],
+        'lost' => [
+            'title' => '😢 Not this time...',
+            'item1' => 'Try again tomorrow!',
+            'item2' => 'The word was tough, but don’t give up!',
+            'item3' => 'Better luck next round!',
+        ],
+        'word' => 'The word was:',
+    ],
+    'attempts_info' => 'ᵗʰ attempt',
+    'error' => 'Mistakes: ',
+
+    // Corrected phrase for the share invitation
+    'invite_text' => 'Try it too at',
+
+    'next_question' => 'Next question in',
+    'share_result' => 'Share your result',
+    'share_button' => [
+        'twitter' => 'Share on X',
     ],
 ];

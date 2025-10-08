@@ -3,7 +3,7 @@
 return [
     'brand' => 'HextechPlay',
     'nav_home' => 'Início',
-    'nav_menu' => 'Menu',
+    'nav_menu' => 'Jogos',
     'loading_head' => 'Carregando',
     'loading_title' => 'HextechPlay',
     'loading_text' => 'Carregando a experiência...',

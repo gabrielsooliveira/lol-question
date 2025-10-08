@@ -1,10 +1,14 @@
 <?php
 
 return [
-    'page_title' => 'Início',
-    'page_description' => 'HextechPlay - plataforma de mini-games inspirada no universo de League of Legends – jogue, divirta-se e desafie seus amigos!',
+    'page_title' => 'Inicio',
+    'page_description' => 'HextechPlay - Jogue mini games rápidos e divertidos inspirados em League of Legends! Teste seus conhecimentos e desafie seus amigos no HextechPlay.',
+    'page_keywords' => 'HextechPlay, mini games LoL, jogos online, quiz League of Legends, runeterra, diversão, jogos rápidos',
+    'og_title' => 'HextechPlay – Mini Games e Quizzes de League of Legends',
+    'og_description' => 'Teste seu conhecimento e divirta-se com jogos rápidos inspirados em Runeterra!',
+
     'play_phrase' => 'Jogue e divirta-se na HextechPlay!',
-    'play_phrase_sub' => 'Mini-games divertidos para desafiar seus amigos e explorar Runeterra.',
+    'play_phrase_sub' => 'Mini-games divertidos para desafiar seus amigos e explorar Runete rra.',
     'play_button' => 'Jogar agora',
     'featured_games_title' => 'Jogos em Destaque',
     'featured_games_subtitle' => 'Explore os mini-games mais populares da plataforma',

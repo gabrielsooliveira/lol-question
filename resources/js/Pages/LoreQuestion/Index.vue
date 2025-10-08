@@ -31,7 +31,12 @@ const saveSettings = () => {
 <template>
     <Head>
         <title>{{ $t('page_title') }}</title>
-        <meta head-key="description" name="description" :content="$t('page_description')" />
+        <meta name="description" :content="$t('page_description')" />
+        <meta name="keywords" :content="$t('page_keywords')" />
+        <meta property="og:title" :content="$t('og_title')" />
+        <meta property="og:description" :content="$t('og_description')" />
+        <meta property="og:url" content="https://hextechplay.com/lorequestion" />
+        <link rel="canonical" href="https://hextechplay.com/lorequestion" />
     </Head>
 
     <div class="min-vh-100 d-flex align-items-center justify-content-center">

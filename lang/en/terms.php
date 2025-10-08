@@ -3,6 +3,10 @@
 return [
     'page_title' => 'Terms of Use and Service',
     'page_description' => 'HextechPlay - Terms of Use and Service for accessing the website and digital platforms.',
+    'page_keywords' => 'HextechPlay, LoL mini games, online games, League of Legends quiz, runeterra, fun, quick games',
+    'og_title' => 'HextechPlay – Mini Games and League of Legends Quizzes',
+    'og_description' => 'Test your knowledge and have fun with fast-paced games inspired by Runeterra!',
+
     'title' => 'HextechPlay Terms of Use',
     'last_updated' => 'Last updated: 2025-10-01',
 
@@ -16,7 +20,7 @@ return [
     'section3_content' => 'By using the site, you accept our Privacy Policy, which describes how we collect, use, and protect your personal data with transparency and security.',
 
     'section4_heading' => '4. Content Rights',
-    'section4_content' => 'All HextechPlay content (texts, images, videos, code, audio, etc.) is protected by copyright and intellectual property laws. Use is permitted only for personal and non-commercial purposes. Reproduction or distribution without authorization is prohibited.',
+    'section4_content' => 'All HextechPlay content follows Riot Games "Legal Jibber Jabber" principle, utilizing Riot Games-owned assets. Riot Games does not endorse or sponsor this project.',
 
     'section5_heading' => '5. Cookies and Technologies',
     'section5_content' => 'We use cookies to improve your experience. You can limit or block cookies in your browser, but some features may not work properly.',
