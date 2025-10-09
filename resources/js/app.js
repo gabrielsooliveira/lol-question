@@ -2,7 +2,7 @@ import './bootstrap';
 import 'bootstrap';
 
 import { createApp, h, watch } from 'vue';
-import { createInertiaApp, usePage } from '@inertiajs/vue3'; // adicione usePage
+import { createInertiaApp, usePage } from '@inertiajs/vue3';
 import { createI18n } from 'vue-i18n';
 
 import LayoutSite from './Layouts/LayoutSite.vue';

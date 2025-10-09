@@ -37,7 +37,7 @@ class HandleInertiaRequests extends Middleware
     {
         return [
             'locale' => fn () => app()->getLocale(),
-            'user' => fn () => $request->user() ?  $request->user()->only('name', 'email') : null,
+            // 'user' => fn () => $request->user() ?  $request->user()->only('name', 'email') : null,
             'flash' => [
                 'success' => fn () => $request->session()->get('success'),
                 'error' => fn () => $request->session()->get('error'),

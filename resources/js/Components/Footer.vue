@@ -14,9 +14,9 @@ import { Link } from '@inertiajs/vue3';
             {{ $t('footer_description') }}
           </p>
           <div class="d-flex justify-content-lg-start justify-content-center">
-            <a href="#" class="btn btn-outline-light btn-sm me-2 disabled"><font-awesome-icon icon="fab fa-discord" /></a>
-            <a href="#" class="btn btn-outline-light btn-sm me-2 disabled"><font-awesome-icon icon="fab fa-twitter" /></a>
-            <a href="#" class="btn btn-outline-light btn-sm me-2 disabled"><font-awesome-icon icon="fab fa-youtube" /></a>
+            <a href="https://discord.com/" class="btn btn-outline-light btn-sm me-2 disabled" target="_blank"><font-awesome-icon icon="fab fa-discord" /></a>
+            <a href="https://x.com/" class="btn btn-outline-light btn-sm me-2 disabled" target="_blank"><font-awesome-icon icon="fab fa-twitter" /></a>
+            <a href="https://www.youtube.com/" class="btn btn-outline-light btn-sm me-2 disabled" target="_blank"><font-awesome-icon icon="fab fa-youtube" /></a>
             <a href="https://www.facebook.com/people/HextechPlay/61581496198338/" target="_blank" class="btn btn-outline-light btn-sm"><font-awesome-icon icon="fab fa-facebook" /></a>
           </div>
         </div>
@@ -34,12 +34,12 @@ import { Link } from '@inertiajs/vue3';
 
         <!-- Support -->
         <div class="col-lg-2 col-md-6 mb-4">
-          <h6 class="text-warning text-uppercase fw-semibold mb-3">Suporte</h6>
+          <h6 class="text-warning text-uppercase fw-semibold mb-3">{{ $t('footer_support') }}</h6>
           <ul class="list-unstyled">
-            <li class="mb-2"><Link :href="route('contact')" class="text-light text-decoration-none">Central de Ajuda</Link></li>
-            <li class="mb-2"><Link :href="route('contact')" class="text-light text-decoration-none">Contato</Link></li>
-            <li class="mb-2"><Link :href="route('contact')" class="text-light text-decoration-none">Reportar Bug</Link></li>
-            <li class="mb-2"><Link :href="route('contact')" class="text-light text-decoration-none">Feedback</Link></li>
+            <li class="mb-2"><Link :href="route('contact')" class="text-light text-decoration-none">{{ $t('support_help_center') }}</Link></li>
+            <li class="mb-2"><Link :href="route('contact')" class="text-light text-decoration-none">{{ $t('support_contact') }}</Link></li>
+            <li class="mb-2"><Link :href="route('contact')" class="text-light text-decoration-none">{{ $t('support_report_bug') }}</Link></li>
+            <li class="mb-2"><Link :href="route('contact')" class="text-light text-decoration-none">{{ $t('support_feedback') }}</Link></li>
           </ul>
         </div>
 

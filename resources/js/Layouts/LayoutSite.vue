@@ -2,7 +2,7 @@
 import Navbar from '@/js/Components/Navbar.vue';
 import LoadingScreen from '@/js/Components/LoadingScreen.vue';
 import ScrollTopButton from '@/js/Components/ScrollTopButton.vue';
-
+import Toast from '@/js/Components/Toast.vue';
 import PopUpTerms from '@/js/Components/PopUpTerms.vue';
 import Footer from '@/js/Components/Footer.vue';
 import { ref, onMounted } from 'vue';
@@ -22,6 +22,7 @@ onMounted(() => {
     <main class="position-relative min-vh-100">
       <slot></slot>
     </main>
+    <Toast />
     <PopUpTerms />
     <Footer />
     <ScrollTopButton />

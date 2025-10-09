@@ -5,7 +5,9 @@ return [
     // Navbar
     'brand' => 'HextechPlay',
     'nav_home' => 'Home',
-    'nav_menu' => 'Games',
+    'nav_games' => 'Games',
+    'nav_partners' => 'Partners',
+    'nav_contact' => 'Contact',
 
     // Loading
     'loading_head' => 'Loading',
@@ -35,4 +37,5 @@ return [
 
     // Footer credits
     'copyright' => '© 2025 HextechPlay',
+    'message_sent' => 'Message sent successfully!',
 ];

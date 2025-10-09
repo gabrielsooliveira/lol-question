@@ -3,7 +3,10 @@
 return [
     'brand' => 'HextechPlay',
     'nav_home' => 'Início',
-    'nav_menu' => 'Jogos',
+    'nav_games' => 'Jogos',
+    'nav_partners' => 'Parceiros',
+    'nav_contact' => 'Contato',
+
     'loading_head' => 'Carregando',
     'loading_title' => 'HextechPlay',
     'loading_text' => 'Carregando a experiência...',
@@ -19,4 +22,5 @@ return [
     'privacy_policy' => 'Política de Privacidade',
     'terms_of_use' => 'Termos de Uso',
     'copyright' => '© 2025 HextechPlay',
+    'message_sent' => 'Mensagem enviada com sucesso!',
 ];

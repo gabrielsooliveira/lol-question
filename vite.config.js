@@ -6,7 +6,7 @@ import purgeCss from 'vite-plugin-purgecss';
 import viteImagemin from 'vite-plugin-imagemin';
 
 export default defineConfig({
-    // base: '/build/',
+    base: '/build/',
     plugins: [
         laravel({
             input: ['resources/scss/app.scss', 'resources/js/app.js'],
@@ -63,12 +63,12 @@ export default defineConfig({
     server: {
         host: 'hextechplay.test',
         port: 5173,
-        // strictPort: true,
-        // hmr: {
-        //     host: 'hextechplay.com',
-        //     protocol: 'wss',
-        //     port: 5173,
-        // },
+        strictPort: true,
+        hmr: {
+            host: 'hextechplay.com',
+            protocol: 'wss',
+            port: 5173,
+        },
     },
     build: {
         rollupOptions: {

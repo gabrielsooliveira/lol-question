@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Page;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ContactMail;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
@@ -36,9 +39,22 @@ class PageController extends Controller
         return inertia('Contact');
     }
 
-    public function partnes()
+    public function partners()
     {
-        return inertia('Partnes');
+        return inertia('Partners');
+    }
+
+    public function send(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'message' => 'required|string'
+        ]);
+
+        Mail::to('contact@hextechplay.com')->send(new ContactMail($request->all()));
+
+        return redirect()->back()->with('success', __('site.message_sent'));
     }
 
     public function translate($locale)
